@@ -5,7 +5,7 @@ services:
             context: .
             dockerfile: Dockerfile
         ports: 
-            - 5000:8000
+            - 5000:5000
         build: ./app
         depends_on: 
             - db
@@ -18,7 +18,5 @@ services:
             MYSQL_USER: root
             MYSQL_PASSWORD: root
             MYSQL_ROOT_PASSWORD: root
-        volumes: 
-            - .dbdata:/var/lib/mysql
         ports: 
             - 3306:3306
