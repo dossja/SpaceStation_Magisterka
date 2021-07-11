@@ -1,63 +1,47 @@
-import os
-import flask
-import json
-import mysql.connector
+from flask import Flask, request
+from flask_sqlalchemy import SQLAlchemy
 
-# for debugging from Visual Studio Code -- turn off flask debugger first
-# import ptvsd
-# ptvsd.enable_attach(address=('0.0.0.0', 3000))
+app = Flask(__name__)
 
-
-class DBManager:
-    def __init__(self, database='space_station', host="db", user="root", password='root'):
-        self.connection = mysql.connector.connect(
-            user=user,
-            password=password,
-            host=host,
-            database=database,
-            auth_plugin='mysql_native_password'
-        )
-        self.cursor = self.connection.cursor()
-
-    def populate_db(self):
-        self.cursor.execute('DROP TABLE IF EXISTS blog')
-        self.cursor.execute(
-            'CREATE TABLE blog (id INT AUTO_INCREMENT PRIMARY KEY, title VARCHAR(255))')
-        self.cursor.executemany('INSERT INTO blog (id, title) VALUES (%s, %s);', [
-                                (i, 'Blog post #%d' % i) for i in range(1, 5)])
-        self.connection.commit()
-
-    def query_titles(self):
-        self.cursor.execute('SELECT title FROM blog')
-        rec = []
-        for c in self.cursor:
-            rec.append(c[0])
-        return rec
+# Configuring DB
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@172.17.0.1/space_station'
+db = SQLAlchemy(app)
 
 
-server = flask.Flask(__name__)
-conn = None
+class Users(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(50), nullable=False)
+    surname = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(50), unique=True)
+    job = db.Column(db.String(50), nullable=False)
+
+    def __repr__(self):
+        return "<Name {self.name}>"
 
 
-@server.route('/blogs')
-def listBlog():
-    global conn
-    if not conn:
-        conn = DBManager()
-        conn.populate_db()
-    rec = conn.query_titles()
+@app.route("/<name>/<surname>", methods=["POST", "GET"])
+def add_user(name, surname):
+    if request.method == "POST":
+        u = Users()
+        u.name = name
+        u.surname = surname
+        u.email = u.name + "." + u.surname + "@firm.com"
+        u.job = "Cat"
+        db.session.add(u)
+        db.session.commit()
 
-    result = []
-    for c in rec:
-        result.append(c)
+        return "<h1>Added</h1>"
+    else:
+        value = db.session.query(Users).filter_by(name=name).first()
 
-    return flask.jsonify({"response": result})
+        return f"<h1> {value.name} {value.surname} {value.email} {value.job}</h1>"
 
 
-@server.route('/')
-def hello():
-    return flask.jsonify({"response": "Hello from Docker!"})
+@app.route("/")
+def index():
+    return "<h1>HI</h1>"
 
 
 if __name__ == '__main__':
-    server.run(debug=True, host='0.0.0.0', port=5000)
+    db.create_all()
+    app.run(debug=True, host="0.0.0.0")

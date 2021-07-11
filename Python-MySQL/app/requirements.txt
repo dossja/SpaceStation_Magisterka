@@ -1,2 +1,4 @@
 Flask
-mysql-connector
+flask-SQLAlchemy
+pymysql
+cryptography
