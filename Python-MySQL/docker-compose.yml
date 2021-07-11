@@ -4,19 +4,30 @@ services:
         build: 
             context: .
             dockerfile: Dockerfile
+        volumes: 
+            - ./app:/app
         ports: 
             - 5000:5000
         build: ./app
         depends_on: 
             - db
+        links: 
+            - db:db
 
     db:
-        image: mysql:5.7.22
+        # image: mysql:5.7.22
+        image: mysql:8.0.19
         restart: always
+        volumes:
+            - db-data:/var/lib/mysql
         environment: 
             MYSQL_DATABASE: "space_station"
             MYSQL_USER: root
             MYSQL_PASSWORD: root
             MYSQL_ROOT_PASSWORD: root
+            MYSQL_HOST: 0.0.0.0
         ports: 
             - 3306:3306
+
+volumes:
+    db-data:
