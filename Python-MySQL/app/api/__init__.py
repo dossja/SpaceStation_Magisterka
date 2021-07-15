@@ -1,0 +1,6 @@
+from . import users
+from flask import Blueprint
+
+api = Blueprint('api', __name__)
+
+# Import any endpoints here to make them available
