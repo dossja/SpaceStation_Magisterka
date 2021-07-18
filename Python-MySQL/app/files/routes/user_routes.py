@@ -40,9 +40,16 @@ def signup_user():
     return "<h1>SUCCESS</h1>"
 
 
+@app.route("/users", methods=["GET"])
+def get_users():
+    users = User.query.all()
+
+    return f"{users}"
+
+
 @app.route('/users/<string:id>', methods=['GET'])
 def get_user(id):
-    user = User.query.filter(User.id.ilike(id)).first()
+    user = User.query.get(id)
     if user is not None:
-        return f"<h1>{user}</h1>"
+        return f"<h1>{user} \n{user.reports}</h1>"
     return jsonify(error="user not found"), 404

@@ -1,4 +1,5 @@
 from files import db
+# from files.models.reports import Report
 
 
 class User(db.Model):
@@ -8,6 +9,8 @@ class User(db.Model):
     surname = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), unique=True)
     job = db.Column(db.String(50), nullable=False)
+    reports = db.relationship(
+        "Report", backref="reporting_user")
 
     def __repr__(self):
-        return f"Name {self.name}\nSurname {self.surname}\nEmail {self.email}"
+        return f"User('{self.id}', '{self.name}', '{self.surname}', '{self.email}', '{self.job}')"
