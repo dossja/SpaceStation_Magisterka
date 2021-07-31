@@ -44,7 +44,7 @@ def signup_user():
 def get_users():
     users = User.query.all()
 
-    return f"{users}"
+    return jsonify(f"{users}"), 200
 
 
 @app.route('/users/<string:id>', methods=['GET'])
@@ -52,4 +52,18 @@ def get_user(id):
     user = User.query.get(id)
     if user is not None:
         return f"<h1>{user} \n{user.reports}</h1>"
+    return jsonify(error="user not found"), 404
+
+
+@app.route('/users/login', methods=["POST"])
+def login():
+    datas = request.get_json()
+    email = datas.get('email', '')
+    if email == '':
+        return jsonify(error="email is empty"), 400
+
+    user = User.query.filter_by(email=email).first()
+
+    if user is not None:
+        return jsonify(f"{user}"), 200
     return jsonify(error="user not found"), 404

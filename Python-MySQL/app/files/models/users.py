@@ -13,4 +13,6 @@ class User(db.Model):
         "Report", backref="reporting_user")
 
     def __repr__(self):
-        return f"User('{self.id}', '{self.name}', '{self.surname}', '{self.email}', '{self.job}')"
+        content = {'id': self.id, 'name': self.name,
+                   'surname': self.surname, 'email': self.email, 'job': self.job}
+        return f"{content}"

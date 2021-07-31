@@ -3,3 +3,4 @@ flask-SQLAlchemy
 pymysql
 cryptography
 flask-cors
+flask-login
