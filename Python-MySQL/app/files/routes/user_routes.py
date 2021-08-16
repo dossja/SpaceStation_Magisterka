@@ -1,6 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request, abort, jsonify
 from files import app, db
 from files.models.users import User
+from flask_login import login_user
 
 # from . import api
 from .. import db, app
@@ -65,5 +66,6 @@ def login():
     user = User.query.filter_by(email=email).first()
 
     if user is not None:
+        # login_user(user, remember=remember)
         return jsonify(f"{user}"), 200
     return jsonify(error="user not found"), 404
