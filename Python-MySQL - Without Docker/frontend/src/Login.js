@@ -28,23 +28,26 @@ function Login(props) {
     };
 
     const getUsersAPI = () => {
-        // uAPI.get()
-        //     .then(response => {
-        //         console.log(response.data);
-        //     })
-        //     .catch(e => {
-        //         console.log(e);
-        //     });
+        uAPI.get()
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
     }
 
     const getUserByEmailAPI = () => {
-        // uAPI.getByEmail({ 'email': values.email })
-        //     .then(response => {
-        //         console.log(response.data);
-        //     })
-        //     .catch(e => {
-        //         console.log(e);
-        //     });
+        uAPI.getByEmail({ 'email': values.email })
+            .then(response => {
+                console.log(response.data);
+                console.log(response.status);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+
+        props.setShowNavBar(true);
     }
 
     return (
@@ -77,10 +80,7 @@ function Login(props) {
                     <Button
                         variant="contained"
                         color="primary"
-                        // onClick={getUserByEmailAPI}
-                        onClick={() => {
-                            props.setShowNavBar(true);
-                        }}
+                        onClick={getUserByEmailAPI}
                     >
                         Sing in
                     </Button></Box>

@@ -1,5 +1,5 @@
 from files import db
-# from flask_login import UserMixin
+from flask_login import UserMixin
 # from files.models.reports import Report
 
 

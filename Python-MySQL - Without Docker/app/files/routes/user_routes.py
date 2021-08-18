@@ -38,7 +38,7 @@ def signup_user():
     db.session.add(u)
     db.session.commit()
 
-    return "<h1>SUCCESS</h1>"
+    return jsonify(f"{u}"), 200
 
 
 @app.route("/users", methods=["GET"])
@@ -66,6 +66,6 @@ def login():
     user = User.query.filter_by(email=email).first()
 
     if user is not None:
-        # login_user(user, remember=remember)
+        # login_user(user, remember=True)
         return jsonify(f"{user}"), 200
     return jsonify(error="user not found"), 404

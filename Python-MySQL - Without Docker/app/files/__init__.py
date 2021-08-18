@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost:330
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@127.0.0.1/space_station'
 db = SQLAlchemy(app)
 
-# login_manager = LoginManager(app)
+login_manager = LoginManager(app)
 
 # @login_manager.user_loader
 # def load_user(id):
