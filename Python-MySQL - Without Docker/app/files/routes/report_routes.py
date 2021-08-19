@@ -9,14 +9,14 @@ from .. import db, app
 def get_reports():
     reports = Report.query.all()
 
-    return f"{reports}"
+    return jsonify(f"{reports}"), 200
 
 
 @app.route('/reports/<string:id>', methods=['GET'])
 def get_report(id):
     report = Report.query.get(id)
     if report is not None:
-        return f"<h1>{report}</h1>"
+        return jsonify(f"{report}"), 200
     return jsonify(error="report not found"), 404
 
 
@@ -37,4 +37,4 @@ def add_report():
     db.session.add(r)
     db.session.commit()
 
-    return "<h1>Added</h1>"
+    return jsonify(f"{r}"), 200

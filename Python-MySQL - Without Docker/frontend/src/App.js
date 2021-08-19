@@ -1,7 +1,8 @@
 import './App.css';
 import React from 'react';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import Login from "./Login.js"
+import Login from "./Login.js";
+import NavBar from "./NavBar.js";
 
 function App() {
   const darkTheme = createTheme({
@@ -15,7 +16,8 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <div className="App">
         <header className="App-header">
-          <div> {showNavBar ? <h1>Nothing</h1> : <Login setShowNavBar={setShowNavBar} />}
+          <div>
+            {showNavBar ? <NavBar /> : <Login setShowNavBar={setShowNavBar} />}
           </div>
 
         </header>

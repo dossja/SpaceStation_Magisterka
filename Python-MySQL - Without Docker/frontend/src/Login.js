@@ -52,7 +52,7 @@ function Login(props) {
 
     return (
         <div>
-            <Container maxWidth="s">
+            <Container maxWidth="s" className="Login-Page">
                 <h2>Sign in</h2>
                 <Grid container
                     direction="column"

@@ -29,11 +29,16 @@ def signup_user():
     if job == '':
         return jsonify(error="job is empty"), 400
 
+    manager = datas.get('manager', '')
+
     u = User()
     u.name = name
     u.surname = surname
     u.email = f"{name}.{surname}@firm.com"
     u.job = job
+
+    if manager != '':
+        u.manager = True
 
     db.session.add(u)
     db.session.commit()
