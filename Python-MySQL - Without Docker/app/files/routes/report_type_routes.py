@@ -4,7 +4,7 @@ from files.models.report_type import ReportType
 
 
 @app.route("/report_type", methods=["GET"])
-def get_reports():
+def get_reports_type():
     report_types = ReportType.query.all()
 
     return jsonify(f"{report_types}"), 200

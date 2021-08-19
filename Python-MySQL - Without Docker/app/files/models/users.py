@@ -13,8 +13,6 @@ class User(db.Model):
     manager = db.Column(db.Boolean, default=False)
     reports = db.relationship(
         "Report", backref="reporting_user")
-    missions = db.relationship(
-        "Mission", secondary=db.association_table, backref="users_mission")
 
     def __repr__(self):
         content = {'id': self.id, 'name': self.name, 'surname': self.surname,
