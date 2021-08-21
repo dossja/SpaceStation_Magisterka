@@ -19,11 +19,15 @@ login_manager = LoginManager(app)
 # login_manager = LoginManager(app)
 # login_manager.login_view = 'login'
 # login_manager.login_message_category = 'info'
-from files.routes import user_routes, report_routes, report_type_routes
+from files.routes import user_routes, report_routes, report_type_routes, position_type_routes, missions_routes
 from files.models.report_type import ReportType
+from files.models.position_type import PositionType
 from sqlalchemy import event, DDL
 
 event.listen(ReportType.__table__, 'after_create',
-            DDL(""" INSERT INTO report_type (id, description) VALUES (1, 'cleaning'), (2, 'technical'), (3, 'medical') """))
+            DDL(""" INSERT INTO report_type (id, description) VALUES (1, 'repair'), (2, 'maintenance'), (3, 'medical') """))
+
+event.listen(PositionType.__table__, 'after_create',
+            DDL(""" INSERT INTO position_type (id, name) VALUES (1, 'HR'), (2, 'kitchen'), (3, 'engineer'), (4, 'service'), (5, 'researcher'), (6, 'medic') """))
 
 db.create_all()

@@ -9,12 +9,14 @@ class User(db.Model):
     name = db.Column(db.String(50), nullable=False)
     surname = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), unique=True)
-    job = db.Column(db.String(50), nullable=False)
+    # job = db.Column(db.String(50), nullable=False)
+    position_type_id = db.Column(db.Integer, db.ForeignKey("position_type.id"))
     manager = db.Column(db.Boolean, default=False)
     reports = db.relationship(
         "Report", backref="reporting_user")
+    incidents = db.relationship("Report", back_populates="operating_user")
 
     def __repr__(self):
         content = {'id': self.id, 'name': self.name, 'surname': self.surname,
-                   'email': self.email, 'job': self.job, 'manager': self.manager}
+                   'email': self.email, 'position_type_id': self.position_type_id, 'manager': self.manager}
         return f"{content}"
