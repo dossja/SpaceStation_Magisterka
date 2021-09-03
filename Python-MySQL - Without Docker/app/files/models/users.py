@@ -14,7 +14,7 @@ class User(db.Model):
     manager = db.Column(db.Boolean, default=False)
     reports = db.relationship(
         "Report", backref="reporting_user")
-    incidents = db.relationship("Report", back_populates="operating_user")
+    # incidents = db.relationship("Report", back_populates="operating_user")
 
     def __repr__(self):
         content = {'id': self.id, 'name': self.name, 'surname': self.surname,

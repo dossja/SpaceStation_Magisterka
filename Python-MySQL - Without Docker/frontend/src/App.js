@@ -16,7 +16,7 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <div className="App">
         <header className="App-header">
-          <div>
+          <div className="App-body">
             {showNavBar ? <NavBar /> : <Login setShowNavBar={setShowNavBar} />}
           </div>
 

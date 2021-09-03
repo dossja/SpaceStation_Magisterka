@@ -13,8 +13,8 @@ class Report(db.Model):
     reporting_user_id = db.Column(
         db.Integer, db.ForeignKey("users.id"))
     report_type_id = db.Column(db.Integer, db.ForeignKey("report_type.id"))
-    operating_user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    operating_user = db.relationship("User", back_populates="reports")
+    # operating_user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    # operating_user = db.relationship("User", back_populates="reports")
     # reporting_user = db.relationship(
     #     "User", back_populates="reports")
 
