@@ -7,4 +7,4 @@ from files.models.position_type import PositionType
 def get_position_type():
     position_types = PositionType.query.all()
 
-    return jsonify(f"{position_types}"), 200
+    return jsonify(f"{{\"positionTypes\" : {position_types}}}"), 200

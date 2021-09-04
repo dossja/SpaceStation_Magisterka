@@ -25,9 +25,9 @@ def signup_user():
     surname = datas.get('surname', '')
     if surname == '':
         return jsonify(error="surname is empty"), 400
-    job = datas.get('job', '')
-    if job == '':
-        return jsonify(error="job is empty"), 400
+    position_type_id = datas.get('position_type_id', '')
+    if position_type_id == '':
+        return jsonify(error="position_type_id is empty"), 400
 
     manager = datas.get('manager', '')
 
@@ -35,10 +35,12 @@ def signup_user():
     u.name = name
     u.surname = surname
     u.email = f"{name}.{surname}@firm.com"
-    u.job = job
+    u.position_type_id = position_type_id
 
-    if manager != '':
+    if manager == 'true':
         u.manager = True
+    else:
+        u.manager = False
 
     db.session.add(u)
     db.session.commit()

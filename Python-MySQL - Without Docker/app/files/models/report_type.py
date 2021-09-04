@@ -7,5 +7,4 @@ class ReportType(db.Model):
     description = db.Column(db.String(50), nullable=False)
 
     def __repr__(self):
-        content = {'id': self.id, 'description': self.description}
-        return f"{content}"
+        return f"{{\"id\": \"{self.id}\", \"description\": \"{self.description}\"}}"

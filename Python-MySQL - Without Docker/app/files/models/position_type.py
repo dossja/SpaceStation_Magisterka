@@ -7,5 +7,4 @@ class PositionType(db.Model):
     name = db.Column(db.String(50), nullable=False)
 
     def __repr__(self):
-        content = {'id': self.id, 'name': self.name}
-        return f"{content}"
+        return f"{{\"id\": \"{self.id}\", \"name\": \"{self.name}\"}}"

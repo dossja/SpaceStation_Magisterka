@@ -13,4 +13,11 @@ export default class usersAPI {
 
         return response;
     }
+
+    // Metody POST
+    async post(values) {
+        const response = await API.post("/users/signup", values);
+
+        return response;
+    }
 }
