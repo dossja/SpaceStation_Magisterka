@@ -33,7 +33,7 @@ function ReportsAdd() {
     const rtAPI = new reportTypeAPI();
 
     const classes = useStyles();
-    const [reportType, setReportType] = React.useState([])
+    const [reportType, setReportType] = React.useState([]);
     let aktualizuj = true;
 
     const initialValues = {
@@ -58,7 +58,6 @@ function ReportsAdd() {
     const getReportTypeAPI = () => {
         rtAPI.get()
             .then(response => {
-                // console.log(response.data);
                 setReportType(response.data.reportTypes);
             })
             .catch(e => {

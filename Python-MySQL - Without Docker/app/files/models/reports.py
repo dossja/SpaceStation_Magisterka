@@ -15,10 +15,7 @@ class Report(db.Model):
     report_type_id = db.Column(db.Integer, db.ForeignKey("report_type.id"))
     # operating_user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     # operating_user = db.relationship("User", back_populates="reports")
-    # reporting_user = db.relationship(
-    #     "User", back_populates="reports")
 
     def __repr__(self):
-        content = {'id': self.id, 'submit_date': self.submit_date,
-                   'end_date': self.end_date, 'description': self.description}
-        return f"{{\"id\": \"{self.id}\", \"description\": \"{self.description}\", \"submit_date\": \"{self.submit_date}\", \"end_date\": \"{self.end_date}\", \"title\": \"{self.title}\", \"reporting_user_id\": \"{self.reporting_user_id}\", \"report_type_id\": \"{self.report_type_id}\"}}"
+
+        return f"{{\"id\": \"{self.id}\", \"description\": \"{self.description}\", \"submit_date\": \"{self.submit_date}\", \"end_date\": \"{self.end_date}\", \"title\": \"{self.title}\", \"reporting_user_id\": \"{self.reporting_user_id}\", \"reporting_user\": \"{self.reporting_user.name} {self.reporting_user.surname}\", \"report_type_id\": \"{self.report_type_id}\", \"report_type\": \"{self.report_type.description}\"}}"

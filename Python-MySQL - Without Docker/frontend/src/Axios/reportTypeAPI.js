@@ -7,4 +7,10 @@ export default class reportTypeAPI {
 
         return response;
     }
+
+    async getByID(id) {
+        const response = await API.get("/report_type/" + id);
+
+        return response;
+    }
 }

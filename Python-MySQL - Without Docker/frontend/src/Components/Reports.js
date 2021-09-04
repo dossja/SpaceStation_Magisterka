@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+import './Reports.css';
 import ReportsAdd from './ReportsAdd.js';
 import ReportsShow from './ReportsShow.js';
 

@@ -14,6 +14,12 @@ export default class usersAPI {
         return response;
     }
 
+    async getByID(id) {
+        const response = await API.post('/users/' + id);
+
+        return response;
+    }
+
     // Metody POST
     async post(values) {
         const response = await API.post("/users/signup", values);

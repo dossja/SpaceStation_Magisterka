@@ -2,16 +2,15 @@ import React from 'react';
 import { useState, useEffect } from "react";
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, TextField } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TableBody from '@material-ui/core/TableBody';
+import Table from '@material-ui/core/Table';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 import usersAPI from "../Axios/usersAPI.js";
 import reportAPI from "../Axios/reportAPI.js";
@@ -33,7 +32,10 @@ function ReportsShow() {
     const rtAPI = new reportTypeAPI();
 
     const classes = useStyles();
-    const [reportType, setReportType] = React.useState([])
+    const [reports, setReports] = React.useState([]);
+    const [reportsCopy, setReportsCopy] = React.useState([]);
+    const [reportType, setReportType] = React.useState([]);
+    const [users, setUsers] = React.useState([]);
     let aktualizuj = true;
 
     const initialValues = {
@@ -44,22 +46,43 @@ function ReportsShow() {
     const [values, setValues] = React.useState(initialValues);
 
     const handleChange = (prop) => (event) => {
-        if (prop == 'manager')
-            setValues({ ...values, [prop]: event.target.checked });
-        else
-            setValues({ ...values, [prop]: event.target.value });
+        setValues({ ...values, [prop]: event.target.value });
     };
 
     useEffect(() => {
-        if (aktualizuj)
-            getReportTypeAPI();
+        if (aktualizuj) {
+            getReports();
+        }
+
     }, [aktualizuj]);
 
-    const getReportTypeAPI = () => {
-        rtAPI.get()
+    const getUsersAPI = (id) => {
+        rtAPI.getByID(id)
             .then(response => {
-                // console.log(response.data);
                 setReportType(response.data.reportTypes);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        aktualizuj = false;
+    }
+
+    const getReportTypeAPI = (id) => {
+        rtAPI.getByID(id)
+            .then(response => {
+                setReportType(response.data.reportTypes);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        aktualizuj = false;
+    }
+
+    const getReports = () => {
+        rAPI.get()
+            .then(response => {
+                console.log(response.data);
+                setReports(response.data);
             })
             .catch(e => {
                 console.log(e);
@@ -83,49 +106,57 @@ function ReportsShow() {
         <div>
             <Container maxWidth="s" className="Add-User-Page">
                 <h2>Available Reports</h2>
-                {/* <Grid container
-                    direction="column"
-                    // justifyContent="center"
-                    alignItems="left">
-                    <FormControl className={classes.formControl}>
-                        <TextField
-                            id="name"
-                            label="Title"
-                            value={values.title}
-                            placeholder="Problems with heating"
-                            required fullWidth
-                            onChange={handleChange('title')}
-                        /></FormControl>
-                    <FormControl className={classes.formControl}>
-                        <TextField
-                            id="description"
-                            label="Description"
-                            required
-                            multiline
-                            rows={6}
-                            value={values.description}
-                            placeholder="When trying to..."
-                            onChange={handleChange('description')}
-                        /></FormControl>
-                    <FormControl className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-label" required>Report type</InputLabel>
-                        <Select labelId="report_type" label="Report Type" id="select" onChange={handleChange('report_type')}>
-                            {reportType.map(reportType => (
-                                <MenuItem value={reportType.id} >{reportType.description}</MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </Grid> */}
-                {/* <Box mt="2rem">
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={postReport}
-                    >
-                        Add
-                    </Button></Box> */}
-
             </Container>
+            <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>id</TableCell>
+                            <TableCell align="right">Title</TableCell>
+                            <TableCell align="right">Description</TableCell>
+                            <TableCell align="right">Type</TableCell>
+                            <TableCell align="right">Submit Date</TableCell>
+                            <TableCell align="right">End Date</TableCell>
+                            <TableCell align="right">Reporting user</TableCell>
+                            <TableCell align="right">Operating user</TableCell>
+                            <TableCell align="center">Actions</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {reports.map((reports) => (
+                            <TableRow key={reports.id}>
+                                <TableCell component="th" scope="row">
+                                    {reports.id}
+                                </TableCell>
+                                <TableCell align="right">{reports.title}</TableCell>
+                                <TableCell align="right">{reports.description}</TableCell>
+                                <TableCell align="right">{reports.report_type}</TableCell>
+                                <TableCell align="right">{reports.submit_date}</TableCell>
+                                <TableCell align="right">{reports.end_date}</TableCell>
+                                <TableCell align="right">{reports.reporting_user}</TableCell>
+                                <TableCell align="right"></TableCell>
+                                <TableCell align="right"><Button
+                                    variant="contained"
+                                    color="primary"
+                                    className="Btn-Assign"
+                                // onClick={postReport}
+                                >
+                                    Assign
+                                </Button>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        className="Btn-Cancel"
+                                    // onClick={postReport}
+                                    >
+                                        Cancel
+                                    </Button></TableCell>
+                                {/* <TableCell align="right">{reports.operating_user_id}</TableCell> */}
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>)
 }
 
