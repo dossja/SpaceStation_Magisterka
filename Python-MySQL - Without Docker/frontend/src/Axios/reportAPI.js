@@ -16,6 +16,7 @@ export default class reportAPI {
 
     // Metody POST
     async post(values) {
+        console.log(values);
         const response = await API.post("/reports/add", values);
 
         return response;

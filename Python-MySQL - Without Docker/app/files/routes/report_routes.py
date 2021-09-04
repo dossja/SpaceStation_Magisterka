@@ -23,16 +23,25 @@ def get_report(id):
 @app.route("/reports/add", methods=['POST'])
 def add_report():
     datas = request.get_json()
+
+    title = datas.get('title', '')
+    if title == '':
+        return jsonify(error="title is empty"), 400
     description = datas.get('description', '')
     if description == '':
         return jsonify(error="description is empty"), 400
     reporting_user_id = datas.get('reporting_user_id', '')
     if reporting_user_id == '':
         return jsonify(error="reporting_user_id is empty"), 400
+    report_type_id = datas.get('report_type_id', '')
+    if report_type_id == '':
+        return jsonify(error="report_type_id is empty"), 400
 
     r = Report()
+    r.title = title
     r.description = description
     r.reporting_user_id = reporting_user_id
+    r.report_type_id = report_type_id
 
     db.session.add(r)
     db.session.commit()

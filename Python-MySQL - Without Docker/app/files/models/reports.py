@@ -21,4 +21,4 @@ class Report(db.Model):
     def __repr__(self):
         content = {'id': self.id, 'submit_date': self.submit_date,
                    'end_date': self.end_date, 'description': self.description}
-        return f"{content}"
+        return f"{{\"id\": \"{self.id}\", \"description\": \"{self.description}\", \"submit_date\": \"{self.submit_date}\", \"end_date\": \"{self.end_date}\", \"title\": \"{self.title}\", \"reporting_user_id\": \"{self.reporting_user_id}\", \"report_type_id\": \"{self.report_type_id}\"}}"
