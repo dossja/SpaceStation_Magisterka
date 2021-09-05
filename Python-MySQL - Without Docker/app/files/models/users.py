@@ -17,6 +17,5 @@ class User(db.Model):
     # incidents = db.relationship("Report", back_populates="operating_user")
 
     def __repr__(self):
-        content = {'id': self.id, 'name': self.name, 'surname': self.surname,
-                   'email': self.email, 'position_type_id': self.position_type_id, 'manager': self.manager}
-        return f"{content}"
+
+        return f"{{\"id\": \"{self.id}\", \"name\": \"{self.name}\", \"surname\": \"{self.surname}\", \"email\": \"{self.email}\", \"position_type_id\": \"{self.position_type_id}\", \"position_type\": \"{self.position_type.name}\", \"manager\": \"{self.manager}\"}}"
