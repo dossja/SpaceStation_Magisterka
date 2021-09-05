@@ -22,6 +22,14 @@ const useStyles = makeStyles((theme) => ({
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
+    btnEdit: {
+        margin: "10px",
+        "background-color": "blue"
+    },
+    btnDelete: {
+        margin: "10px",
+        "background-color": "red"
+    }
 }));
 
 function UsersShow() {
@@ -35,6 +43,7 @@ function UsersShow() {
     useEffect(() => {
         if (aktualizuj)
             getUsersAPI();
+        console.log("Akt");
     }, [aktualizuj]);
 
     const getUsersAPI = () => {
@@ -47,6 +56,20 @@ function UsersShow() {
                 console.log(e);
             });
         aktualizuj = false;
+    }
+
+    async function deleteUserAPI(id) {
+        uAPI.deleteByID(id)
+            .then(response => {
+                console.log(response.data);
+
+                setUsers([]);
+                getUsersAPI();
+                aktualizuj = true;
+            })
+            .catch(e => {
+                console.log(e);
+            });
     }
 
     return (
@@ -81,18 +104,18 @@ function UsersShow() {
                                 <TableCell align="right"><Button
                                     variant="contained"
                                     color="primary"
-                                    className="Btn-Assign"
+                                    className={classes.btnEdit}
                                 // onClick={postReport}
                                 >
-                                    Assign
+                                    Edit
                                 </Button>
                                     <Button
                                         variant="contained"
                                         color="primary"
-                                        className="Btn-Cancel"
-                                    // onClick={postReport}
+                                        className={classes.btnDelete}
+                                        onClick={() => deleteUserAPI(users.id)}
                                     >
-                                        Cancel
+                                        Delete
                                     </Button></TableCell>
                             </TableRow>
                         ))}

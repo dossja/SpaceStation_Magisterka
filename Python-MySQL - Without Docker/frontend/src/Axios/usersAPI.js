@@ -26,4 +26,11 @@ export default class usersAPI {
 
         return response;
     }
+
+    // Metody DELETE
+    async deleteByID(id) {
+        const response = await API.delete("/users/delete/" + id);
+
+        return response;
+    }
 }

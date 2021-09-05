@@ -6,7 +6,7 @@ from flask_login import login_user
 # from . import api
 from .. import db, app
 
-from ..models.users import User
+# from ..models.users import User
 # from ..schemas.user import user_schema, users_schema
 
 
@@ -28,7 +28,6 @@ def signup_user():
     position_type_id = datas.get('position_type_id', '')
     if position_type_id == '':
         return jsonify(error="position_type_id is empty"), 400
-
     manager = datas.get('manager', '')
 
     u = User()
@@ -36,11 +35,7 @@ def signup_user():
     u.surname = surname
     u.email = f"{name}.{surname}@firm.com"
     u.position_type_id = position_type_id
-
-    if manager == 'true':
-        u.manager = True
-    else:
-        u.manager = False
+    u.manager = manager
 
     db.session.add(u)
     db.session.commit()
@@ -76,3 +71,11 @@ def login():
         # login_user(user, remember=True)
         return jsonify(f"{user}"), 200
     return jsonify(error="user not found"), 404
+
+
+@app.route('/users/delete/<string:id>', methods=['DELETE'])
+def delete_user(id):
+    user = User.query.filter_by(id=id).delete()
+    db.session.commit()
+
+    return jsonify(f"User deleted"), 200

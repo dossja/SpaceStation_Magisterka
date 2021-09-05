@@ -24,6 +24,14 @@ const useStyles = makeStyles((theme) => ({
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
+    btnAssign: {
+        margin: "10px",
+        "background-color": "blue"
+    },
+    btnCancel: {
+        margin: "10px",
+        "background-color": "red"
+    }
 }));
 
 function ReportsShow() {
@@ -90,7 +98,7 @@ function ReportsShow() {
                                 <TableCell align="right"><Button
                                     variant="contained"
                                     color="primary"
-                                    className="Btn-Assign"
+                                    className={classes.btnAssign}
                                 // onClick={postReport}
                                 >
                                     Assign
@@ -98,7 +106,7 @@ function ReportsShow() {
                                     <Button
                                         variant="contained"
                                         color="primary"
-                                        className="Btn-Cancel"
+                                        className={classes.btnCancel}
                                     // onClick={postReport}
                                     >
                                         Cancel
