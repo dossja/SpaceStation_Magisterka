@@ -15,7 +15,7 @@ export default class usersAPI {
     }
 
     async getByID(id) {
-        const response = await API.post('/users/' + id);
+        const response = await API.get('/users/' + id);
 
         return response;
     }
@@ -23,6 +23,13 @@ export default class usersAPI {
     // Metody POST
     async post(values) {
         const response = await API.post("/users/signup", values);
+
+        return response;
+    }
+
+    // Metody PUT
+    async putByID(id, values) {
+        const response = await API.put("/users/update/" + id, values);
 
         return response;
     }

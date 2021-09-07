@@ -53,8 +53,34 @@ def get_users():
 @app.route('/users/<string:id>', methods=['GET'])
 def get_user(id):
     user = User.query.get(id)
+
     if user is not None:
-        return f"<h1>{user} \n{user.reports}</h1>"
+        return jsonify(f"{user}"), 200
+    return jsonify(error="user not found"), 404
+
+
+@app.route('/users/update/<string:id>', methods=['PUT'])
+def update_user(id):
+    user = User.query.get(id)
+    datas = request.get_json()
+
+    name = datas.get('name', '')
+    surname = datas.get('surname', '')
+    email = datas.get('email', '')
+    position_type_id = datas.get('position_type_id', '')
+    manager = datas.get('manager', '')
+
+    user.name = name
+    user.surname = surname
+    user.email = f"{name}.{surname}@firm.com"
+    user.position_type_id = position_type_id
+    user.manager = manager
+
+    db.session.add(user)
+    db.session.commit()
+
+    if user is not None:
+        return jsonify(f"{user}"), 200
     return jsonify(error="user not found"), 404
 
 

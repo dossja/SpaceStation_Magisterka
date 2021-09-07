@@ -11,6 +11,9 @@ import TableBody from '@material-ui/core/TableBody';
 import Table from '@material-ui/core/Table';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import Modal from '@material-ui/core/Modal';
+
+import UsersEdit from './UsersEdit.js';
 
 import usersAPI from "../Axios/usersAPI.js";
 
@@ -29,14 +32,16 @@ const useStyles = makeStyles((theme) => ({
     btnDelete: {
         margin: "10px",
         "background-color": "red"
-    }
-}));
+    },
+}))
 
 function UsersShow() {
     const uAPI = new usersAPI();
 
     const classes = useStyles();
     const [users, setUsers] = React.useState([]);
+    const [open, setOpen] = React.useState(false);
+    const [userID, setUserID] = React.useState(false);
 
     let aktualizuj = true;
 
@@ -72,6 +77,16 @@ function UsersShow() {
             });
     }
 
+    const setAktualizuj = () => {
+        aktualizuj = true;
+    }
+
+    const handleClose = () => {
+        console.log("H_Close");
+        setOpen(false);
+        aktualizuj = true;
+    };
+
     return (
         <div>
             <Container maxWidth="s" className="Add-User-Page">
@@ -105,7 +120,11 @@ function UsersShow() {
                                     variant="contained"
                                     color="primary"
                                     className={classes.btnEdit}
-                                // onClick={postReport}
+                                    // onClick={postReport}
+                                    onClick={() => {
+                                        setOpen(true);
+                                        setUserID(users.id);
+                                    }}
                                 >
                                     Edit
                                 </Button>
@@ -122,7 +141,16 @@ function UsersShow() {
                     </TableBody>
                 </Table>
             </TableContainer>
-        </div>)
+
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <UsersEdit userID={userID} handleClose={handleClose} setAktualizuj={setAktualizuj} />
+            </Modal>
+        </div >)
 }
 
 export default UsersShow;
