@@ -11,10 +11,12 @@ import TableBody from '@material-ui/core/TableBody';
 import Table from '@material-ui/core/Table';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import Modal from '@material-ui/core/Modal';
 
 import reportAPI from "../Axios/reportAPI.js";
 
 import "./Reports.css";
+import ReportsAssign from './ReportsAssign.js';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -40,6 +42,9 @@ function ReportsShow() {
     const classes = useStyles();
     const [reports, setReports] = React.useState([]);
 
+    const [open, setOpen] = React.useState(false);
+    const [reportID, setReportID] = React.useState(false);
+
     let aktualizuj = true;
 
     useEffect(() => {
@@ -61,6 +66,16 @@ function ReportsShow() {
             });
         aktualizuj = false;
     }
+
+    const setAktualizuj = () => {
+        aktualizuj = true;
+    }
+
+    const handleClose = () => {
+        console.log("H_Close");
+        setOpen(false);
+        aktualizuj = true;
+    };
 
     return (
         <div>
@@ -99,7 +114,10 @@ function ReportsShow() {
                                     variant="contained"
                                     color="primary"
                                     className={classes.btnAssign}
-                                // onClick={postReport}
+                                    onClick={() => {
+                                        setOpen(true);
+                                        setReportID(reports.id);
+                                    }}
                                 >
                                     Assign
                                 </Button>
@@ -117,6 +135,15 @@ function ReportsShow() {
                     </TableBody>
                 </Table>
             </TableContainer>
+
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <ReportsAssign reportID={reportID} handleClose={handleClose} setAktualizuj={setAktualizuj} />
+            </Modal>
         </div>)
 }
 

@@ -17,7 +17,7 @@ function Login(props) {
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
-        getUsersAPI();
+        // getUsersAPI();
     };
 
     const handleClickShowPassword = () => {
