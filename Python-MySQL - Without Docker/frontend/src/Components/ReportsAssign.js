@@ -14,7 +14,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
 import usersAPI from "../Axios/usersAPI.js";
-import positionTypeAPI from "../Axios/positionTypeAPI.js";
+import reportsAPI from "../Axios/reportAPI.js";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -52,30 +52,44 @@ function getModalStyle() {
 
 function ReportsAssign(props) {
     const uAPI = new usersAPI();
-    const ptAPI = new positionTypeAPI();
+    const rAPI = new reportsAPI();
 
     const classes = useStyles();
-    const [positionType, setPositionType] = React.useState([]);
     const [modalStyle] = React.useState(getModalStyle);
-    const [user, setUser] = React.useState({});
+    const [users, setUsers] = React.useState([]);
+    const [report, setReport] = React.useState({});
 
     let aktualizuj = true;
 
     const handleChange = (prop) => (event) => {
-        setUser({ ...user, [prop]: event.target.value });
+        setReport({ ...report, [prop]: event.target.value });
     };
 
     useEffect(() => {
         console.log(props.reportID);
-        // if (aktualizuj)
-        // getPositionTypeAPI();
+        getUsers();
+        getReportByID(props.reportID);
     }, [aktualizuj]);
 
-    const getUserByID = (id) => {
-        uAPI.getByID(id)
+    const getUsers = () => {
+        uAPI.get()
+            .then(response => {
+                let userss = [];
+                for (let i in response.data) {
+                    userss.push({ 'id': response.data[i].id, 'name': response.data[i].name + ' ' + response.data[i].surname });
+                }
+                setUsers(userss);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
+    const getReportByID = (id) => {
+        rAPI.getByID(id)
             .then(response => {
                 console.log(response.data);
-                setUser(response.data);
+                setReport(response.data);
             })
             .catch(e => {
                 console.log(e);
@@ -83,11 +97,7 @@ function ReportsAssign(props) {
     }
 
     const putReport = () => {
-
-    }
-
-    const putUser = () => {
-        uAPI.putByID(props.userID, user)
+        rAPI.putByID(props.reportID, report)
             .then(response => {
                 console.log(response.data);
                 console.log(response.status);
@@ -110,40 +120,22 @@ function ReportsAssign(props) {
                         alignItems="left">
                         {/* <FormControl className={classes.formControl}>
                             <TextField
-                                id="name"
-                                label="First name"
-                                value={user.name}
-                                placeholder="John"
-                                required fullWidth
-                                onChange={handleChange('name')}
-                            /></FormControl>
-                        <FormControl className={classes.formControl}>
-                            <TextField
-                                id="surname"
-                                label="Surname"
-                                required
-                                value={user.surname}
-                                placeholder="Smith"
-                                onChange={handleChange('surname')}
-                            /></FormControl>
-                        <FormControl className={classes.formControl}>
-                            <TextField
                                 id="email"
                                 label="Email"
                                 required
                                 value={user.email}
                                 placeholder="mail@company.com"
                                 onChange={handleChange('email')}
-                            /></FormControl>
+                            /></FormControl> */}
                         <FormControl className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-label" required>Position</InputLabel>
-                            <Select labelId="position" label="Position" id="select" value={user.position_type_id} onChange={handleChange('position_type')}>
-                                {positionType.map(positionType => (
-                                    <MenuItem value={positionType.id} >{positionType.name}</MenuItem>
+                            <InputLabel id="demo-simple-select-label" required>User</InputLabel>
+                            <Select labelId="position" label="Position" id="select" onChange={handleChange('operating_user_id')}>
+                                {users.map(users => (
+                                    <MenuItem value={users.id} >{users.name}</MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
-                        <FormControl className={classes.formControl}>
+                        {/* <FormControl className={classes.formControl}>
                             <FormControlLabel
                                 control={<Checkbox checked={user.manager} name="manager" onChange={handleChange('manager')} />}
                                 label="manager"
