@@ -19,7 +19,7 @@ login_manager = LoginManager(app)
 # login_manager = LoginManager(app)
 # login_manager.login_view = 'login'
 # login_manager.login_message_category = 'info'
-from files.routes import user_routes, report_routes, report_type_routes, position_type_routes, missions_routes
+from files.routes import user_routes, report_routes, report_type_routes, position_type_routes, missions_routes, incidents_route
 from files.models.report_type import ReportType
 from files.models.position_type import PositionType
 from sqlalchemy import event, DDL

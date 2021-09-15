@@ -1,5 +1,6 @@
 import datetime
 from files import db
+from flask import jsonify
 # from files.models.users import User
 
 
@@ -13,9 +14,20 @@ class Report(db.Model):
     reporting_user_id = db.Column(
         db.Integer, db.ForeignKey("users.id"))
     report_type_id = db.Column(db.Integer, db.ForeignKey("report_type.id"))
+    operating_user_id = db.relationship(
+        "User", secondary="incidents", backref="report")
     # operating_user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     # operating_user = db.relationship("User", back_populates="reports")
 
     def __repr__(self):
+        if self.operating_user_id:
+            operating_user = f"\"operating_user_id\": \"{self.operating_user_id[0].id}\", \"operating_user\": \"{self.operating_user_id[0].name} {self.operating_user_id[0].surname}\""
+        else:
+            operating_user = f"\"operating_user_id\": \"\", \"operating_user\": \"\""
 
-        return f"{{\"id\": \"{self.id}\", \"description\": \"{self.description}\", \"submit_date\": \"{self.submit_date}\", \"end_date\": \"{self.end_date}\", \"title\": \"{self.title}\", \"reporting_user_id\": \"{self.reporting_user_id}\", \"reporting_user\": \"{self.reporting_user.name} {self.reporting_user.surname}\", \"report_type_id\": \"{self.report_type_id}\", \"report_type\": \"{self.report_type.description}\"}}"
+        if self.end_date:
+            end_date = self.end_date
+        else:
+            end_date = "not specified"
+
+        return f"{{\"id\": \"{self.id}\", \"description\": \"{self.description}\", \"submit_date\": \"{self.submit_date}\", \"end_date\": \"{end_date}\", \"title\": \"{self.title}\", \"reporting_user_id\": \"{self.reporting_user_id}\", \"reporting_user\": \"{self.reporting_user.name} {self.reporting_user.surname}\", \"report_type_id\": \"{self.report_type_id}\", \"report_type\": \"{self.report_type.description}\", {operating_user}}}"

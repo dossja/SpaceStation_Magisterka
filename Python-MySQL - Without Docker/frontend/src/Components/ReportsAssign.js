@@ -15,6 +15,7 @@ import FormControl from '@material-ui/core/FormControl';
 
 import usersAPI from "../Axios/usersAPI.js";
 import reportsAPI from "../Axios/reportAPI.js";
+import incidentsAPI from '../Axios/incidentsAPI.js';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -53,16 +54,22 @@ function getModalStyle() {
 function ReportsAssign(props) {
     const uAPI = new usersAPI();
     const rAPI = new reportsAPI();
+    const iAPI = new incidentsAPI();
 
     const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
     const [users, setUsers] = React.useState([]);
     const [report, setReport] = React.useState({});
 
+    const initialValues = {
+        operating_user_id: ''
+    };
+    const [values, setValues] = React.useState(initialValues);
+
     let aktualizuj = true;
 
     const handleChange = (prop) => (event) => {
-        setReport({ ...report, [prop]: event.target.value });
+        setValues({ ...report, [prop]: event.target.value });
     };
 
     useEffect(() => {
@@ -97,12 +104,12 @@ function ReportsAssign(props) {
     }
 
     const putReport = () => {
-        rAPI.putByID(props.reportID, report)
+        console.log(props.reportID);
+        console.log(values.operating_user_id);
+        iAPI.post({ 'report_id': props.reportID, 'operating_user_id': values.operating_user_id })
             .then(response => {
                 console.log(response.data);
                 console.log(response.status);
-                props.setAktualizuj();
-                props.handleClose();
             })
             .catch(e => {
                 console.log(e);

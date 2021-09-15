@@ -47,3 +47,29 @@ def add_report():
     db.session.commit()
 
     return jsonify(f"{r}"), 200
+
+
+@app.route('/reports/update/<string:id>', methods=['PUT'])
+def update_report(id):
+    r = Report.query.get(id)
+    datas = request.get_json()
+
+    title = datas.get('title', '')
+    description = datas.get('description', '')
+    reporting_user_id = datas.get('reporting_user_id', '')
+    report_type_id = datas.get('report_type_id', '')
+    end_date = datas.get('end_date', '')
+    if end_date != "not specified":
+        r.end_date = end_date
+
+    r.title = title
+    r.description = description
+    r.reporting_user_id = reporting_user_id
+    r.report_type_id = report_type_id
+
+    db.session.add(r)
+    db.session.commit()
+
+    if r is not None:
+        return jsonify(f"{r}"), 200
+    return jsonify(error="report not updated"), 404

@@ -109,7 +109,7 @@ function ReportsShow() {
                                 <TableCell align="right">{reports.submit_date}</TableCell>
                                 <TableCell align="right">{reports.end_date}</TableCell>
                                 <TableCell align="right">{reports.reporting_user}</TableCell>
-                                <TableCell align="right"></TableCell>
+                                <TableCell align="right">{reports.operating_user}</TableCell>
                                 <TableCell align="right"><Button
                                     variant="contained"
                                     color="primary"
@@ -129,7 +129,6 @@ function ReportsShow() {
                                     >
                                         Cancel
                                     </Button></TableCell>
-                                {/* <TableCell align="right">{reports.operating_user_id}</TableCell> */}
                             </TableRow>
                         ))}
                     </TableBody>

@@ -67,7 +67,7 @@ function ReportsAdd() {
     }
 
     const postReport = () => {
-        rAPI.post({ 'description': values.description, 'reporting_user_id': 25, 'title': values.title, 'report_type_id': values.report_type })
+        rAPI.post({ 'description': values.description, 'reporting_user_id': 1, 'title': values.title, 'report_type_id': values.report_type })
             .then(response => {
                 console.log(response.data);
                 console.log(response.status);

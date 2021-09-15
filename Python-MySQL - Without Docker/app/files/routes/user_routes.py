@@ -81,7 +81,7 @@ def update_user(id):
 
     if user is not None:
         return jsonify(f"{user}"), 200
-    return jsonify(error="user not found"), 404
+    return jsonify(error="user not updated"), 404
 
 
 @app.route('/users/login', methods=["POST"])
