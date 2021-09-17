@@ -33,7 +33,7 @@
 }
 
 .divider{
-    width:5px;
+    width:8px;
     height:auto;
     display:inline-block;
 }
@@ -41,6 +41,7 @@
 .Nav-Button {
     padding: 10px;
     margin: 10px;
+    background-color: gray;
 }
 
 .Nav-Route{
