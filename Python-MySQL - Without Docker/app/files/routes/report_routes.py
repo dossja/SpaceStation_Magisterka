@@ -42,6 +42,7 @@ def add_report():
     r.description = description
     r.reporting_user_id = reporting_user_id
     r.report_type_id = report_type_id
+    r.report_status_id = 1
 
     db.session.add(r)
     db.session.commit()
@@ -58,6 +59,7 @@ def update_report(id):
     description = datas.get('description', '')
     reporting_user_id = datas.get('reporting_user_id', '')
     report_type_id = datas.get('report_type_id', '')
+    report_status_id = datas.get('report_status_id', '')
     end_date = datas.get('end_date', '')
     if end_date != "not specified":
         r.end_date = end_date
@@ -66,6 +68,7 @@ def update_report(id):
     r.description = description
     r.reporting_user_id = reporting_user_id
     r.report_type_id = report_type_id
+    r.report_status_id = int(report_status_id)
 
     db.session.add(r)
     db.session.commit()

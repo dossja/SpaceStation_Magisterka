@@ -14,6 +14,7 @@ class Report(db.Model):
     reporting_user_id = db.Column(
         db.Integer, db.ForeignKey("users.id"))
     report_type_id = db.Column(db.Integer, db.ForeignKey("report_type.id"))
+    report_status_id = db.Column(db.Integer, db.ForeignKey("report_status.id"))
     operating_user_id = db.relationship(
         "User", secondary="incidents", backref="report")
     # operating_user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -30,4 +31,4 @@ class Report(db.Model):
         else:
             end_date = "not specified"
 
-        return f"{{\"id\": \"{self.id}\", \"description\": \"{self.description}\", \"submit_date\": \"{self.submit_date}\", \"end_date\": \"{end_date}\", \"title\": \"{self.title}\", \"reporting_user_id\": \"{self.reporting_user_id}\", \"reporting_user\": \"{self.reporting_user.name} {self.reporting_user.surname}\", \"report_type_id\": \"{self.report_type_id}\", \"report_type\": \"{self.report_type.description}\", {operating_user}}}"
+        return f"{{\"id\": \"{self.id}\", \"description\": \"{self.description}\", \"submit_date\": \"{self.submit_date}\", \"end_date\": \"{end_date}\", \"title\": \"{self.title}\", \"reporting_user_id\": \"{self.reporting_user_id}\", \"reporting_user\": \"{self.reporting_user.name} {self.reporting_user.surname}\",\"report_status_id\": \"{self.report_status_id}\", \"report_status\": \"{self.report_status.description}\", \"report_type_id\": \"{self.report_type_id}\", \"report_type\": \"{self.report_type.description}\", {operating_user}}}"

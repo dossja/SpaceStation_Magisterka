@@ -17,32 +17,15 @@ function Login(props) {
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
-        // getUsersAPI();
     };
-
-    const handleClickShowPassword = () => {
-        setValues({ ...values, showPassword: !values.showPassword });
-    };
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
-
-    const getUsersAPI = () => {
-        uAPI.get()
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(e => {
-                console.log(e);
-            });
-    }
 
     const getUserByEmailAPI = () => {
         uAPI.getByEmail({ 'email': values.email })
             .then(response => {
                 console.log(response.data);
                 console.log(response.status);
+                if (response.status == 200)
+                    props.setCurrentUserID(response.data.id);
             })
             .catch(e => {
                 console.log(e);

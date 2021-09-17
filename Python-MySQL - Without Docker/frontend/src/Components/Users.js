@@ -9,11 +9,13 @@ import UsersAdd from './UsersAdd';
 import UsersShow from './UsersShow';
 
 
-function Users() {
+function Users(props) {
+    const [currentUserID, setCurrentUserID] = React.useState(props.currentUserID);
     return (
         <div>
             <Container maxWidth="s" className="Add-User-Page">
                 <h2>Users</h2>
+                <h2>{currentUserID}</h2>
                 <Router >
                     <div>
                         <Button variant="contained" ><Link to="/users/add" className="Category-link">Add User</Link></Button>

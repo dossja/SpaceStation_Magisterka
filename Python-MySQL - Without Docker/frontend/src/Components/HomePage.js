@@ -1,6 +1,6 @@
 import React from 'react';
 
-function HomePage() {
+function HomePage(props) {
     return (
         <div>
             <h1>HomePage</h1>

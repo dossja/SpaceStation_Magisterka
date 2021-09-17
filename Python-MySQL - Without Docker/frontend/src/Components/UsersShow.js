@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -42,8 +42,9 @@ function UsersShow() {
     const [users, setUsers] = React.useState([]);
     const [open, setOpen] = React.useState(false);
     const [userID, setUserID] = React.useState(false);
+    const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
-    let aktualizuj = true;
+    const [aktualizuj, setAktualizuj] = React.useState(true);
 
     useEffect(() => {
         if (aktualizuj)
@@ -60,7 +61,7 @@ function UsersShow() {
             .catch(e => {
                 console.log(e);
             });
-        aktualizuj = false;
+        setAktualizuj(false);
     }
 
     async function deleteUserAPI(id) {
@@ -70,21 +71,19 @@ function UsersShow() {
 
                 setUsers([]);
                 getUsersAPI();
-                aktualizuj = true;
+                setAktualizuj(false);
             })
             .catch(e => {
                 console.log(e);
             });
     }
 
-    const setAktualizuj = () => {
-        aktualizuj = true;
-    }
-
     const handleClose = () => {
         console.log("H_Close");
         setOpen(false);
-        aktualizuj = true;
+        setAktualizuj(true);
+        console.log(aktualizuj);
+        forceUpdate();
     };
 
     return (

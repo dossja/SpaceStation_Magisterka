@@ -108,6 +108,7 @@ function UsersAdd(props) {
     }
 
     const putUser = () => {
+        console.log(user);
         uAPI.putByID(props.userID, user)
             .then(response => {
                 console.log(response.data);
@@ -164,7 +165,7 @@ function UsersAdd(props) {
                             /></FormControl>
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-simple-select-label" required>Position</InputLabel>
-                            <Select labelId="position" label="Position" id="select" value={user.position_type_id} onChange={handleChange('position_type')}>
+                            <Select labelId="position" label="Position" id="select" value={user.position_type_id} onChange={handleChange('position_type_id')}>
                                 {positionType.map(positionType => (
                                     <MenuItem value={positionType.id} >{positionType.name}</MenuItem>
                                 ))}

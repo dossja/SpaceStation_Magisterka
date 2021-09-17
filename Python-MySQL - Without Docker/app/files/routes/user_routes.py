@@ -74,7 +74,7 @@ def update_user(id):
     user.surname = surname
     user.email = f"{name}.{surname}@firm.com"
     user.position_type_id = position_type_id
-    user.manager = manager
+    user.manager = bool(manager)
 
     db.session.add(user)
     db.session.commit()

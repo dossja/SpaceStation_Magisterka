@@ -24,7 +24,7 @@ export default class reportAPI {
 
     // Metody PUT
     async putByID(id, values) {
-        const response = await API.put("/users/update/" + id, values);
+        const response = await API.put("/reports/update/" + id, values);
 
         return response;
     }

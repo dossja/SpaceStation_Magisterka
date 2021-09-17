@@ -110,6 +110,18 @@ function ReportsAssign(props) {
             .then(response => {
                 console.log(response.data);
                 console.log(response.status);
+                report.report_status_id = "2";
+                console.log(report);
+                rAPI.putByID(props.reportID, report)
+                    .then(response => {
+                        console.log(response.data);
+                        console.log(response.status);
+                        props.setAktualizuj();
+                        props.handleClose();
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
             })
             .catch(e => {
                 console.log(e);
@@ -125,15 +137,6 @@ function ReportsAssign(props) {
                     <Grid container
                         direction="column"
                         alignItems="left">
-                        {/* <FormControl className={classes.formControl}>
-                            <TextField
-                                id="email"
-                                label="Email"
-                                required
-                                value={user.email}
-                                placeholder="mail@company.com"
-                                onChange={handleChange('email')}
-                            /></FormControl> */}
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-simple-select-label" required>User</InputLabel>
                             <Select labelId="position" label="Position" id="select" onChange={handleChange('operating_user_id')}>
@@ -142,11 +145,6 @@ function ReportsAssign(props) {
                                 ))}
                             </Select>
                         </FormControl>
-                        {/* <FormControl className={classes.formControl}>
-                            <FormControlLabel
-                                control={<Checkbox checked={user.manager} name="manager" onChange={handleChange('manager')} />}
-                                label="manager"
-                            /></FormControl> */}
                     </Grid>
                     <Box mt="2rem">
                         <Button
