@@ -42,14 +42,12 @@ function UsersShow(props) {
     const [users, setUsers] = React.useState([]);
     const [open, setOpen] = React.useState(false);
     const [userID, setUserID] = React.useState(false);
-    const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
     const [aktualizuj, setAktualizuj] = React.useState(true);
 
     useEffect(() => {
         if (aktualizuj)
             getUsersAPI();
-        console.log("Akt");
     }, [aktualizuj]);
 
     const getUsersAPI = () => {
@@ -83,7 +81,6 @@ function UsersShow(props) {
         setOpen(false);
         setAktualizuj(true);
         console.log(aktualizuj);
-        forceUpdate();
     };
 
     return (

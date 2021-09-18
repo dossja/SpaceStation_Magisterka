@@ -9,7 +9,7 @@ import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
@@ -114,7 +114,7 @@ function UsersAdd() {
                     </FormControl>
                     <FormControl className={classes.formControl}>
                         <FormControlLabel
-                            control={<Checkbox checked={values.manager} onChange={handleChange('manager')} name="manager" />}
+                            control={<Switch checked={values.manager} onChange={handleChange('manager')} name="manager" color="warning" />}
                             label="manager"
                         /></FormControl>
                 </Grid>

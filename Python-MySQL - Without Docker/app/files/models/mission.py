@@ -12,6 +12,5 @@ class Mission(db.Model):
     crew = db.relationship("User", secondary=mission_crew, backref="missions")
 
     def __repr__(self):
-        content = {'id': self.id, 'start_date': self.start_date,
-                   'end_date': self.end_date}
-        return f"{content}"
+
+        return f"{{\"id\": \"{self.id}\", \"start_date\": \"{self.start_date}\",\"end_date\": \"{self.end_date}\"}}"

@@ -12,6 +12,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import Switch from '@material-ui/core/Switch';
 
 import usersAPI from "../Axios/usersAPI.js";
 import positionTypeAPI from "../Axios/positionTypeAPI.js";
@@ -173,7 +174,7 @@ function UsersAdd(props) {
                         </FormControl>
                         <FormControl className={classes.formControl}>
                             <FormControlLabel
-                                control={<Checkbox checked={user.manager} name="manager" onChange={handleChange('manager')} />}
+                                control={<Switch checked={user.manager} name="manager" onChange={handleChange('manager')} color="warning" />}
                                 label="manager"
                             /></FormControl>
                     </Grid>

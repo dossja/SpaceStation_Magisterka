@@ -11,7 +11,6 @@ function Missions(props) {
         <div>
             <Container maxWidth="s" className="Add-User-Page">
                 <h3>Missions</h3>
-                <h3>{props.currentUserID}</h3>
                 <Router >
                     <div>
                         {props.isManager == "True" ?
