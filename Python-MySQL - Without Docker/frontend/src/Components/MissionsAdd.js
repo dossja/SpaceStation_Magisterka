@@ -1,9 +1,10 @@
 import React from 'react';
 
-function MissionsAdd() {
+function MissionsAdd(props) {
     return (
         <div>
-            <h2>Missions</h2>
+            <h2>Add Mission</h2>
+            <h3>{props.currentUserID}</h3>
         </div>)
 }
 

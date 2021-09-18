@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function ReportsAdd() {
+function ReportsAdd(props) {
     const uAPI = new usersAPI();
     const rAPI = new reportAPI();
     const rtAPI = new reportTypeAPI();
@@ -67,7 +67,7 @@ function ReportsAdd() {
     }
 
     const postReport = () => {
-        rAPI.post({ 'description': values.description, 'reporting_user_id': 1, 'title': values.title, 'report_type_id': values.report_type })
+        rAPI.post({ 'description': values.description, 'reporting_user_id': props.currentUserID, 'title': values.title, 'report_type_id': values.report_type })
             .then(response => {
                 console.log(response.data);
                 console.log(response.status);
@@ -82,6 +82,7 @@ function ReportsAdd() {
         <div>
             <Container maxWidth="s" className="Add-User-Page">
                 <h2>Add Report</h2>
+                <h3>{props.currentUserID}</h3>
                 <Grid container
                     direction="column"
                     // justifyContent="center"

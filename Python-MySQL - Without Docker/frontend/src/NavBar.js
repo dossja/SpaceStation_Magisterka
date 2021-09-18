@@ -12,11 +12,9 @@ import Users from './Components/Users.js';
 import HomePage from './Components/HomePage.js';
 
 function NavBar(props) {
-    const [currentUserID, setCurrentUserID] = React.useState(props.currentUserID);
     return (
         <Router className="Nav-Bar">
             <div className="Nav-div">
-                {currentUserID}
                 <Button variant="contained" color="secondary" className="Nav-Button"><Link to="/reports" className="Nav-link">Reports</Link></Button>
                 <div class="divider" />
                 <Button variant="contained" color="secondary" className="Nav-Button"><Link to="/missions" className="Nav-link">Missions</Link></Button>
@@ -24,9 +22,9 @@ function NavBar(props) {
                 <Button variant="contained" color="secondary" className="Nav-Button"><Link to="/users" className="Nav-link">Users</Link></Button>
                 <Switch className="Nav-Route">
                     <Route exact path="/" className="Nav-Route" component={HomePage} />
-                    <Route exact path="/reports" className="Nav-Route"><Reports setCurrentUserID={setCurrentUserID} /></Route>
-                    <Route exact path="/missions" className="Nav-Route" component={Missions} props={props} />
-                    <Route exact path="/users" className="Nav-Route" render={(props) => (<Users setCurrentUserID={props.setCurrentUserID} />)} />
+                    <Route exact path="/reports" className="Nav-Route"><Reports currentUserID={props.currentUserID} /></Route>
+                    <Route exact path="/missions" className="Nav-Route"><Missions currentUserID={props.currentUserID} /></Route>
+                    <Route exact path="/users" className="Nav-Route"><Users currentUserID={props.currentUserID} /></Route>
                 </Switch>
             </div >
         </Router >)

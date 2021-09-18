@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-function UsersShow() {
+function UsersShow(props) {
     const uAPI = new usersAPI();
 
     const classes = useStyles();
@@ -90,6 +90,7 @@ function UsersShow() {
         <div>
             <Container maxWidth="s" className="Add-User-Page">
                 <h2>Available Users</h2>
+                <h3>{props.currentUserID}</h3>
             </Container>
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">

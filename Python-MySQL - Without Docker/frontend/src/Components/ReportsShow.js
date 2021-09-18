@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function ReportsShow() {
+function ReportsShow(props) {
     const rAPI = new reportAPI();
 
     const classes = useStyles();
@@ -97,6 +97,7 @@ function ReportsShow() {
         <div>
             <Container maxWidth="s" className="Show-Report-Page">
                 <h2>Available Reports</h2>
+                <h3>{props.currentUserID}</h3>
             </Container>
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
