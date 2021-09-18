@@ -10,16 +10,20 @@ function Missions(props) {
     return (
         <div>
             <Container maxWidth="s" className="Add-User-Page">
-                <h2>Missions</h2>
+                <h3>Missions</h3>
                 <h3>{props.currentUserID}</h3>
                 <Router >
                     <div>
-                        <Button variant="contained" ><Link to="/missions/add" className="Category-link">Add Mission</Link></Button>
-                        <div class="divider" />
+                        {props.isManager == "True" ?
+                            <Button variant="contained" ><Link to="/missions/add" className="Category-link">Add Mission</Link></Button>
+                            : null}
+                        {props.isManager == "True" ?
+                            <div class="divider" />
+                            : null}
                         <Button variant="contained" ><Link to="/missions/show" className="Category-link">Show Missions</Link></Button>
                         <Switch className="Nav-Route">
                             <Route exact path="/missions/add" className="Nav-Route"><MissionsAdd currentUserID={props.currentUserID} /></Route>
-                            <Route exact path="/missions/show" className="Nav-Route"><MissionsShow currentUserID={props.currentUserID} /></Route>
+                            <Route exact path="/missions/show" className="Nav-Route"><MissionsShow currentUserID={props.currentUserID} isManager={props.isManager} /></Route>
                         </Switch>
                     </div >
                 </Router >

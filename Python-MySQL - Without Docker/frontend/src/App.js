@@ -12,6 +12,7 @@ function App() {
   });
   const [showNavBar, setShowNavBar] = React.useState(false);
   const [currentUserID, setCurrentUserID] = React.useState(null);
+  const [isManager, setIsManager] = React.useState(false);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -19,7 +20,7 @@ function App() {
         <header className="App-header">
           {/* {currentUserID} */}
           <div className="App-body">
-            {showNavBar ? <NavBar currentUserID={currentUserID} /> : <Login setShowNavBar={setShowNavBar} setCurrentUserID={setCurrentUserID} />}
+            {showNavBar ? <NavBar currentUserID={currentUserID} isManager={isManager} /> : <Login setShowNavBar={setShowNavBar} setCurrentUserID={setCurrentUserID} setIsManager={setIsManager} />}
           </div>
 
         </header>

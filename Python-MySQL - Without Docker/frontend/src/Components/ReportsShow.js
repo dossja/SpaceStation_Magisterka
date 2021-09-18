@@ -126,9 +126,8 @@ function ReportsShow(props) {
                                 <TableCell align="right">{reports.submit_date.split(" ")[0]}</TableCell>
                                 <TableCell align="right">{reports.end_date}</TableCell>
                                 <TableCell align="right">{reports.reporting_user}</TableCell>
-                                {/* <TableCell align="right">{reports.operating_user}</TableCell> */}
                                 <TableCell align="center">
-                                    {reports.report_status_id == 1 ? <Button
+                                    {reports.report_status_id == 1 && props.isManager == "True" ? <Button
                                         variant="contained"
                                         color="primary"
                                         className={classes.btnAssign}
@@ -140,10 +139,9 @@ function ReportsShow(props) {
                                         Assign
                                     </Button> : null}
 
-                                    {reports.report_status_id == 2 ? <Button
+                                    {reports.report_status_id == 2 && reports.operating_user_id == props.currentUserID ? <Button
                                         variant="contained"
                                         color="success"
-                                        // className={classes.btnBlue}
                                         onClick={() => {
                                             changeReportStatus(3, reports.id)
                                         }}
@@ -151,10 +149,20 @@ function ReportsShow(props) {
                                         In progress
                                     </Button> : null}
 
-                                    {reports.report_status_id == 3 ? <Button
+                                    {reports.report_status_id == 2 && reports.operating_user_id != props.currentUserID ? <Button
                                         variant="contained"
                                         color="success"
-                                        // className={classes.btnBlue}
+                                        disabled
+                                        onClick={() => {
+                                            changeReportStatus(3, reports.id)
+                                        }}
+                                    >
+                                        In progress
+                                    </Button> : null}
+
+                                    {reports.report_status_id == 3 && reports.operating_user_id == props.currentUserID ? <Button
+                                        variant="contained"
+                                        color="success"
                                         onClick={() => {
                                             changeReportStatus(4, reports.id)
                                         }}
@@ -162,7 +170,18 @@ function ReportsShow(props) {
                                         Finished
                                     </Button> : null}
 
-                                    {reports.report_status_id != 4 && reports.report_status_id != 5 ? <Button
+                                    {reports.report_status_id == 3 && reports.operating_user_id != props.currentUserID ? <Button
+                                        variant="contained"
+                                        color="success"
+                                        disabled
+                                        onClick={() => {
+                                            changeReportStatus(4, reports.id)
+                                        }}
+                                    >
+                                        Finished
+                                    </Button> : null}
+
+                                    {reports.report_status_id != 4 && reports.report_status_id != 5 && (reports.operating_user_id == props.currentUserID || props.isManager == "True") ? <Button
                                         variant="contained"
                                         color="primary"
                                         className={classes.btnCancel}

@@ -22,7 +22,7 @@ function Reports(props) {
                         <Button variant="contained" ><Link to="/reports/show" className="Category-link">Show Reports</Link></Button>
                         <Switch className="Nav-Route">
                             <Route exact path="/reports/add" className="Nav-Route"><ReportsAdd currentUserID={props.currentUserID} /></Route>
-                            <Route exact path="/reports/show" className="Nav-Route"><ReportsShow currentUserID={props.currentUserID} /></Route>
+                            <Route exact path="/reports/show" className="Nav-Route"><ReportsShow currentUserID={props.currentUserID} isManager={props.isManager} /></Route>
                         </Switch>
                     </div >
                 </Router >

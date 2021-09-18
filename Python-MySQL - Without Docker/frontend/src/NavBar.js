@@ -22,9 +22,9 @@ function NavBar(props) {
                 <Button variant="contained" color="secondary" className="Nav-Button"><Link to="/users" className="Nav-link">Users</Link></Button>
                 <Switch className="Nav-Route">
                     <Route exact path="/" className="Nav-Route" component={HomePage} />
-                    <Route exact path="/reports" className="Nav-Route"><Reports currentUserID={props.currentUserID} /></Route>
-                    <Route exact path="/missions" className="Nav-Route"><Missions currentUserID={props.currentUserID} /></Route>
-                    <Route exact path="/users" className="Nav-Route"><Users currentUserID={props.currentUserID} /></Route>
+                    <Route exact path="/reports" className="Nav-Route"><Reports currentUserID={props.currentUserID} isManager={props.isManager} /></Route>
+                    <Route exact path="/missions" className="Nav-Route"><Missions currentUserID={props.currentUserID} isManager={props.isManager} /></Route>
+                    <Route exact path="/users" className="Nav-Route"><Users currentUserID={props.currentUserID} isManager={props.isManager} /></Route>
                 </Switch>
             </div >
         </Router >)

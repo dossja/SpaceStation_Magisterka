@@ -24,8 +24,11 @@ function Login(props) {
             .then(response => {
                 console.log(response.data);
                 console.log(response.status);
-                if (response.status == 200)
+                if (response.status == 200) {
                     props.setCurrentUserID(response.data.id);
+                    props.setIsManager(response.data.manager);
+                }
+
             })
             .catch(e => {
                 console.log(e);

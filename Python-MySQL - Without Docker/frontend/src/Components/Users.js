@@ -15,15 +15,20 @@ function Users(props) {
         <div>
             <Container maxWidth="s" className="Add-User-Page">
                 <h2>Users</h2>
-                <h3>{props.currentUserID}</h3>
+                {/* <h3>{props.currentUserID}</h3> */}
+                {/* <h3>{props.isManager}</h3> */}
                 <Router >
                     <div>
-                        <Button variant="contained" ><Link to="/users/add" className="Category-link">Add User</Link></Button>
-                        <div class="divider" />
+                        {props.isManager == "True" ?
+                            <Button variant="contained" ><Link to="/users/add" className="Category-link">Add User</Link></Button>
+                            : null}
+                        {props.isManager == "True" ?
+                            <div class="divider" />
+                            : null}
                         <Button variant="contained" ><Link to="/users/show" className="Category-link">Show Users</Link></Button>
                         <Switch className="Nav-Route">
                             <Route exact path="/users/add" className="Nav-Route"><UsersAdd currentUserID={props.currentUserID} /></Route>
-                            <Route exact path="/users/show" className="Nav-Route"><UsersShow currentUserID={props.currentUserID} /></Route>
+                            <Route exact path="/users/show" className="Nav-Route"><UsersShow currentUserID={props.currentUserID} isManager={props.isManager} /></Route>
                         </Switch>
                     </div >
                 </Router >
