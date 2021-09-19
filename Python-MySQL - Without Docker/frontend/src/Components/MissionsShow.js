@@ -14,6 +14,7 @@ import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 
 import MissionsEdit from './MissionsEdit.js';
+import MissionCrewShow from './MissionCrewShow';
 
 import missionsAPI from "../Axios/missionsAPI.js";
 
@@ -33,6 +34,7 @@ function MissionsShow(props) {
     const classes = useStyles();
     const [missions, setMissions] = React.useState([]);
     const [open, setOpen] = React.useState(false);
+    const [openShow, setOpenShow] = React.useState(false);
     const [missionID, setMissionID] = React.useState(false);
 
     const [aktualizuj, setAktualizuj] = React.useState(true);
@@ -58,6 +60,7 @@ function MissionsShow(props) {
     const handleClose = () => {
         console.log("H_Close");
         setOpen(false);
+        setOpenShow(false);
         setAktualizuj(true);
         console.log(aktualizuj);
     };
@@ -85,7 +88,7 @@ function MissionsShow(props) {
                                 </TableCell>
                                 <TableCell align="right">{missions.start_date}</TableCell>
                                 <TableCell align="right">{missions.end_date}</TableCell>
-                                {props.isManager == "True" ? <TableCell align="right">
+                                {props.isManager == "True" && missions.crew == "False" ? <TableCell align="right">
                                     <Button
                                         variant="contained"
                                         color="primary"
@@ -97,6 +100,20 @@ function MissionsShow(props) {
                                         }}
                                     >
                                         Edit
+                                    </Button>
+                                </TableCell> : null}
+                                {missions.crew == "True" ? <TableCell align="right">
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        // className={classes.btnEdit}
+                                        // onClick={postReport}
+                                        onClick={() => {
+                                            setOpenShow(true);
+                                            setMissionID(missions.id);
+                                        }}
+                                    >
+                                        Show
                                     </Button>
                                 </TableCell> : null}
                             </TableRow>
@@ -112,6 +129,15 @@ function MissionsShow(props) {
                 aria-describedby="simple-modal-description"
             >
                 <MissionsEdit missionID={missionID} handleClose={handleClose} setAktualizuj={setAktualizuj} />
+            </Modal>
+
+            <Modal
+                open={openShow}
+                onClose={handleClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <MissionCrewShow missionID={missionID} handleClose={handleClose} setAktualizuj={setAktualizuj} />
             </Modal>
         </div>)
 }

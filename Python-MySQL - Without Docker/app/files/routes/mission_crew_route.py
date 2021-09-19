@@ -22,14 +22,18 @@ def add_mission_crew():
     if user_id == '':
         return jsonify(error="user_id is empty"), 400
 
-    mc = MissionCrew()
-    # mc.mission_id = mission_id
-    # mc.user_id = user_id
+    mission_crew = []
 
-    # db.session.add(mc)
-    # db.session.commit()
+    for user in user_id:
+        print(repr(user))
+        mc = MissionCrew()
+        mc.mission_id = mission_id
+        mc.user_id = user
+        mission_crew.append(mc)
+        db.session.add(mc)
+        db.session.commit()
 
-    return jsonify(f"{mc}"), 200
+    return jsonify(f"{mission_crew}"), 200
 
 
 @app.route('/missions_crew/mission/<string:id>', methods=['GET'])

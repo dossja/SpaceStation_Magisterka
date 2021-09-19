@@ -9,5 +9,13 @@ class Mission(db.Model):
     crew = db.relationship("User", secondary="mission_crew", backref="mission")
 
     def __repr__(self):
+        if self.crew:
+            crew = True
+        else:
+            crew = False
 
-        return f"{{\"id\": \"{self.id}\", \"start_date\": \"{self.start_date}\", \"end_date\": \"{self.end_date}\", \"crew\": \"{self.crew}\"}}"
+        return f"{{\"id\": \"{self.id}\", \"start_date\": \"{self.start_date}\", \"end_date\": \"{self.end_date}\", \"crew\": \"{crew}\"}}"
+
+    def return_crew(self):
+
+        return f"{self.crew}"

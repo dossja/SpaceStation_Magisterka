@@ -19,6 +19,7 @@ import Checkbox from '@mui/material/Checkbox';
 import ListItemText from '@mui/material/ListItemText';
 
 import usersAPI from "../Axios/usersAPI.js";
+import missionCrewAPI from "../Axios/missionCrewAPI.js";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -56,6 +57,7 @@ function getModalStyle() {
 
 function MissionsEdit(props) {
     const uAPI = new usersAPI();
+    const mcAPI = new missionCrewAPI();
 
     const classes = useStyles();
 
@@ -98,16 +100,17 @@ function MissionsEdit(props) {
 
     const putMissionCrew = () => {
         console.log(missionCrew);
-        // mcAPI.putByID(props.userID, user)
-        //     .then(response => {
-        //         console.log(response.data);
-        //         console.log(response.status);
-        //         props.setAktualizuj();
-        //         props.handleClose();
-        //     })
-        //     .catch(e => {
-        //         console.log(e);
-        //     });
+        console.log(props.missionID);
+        mcAPI.post({ "mission_id": props.missionID, "user_id": missionCrew })
+            .then(response => {
+                console.log(response.data);
+                console.log(response.status);
+                props.setAktualizuj();
+                props.handleClose();
+            })
+            .catch(e => {
+                console.log(e);
+            });
     }
 
     return (

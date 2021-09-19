@@ -11,6 +11,15 @@ def get_missions():
     return jsonify(f"{missions}"), 200
 
 
+@app.route("/missions/<string:id>/crew", methods=["GET"])
+def get_mission_id_crew(id):
+    missions = Mission.query.get(id)
+
+    print(repr(missions.return_crew()))
+
+    return jsonify(f"{missions.return_crew()}"), 200
+
+
 @app.route("/missions/add", methods=['POST'])
 def missions_add():
     missions = Mission.query.order_by(Mission.id.desc()).first()

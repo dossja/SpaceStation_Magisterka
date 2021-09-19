@@ -9,6 +9,12 @@ export default class missionsAPI {
     }
 
 
+    async getCrewByID(id) {
+        const response = await API.get("/missions/" + id + "/crew");
+
+        return response;
+    }
+
     // Metody POST
     async post(values) {
         const response = await API.post("/missions/add");
