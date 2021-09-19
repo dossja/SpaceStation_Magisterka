@@ -62,14 +62,6 @@ function UsersAdd(props) {
 
     let aktualizuj = true;
 
-    // const initialValues = {
-    //     name: '',
-    //     surname: '',
-    //     position: '',
-    //     manager: false
-    // };
-    // const [values, setValues] = React.useState(initialValues);
-
     const handleChange = (prop) => (event) => {
         if (prop == 'manager')
             setUser({ ...user, [prop]: event.target.checked });
@@ -125,14 +117,9 @@ function UsersAdd(props) {
 
     return (
         <div>
-            <Container maxWidth="s" className="Add-User-Page">
+            <Container maxWidth="s" className="Modify-User-Page">
                 <div style={modalStyle} className={classes.paper}>
-                    {/* <p id="simple-modal-description">
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </p> */}
-
-
-                    <h2 id="simple-modal-title">Add User</h2>
+                    <h2 id="simple-modal-title">Modify User</h2>
                     <Grid container
                         direction="column"
                         // justifyContent="center"
@@ -184,7 +171,7 @@ function UsersAdd(props) {
                             color="primary"
                             onClick={putUser}
                         >
-                            Add
+                            Modify
                         </Button></Box>
                 </div>
             </Container>
