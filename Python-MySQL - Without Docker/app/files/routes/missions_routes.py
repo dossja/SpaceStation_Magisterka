@@ -15,8 +15,6 @@ def get_missions():
 def get_mission_id_crew(id):
     missions = Mission.query.get(id)
 
-    print(repr(missions.return_crew()))
-
     return jsonify(f"{missions.return_crew()}"), 200
 
 

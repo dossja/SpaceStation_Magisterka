@@ -8,7 +8,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50), nullable=False)
     surname = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(50), unique=True)
+    email = db.Column(db.String(100), unique=True)
     # job = db.Column(db.String(50), nullable=False)
     position_type_id = db.Column(db.Integer, db.ForeignKey("position_type.id"))
     manager = db.Column(db.Boolean, default=False)
