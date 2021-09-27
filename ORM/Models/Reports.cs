@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace ORM.Models
 {
@@ -14,7 +15,24 @@ namespace ORM.Models
         [MaxLength(50)]
         public string Title { get; set; }
         [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [DefaultValue("getutcdate()")]
         public DateTime SubmitDate { get; set; }
         public DateTime EndDate { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string Description { get; set; }
+
+        [ForeignKey("ReportType")]
+        public int ReportTypeId { get; set; }
+        public ReportType ReportType { get; set; }
+
+        [ForeignKey("ReportStatus")]
+        public int ReportStatusId { get; set; }
+        public ReportStatus ReportStatus { get; set; }
+
+        [ForeignKey("Users")]
+        public int ReportingUserId { get; set; }
+        public Users ReportingUser { get; set; }
     }
 }
