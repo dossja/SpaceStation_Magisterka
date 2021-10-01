@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ORM.DataAccess;
 using ORM.Models;
@@ -7,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ASP.NET.Controllers
 {
@@ -21,15 +22,16 @@ namespace ASP.NET.Controllers
             _context = context;
         }
 
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Incidents>>> GetIncidents()
+        public async Task<ActionResult<IEnumerable<Incidents>>> GetReports()
         {
             var incidents = await _context.Incidents.ToListAsync();
 
             return incidents;
         }
 
-        // GET: api/Users/1
+        // GET api/<IncidentsController>/5
         [HttpGet("report/{id}")]
         public async Task<ActionResult<Incidents>> GetIncidents(int id)
         {
@@ -48,8 +50,12 @@ namespace ASP.NET.Controllers
             if (incident == null)
                 return NotFound();
 
+            incident.User = await _context.Users.FindAsync(incident.UserId);
+            incident.Report = await _context.Reports.FindAsync(incident.ReportId);
+
             return incident;
         }
+
 
         // POST: api/Users
         [Route("add")]
@@ -59,7 +65,7 @@ namespace ASP.NET.Controllers
             _context.Incidents.Add(incidents);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("PostIncidents", new { ReportId = incidents.ReportId,  OperatingUserId = incidents.OperatingUserId}, incidents);
+            return CreatedAtAction("PostIncidents", new { ReportId = incidents.ReportId, UserId = incidents.UserId }, incidents);
         }
     }
 }

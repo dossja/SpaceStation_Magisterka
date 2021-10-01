@@ -24,7 +24,5 @@ namespace ORM.Models
         [ForeignKey("PositionType")]
         public int PositionTypeId { get; set; }
         public PositionType PositionType { get; set; }
-
-        public List<Incidents> IncidentsId { get; set; }
     }
 }

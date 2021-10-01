@@ -112,21 +112,21 @@ namespace ORM.Migrations
                 name: "Incidents",
                 columns: table => new
                 {
-                    OperatingUserId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     ReportId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Incidents", x => new { x.OperatingUserId, x.ReportId });
+                    table.PrimaryKey("PK_Incidents", x => new { x.UserId, x.ReportId });
                     table.ForeignKey(
-                        name: "FK_Incidents_Reports_OperatingUserId",
-                        column: x => x.OperatingUserId,
+                        name: "FK_Incidents_Reports_ReportId",
+                        column: x => x.ReportId,
                         principalTable: "Reports",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Incidents_Users_ReportId",
-                        column: x => x.ReportId,
+                        name: "FK_Incidents_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
