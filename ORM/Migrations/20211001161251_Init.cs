@@ -9,6 +9,18 @@ namespace ORM.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "MissionCrew",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    MissionId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MissionCrew", x => new { x.UserId, x.MissionId });
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Position_Type",
                 columns: table => new
                 {
@@ -48,6 +60,28 @@ namespace ORM.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Missions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    StartDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    MissionCrewMissionId = table.Column<int>(type: "int", nullable: true),
+                    MissionCrewUserId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Missions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Missions_MissionCrew_MissionCrewUserId_MissionCrewMissionId",
+                        columns: x => new { x.MissionCrewUserId, x.MissionCrewMissionId },
+                        principalTable: "MissionCrew",
+                        principalColumns: new[] { "UserId", "MissionId" },
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -57,11 +91,19 @@ namespace ORM.Migrations
                     Surname = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
                     Manager = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    PositionTypeId = table.Column<int>(type: "int", nullable: false)
+                    PositionTypeId = table.Column<int>(type: "int", nullable: false),
+                    MissionCrewMissionId = table.Column<int>(type: "int", nullable: true),
+                    MissionCrewUserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_MissionCrew_MissionCrewUserId_MissionCrewMissionId",
+                        columns: x => new { x.MissionCrewUserId, x.MissionCrewMissionId },
+                        principalTable: "MissionCrew",
+                        principalColumns: new[] { "UserId", "MissionId" },
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Users_Position_Type_PositionTypeId",
                         column: x => x.PositionTypeId,
@@ -173,6 +215,11 @@ namespace ORM.Migrations
                 column: "ReportId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Missions_MissionCrewUserId_MissionCrewMissionId",
+                table: "Missions",
+                columns: new[] { "MissionCrewUserId", "MissionCrewMissionId" });
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reports_ReportingUserId",
                 table: "Reports",
                 column: "ReportingUserId");
@@ -188,6 +235,11 @@ namespace ORM.Migrations
                 column: "ReportTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Users_MissionCrewUserId_MissionCrewMissionId",
+                table: "Users",
+                columns: new[] { "MissionCrewUserId", "MissionCrewMissionId" });
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_PositionTypeId",
                 table: "Users",
                 column: "PositionTypeId");
@@ -197,6 +249,9 @@ namespace ORM.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Incidents");
+
+            migrationBuilder.DropTable(
+                name: "Missions");
 
             migrationBuilder.DropTable(
                 name: "Reports");
@@ -209,6 +264,9 @@ namespace ORM.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "MissionCrew");
 
             migrationBuilder.DropTable(
                 name: "Position_Type");

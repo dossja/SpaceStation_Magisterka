@@ -9,7 +9,7 @@ using ORM.DataAccess;
 namespace ORM.Migrations
 {
     [DbContext(typeof(SpaceStationContext))]
-    [Migration("20211001152050_Init")]
+    [Migration("20211001161251_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,44 @@ namespace ORM.Migrations
                     b.HasIndex("ReportId");
 
                     b.ToTable("Incidents");
+                });
+
+            modelBuilder.Entity("ORM.Models.MissionCrew", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MissionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "MissionId");
+
+                    b.ToTable("MissionCrew");
+                });
+
+            modelBuilder.Entity("ORM.Models.Missions", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("MissionCrewMissionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MissionCrewUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MissionCrewUserId", "MissionCrewMissionId");
+
+                    b.ToTable("Missions");
                 });
 
             modelBuilder.Entity("ORM.Models.PositionType", b =>
@@ -214,6 +252,12 @@ namespace ORM.Migrations
                     b.Property<bool>("Manager")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<int?>("MissionCrewMissionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MissionCrewUserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -230,6 +274,8 @@ namespace ORM.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PositionTypeId");
+
+                    b.HasIndex("MissionCrewUserId", "MissionCrewMissionId");
 
                     b.ToTable("Users");
                 });
@@ -251,6 +297,13 @@ namespace ORM.Migrations
                     b.Navigation("Report");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ORM.Models.Missions", b =>
+                {
+                    b.HasOne("ORM.Models.MissionCrew", null)
+                        .WithMany("Mission")
+                        .HasForeignKey("MissionCrewUserId", "MissionCrewMissionId");
                 });
 
             modelBuilder.Entity("ORM.Models.Reports", b =>
@@ -288,7 +341,18 @@ namespace ORM.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ORM.Models.MissionCrew", null)
+                        .WithMany("User")
+                        .HasForeignKey("MissionCrewUserId", "MissionCrewMissionId");
+
                     b.Navigation("PositionType");
+                });
+
+            modelBuilder.Entity("ORM.Models.MissionCrew", b =>
+                {
+                    b.Navigation("Mission");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

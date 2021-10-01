@@ -16,6 +16,8 @@ namespace ORM.DataAccess
         public DbSet<ReportStatus> Report_Status { get; set; }
         public DbSet<Reports> Reports { get; set; }
         public DbSet<Incidents> Incidents { get; set; }
+        public DbSet<MissionCrew> MissionCrew { get; set; }
+        public DbSet<Missions> Missions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,6 +48,7 @@ namespace ORM.DataAccess
             );
 
             modelBuilder.Entity<Incidents>().HasKey(inc => new { inc.UserId, inc.ReportId });
+            modelBuilder.Entity<MissionCrew>().HasKey(mis => new { mis.UserId, mis.MissionId});
         }
     }
 }
