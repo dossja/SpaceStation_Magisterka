@@ -15,6 +15,7 @@ namespace ORM.DataAccess
         public DbSet<ReportType> Report_Type { get; set; }
         public DbSet<ReportStatus> Report_Status { get; set; }
         public DbSet<Reports> Reports { get; set; }
+        public DbSet<Incidents> Incidents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,6 +44,18 @@ namespace ORM.DataAccess
                     new ReportType { Id = 2, Description = "maintenance" },
                     new ReportType { Id = 3, Description = "medical" }
             );
+
+            modelBuilder.Entity<Incidents>().HasKey(inc => new { inc.OperatingUserId, inc.ReportId});
+
+            modelBuilder.Entity<Incidents>()
+                .HasOne(pt => pt.OperatingUser)
+                .WithMany(p => p.IncidentsId)
+                .HasForeignKey(pt => pt.ReportId);
+
+            modelBuilder.Entity<Incidents>()
+                .HasOne(pt => pt.Report)
+                .WithMany(t => t.OperatingUserId)
+                .HasForeignKey(pt => pt.OperatingUserId);
         }
     }
 }

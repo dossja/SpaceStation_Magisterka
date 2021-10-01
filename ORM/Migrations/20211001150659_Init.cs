@@ -4,7 +4,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace ORM.Migrations
 {
-    public partial class New : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -108,6 +108,30 @@ namespace ORM.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Incidents",
+                columns: table => new
+                {
+                    OperatingUserId = table.Column<int>(type: "int", nullable: false),
+                    ReportId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Incidents", x => new { x.OperatingUserId, x.ReportId });
+                    table.ForeignKey(
+                        name: "FK_Incidents_Reports_OperatingUserId",
+                        column: x => x.OperatingUserId,
+                        principalTable: "Reports",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Incidents_Users_ReportId",
+                        column: x => x.ReportId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Position_Type",
                 columns: new[] { "Id", "Name" },
@@ -144,6 +168,11 @@ namespace ORM.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Incidents_ReportId",
+                table: "Incidents",
+                column: "ReportId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reports_ReportingUserId",
                 table: "Reports",
                 column: "ReportingUserId");
@@ -166,6 +195,9 @@ namespace ORM.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Incidents");
+
             migrationBuilder.DropTable(
                 name: "Reports");
 

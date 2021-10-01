@@ -9,8 +9,8 @@ using ORM.DataAccess;
 namespace ORM.Migrations
 {
     [DbContext(typeof(SpaceStationContext))]
-    [Migration("20210927173045_New")]
-    partial class New
+    [Migration("20211001150659_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,21 @@ namespace ORM.Migrations
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.10");
+
+            modelBuilder.Entity("ORM.Models.Incidents", b =>
+                {
+                    b.Property<int>("OperatingUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReportId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OperatingUserId", "ReportId");
+
+                    b.HasIndex("ReportId");
+
+                    b.ToTable("Incidents");
+                });
 
             modelBuilder.Entity("ORM.Models.PositionType", b =>
                 {
@@ -219,6 +234,25 @@ namespace ORM.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("ORM.Models.Incidents", b =>
+                {
+                    b.HasOne("ORM.Models.Reports", "Report")
+                        .WithMany("OperatingUserId")
+                        .HasForeignKey("OperatingUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ORM.Models.Users", "OperatingUser")
+                        .WithMany("IncidentsId")
+                        .HasForeignKey("ReportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OperatingUser");
+
+                    b.Navigation("Report");
+                });
+
             modelBuilder.Entity("ORM.Models.Reports", b =>
                 {
                     b.HasOne("ORM.Models.ReportStatus", "ReportStatus")
@@ -255,6 +289,16 @@ namespace ORM.Migrations
                         .IsRequired();
 
                     b.Navigation("PositionType");
+                });
+
+            modelBuilder.Entity("ORM.Models.Reports", b =>
+                {
+                    b.Navigation("OperatingUserId");
+                });
+
+            modelBuilder.Entity("ORM.Models.Users", b =>
+                {
+                    b.Navigation("IncidentsId");
                 });
 #pragma warning restore 612, 618
         }

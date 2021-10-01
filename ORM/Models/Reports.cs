@@ -34,5 +34,7 @@ namespace ORM.Models
         [ForeignKey("Users")]
         public int ReportingUserId { get; set; }
         public Users ReportingUser { get; set; }
+
+        public List<Incidents> OperatingUserId { get; set; }
     }
 }

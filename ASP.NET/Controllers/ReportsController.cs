@@ -35,6 +35,17 @@ namespace ASP.NET.Controllers
                 reports[i].ReportStatus = reportStatus;
                 Users reportingUser = await _context.Users.FindAsync(reports[i].ReportingUserId);
                 reports[i].ReportingUser = reportingUser;
+
+                var incidents = await _context.Incidents.ToListAsync();
+
+                foreach (var incident in incidents)
+                {
+                    if (incident.ReportId == reports[i].Id)
+                        reports[i].OperatingUserId.Add(incident);
+                }
+/*
+                var operatingUser = reports[i].OperatingUserId.Select(op => op.OperatingUserId);
+                Console.Write(operatingUser);*/
             }
 
             return reports;
