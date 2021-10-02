@@ -1,0 +1,51 @@
+.Nav-Bar{
+    /* text-align: left; */
+    /* justify-content: baseline; */
+    /* margin-top: 10px; */
+    /* flex-direction: row; */
+    /* min-width: 80rem; */
+    /* display: flex; */
+}
+
+.Nav-div{
+    /* text-align: left; */
+    /* justify-content: left; */
+    /* align-items: flex-start; */
+    /* padding: 10px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    min-width: 80%;
+    min-height: 100%; */
+    padding: 10px;
+}
+
+.Nav-link{
+    /* padding: 10px; */
+    text-decoration: none;
+    color: white;
+}
+
+.Category-link{
+    /* padding: 10px; */
+    text-decoration: none;
+    color: black;
+}
+
+.divider{
+    width:8px;
+    height:auto;
+    display:inline-block;
+}
+
+.Nav-Button {
+    padding: 10px;
+    margin: 10px;
+    background-color: gray;
+}
+
+.Nav-Route{
+    /* min-width: 80%; */
+
+    /* min-height: 100%; */
+}
