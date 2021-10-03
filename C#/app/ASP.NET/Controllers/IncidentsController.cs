@@ -50,8 +50,8 @@ namespace ASP.NET.Controllers
             if (incident == null)
                 return NotFound();
 
-            incident.User = await _context.Users.FindAsync(incident.UserId);
-            incident.Report = await _context.Reports.FindAsync(incident.ReportId);
+/*            incident.User = await _context.Users.FindAsync(incident.UserId);
+            incident.Report = await _context.Reports.FindAsync(incident.ReportId);*/
 
             return incident;
         }

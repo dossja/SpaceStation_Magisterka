@@ -47,8 +47,10 @@ namespace ORM.DataAccess
                     new ReportType { Id = 3, Description = "medical" }
             );
 
-            modelBuilder.Entity<Incidents>().HasKey(inc => new { inc.UserId, inc.ReportId });
-            modelBuilder.Entity<MissionCrew>().HasKey(mis => new { mis.UserId, mis.MissionId});
+/*            modelBuilder.Entity<Reports>().ToTable(nameof(Incidents))
+                .HasMany(c => c.Incidents)
+                .WithMany(i => i.User);
+            modelBuilder.Entity<MissionCrew>().HasKey(mis => new { mis.UserId, mis.MissionId});*/
         }
     }
 }

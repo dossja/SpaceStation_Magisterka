@@ -8,12 +8,13 @@ namespace ORM.Models
 {
     public class Incidents
     {
-        [Key, Column(Order = 1)]
-        public int UserId { get; set; }
-        public Users User { get; set; }
+        [Key]
+        public int IncidentId { get; set; }
 
-        [Key, Column(Order = 2)]
+        public int UserId { get; set; }
+        public ICollection<Users> User { get; set; }
+
         public int ReportId { get; set; }
-        public Reports Report { get; set; }
+        public ICollection<Reports> Report { get; set; }
     }
 }

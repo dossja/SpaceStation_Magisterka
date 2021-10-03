@@ -43,14 +43,14 @@ namespace ASP.NET.Controllers
                 {
                     missionCrew = missionCrews[i];
 
-                    missionCrew.User.Add(await _context.Users.FindAsync(missionCrew.UserId));
+/*                    missionCrew.User.Add(await _context.Users.FindAsync(missionCrew.UserId));*/
                 }
             }
 
             if (missionCrew == null)
                 return NotFound();
-
-            missionCrew.Mission.Add(await _context.Missions.FindAsync(missionCrew.MissionId));
+/*
+            missionCrew.Mission.Add(await _context.Missions.FindAsync(missionCrew.MissionId));*/
 
             return missionCrew;
         }
@@ -68,15 +68,15 @@ namespace ASP.NET.Controllers
                 {
                     if(missionCrew.UserId == null)
                         missionCrew = missionCrews[i];
-
-                    missionCrew.Mission.Add(await _context.Missions.FindAsync(missionCrew.MissionId));
+/*
+                    missionCrew.Mission.Add(await _context.Missions.FindAsync(missionCrew.MissionId));*/
                 }
             }
 
             if (missionCrew == null)
                 return NotFound();
 
-            missionCrew.User.Add(await _context.Users.FindAsync(missionCrew.UserId));
+/*            missionCrew.User.Add(await _context.Users.FindAsync(missionCrew.UserId));*/
 
             return missionCrew;
         }

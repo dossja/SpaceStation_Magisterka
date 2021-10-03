@@ -8,12 +8,13 @@ namespace ORM.Models
 {
     public class MissionCrew
     {
-        [Key, Column(Order = 1)]
-        public int UserId { get; set; }
-        public IList<Users> User { get; set; }
+        [Key]
+        public int MissionCrewId { get; set; }
 
-        [Key, Column(Order = 2)]
+        public int UserId { get; set; }
+        public ICollection<Users> User { get; set; }
+
         public int MissionId { get; set; }
-        public IList<Missions> Mission { get; set; }
+        public ICollection<Missions> Mission { get; set; }
     }
 }
