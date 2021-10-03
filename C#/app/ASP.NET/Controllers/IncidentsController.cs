@@ -33,27 +33,18 @@ namespace ASP.NET.Controllers
 
         // GET api/<IncidentsController>/5
         [HttpGet("report/{id}")]
-        public async Task<ActionResult<Incidents>> GetIncidents(int id)
+        public async Task<ActionResult<IEnumerable<Incidents>>> GetIncidents(int id)
         {
-            var incidents = await _context.Incidents.ToListAsync();
-            var incident = new Incidents();
+            var incidents = await _context.Incidents
+                .Where(i => i.ReportId == id)
+                .Include(i => i.Report)
+                .Include(i => i.User)
+                .ToListAsync();
 
-            for (int i = 0; i < incidents.Count; i++)
-            {
-                if (incidents[i].ReportId == id)
-                {
-                    incident = incidents[i];
-                    break;
-                }
-            }
-
-            if (incident == null)
+            if (incidents == null)
                 return NotFound();
 
-/*            incident.User = await _context.Users.FindAsync(incident.UserId);
-            incident.Report = await _context.Reports.FindAsync(incident.ReportId);*/
-
-            return incident;
+            return incidents;
         }
 
 

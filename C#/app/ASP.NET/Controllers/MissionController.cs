@@ -25,7 +25,10 @@ namespace ASP.NET.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Missions>>> GetMissions()
         {
-            var missions = await _context.Missions.ToListAsync();
+            var missions = await _context.Missions
+                .Include(m => m.Crew)
+                .ThenInclude(c => c.User)
+                .ToListAsync();
 
             return missions;
         }

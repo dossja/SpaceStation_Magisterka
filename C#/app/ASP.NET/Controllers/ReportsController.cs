@@ -25,28 +25,13 @@ namespace ASP.NET.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Reports>>> GetReports()
         {
-            var reports = await _context.Reports.ToListAsync();
-
-            for (int i = 0; i < reports.Count; i++)
-            {
-                ReportType reportType= await _context.Report_Type.FindAsync(reports[i].ReportTypeId);
-                reports[i].ReportType = reportType;
-                ReportStatus reportStatus = await _context.Report_Status.FindAsync(reports[i].ReportStatusId);
-                reports[i].ReportStatus = reportStatus;
-                Users reportingUser = await _context.Users.FindAsync(reports[i].ReportingUserId);
-                reports[i].ReportingUser = reportingUser;
-/*
-                var incidents = await _context.Incidents.ToListAsync();
-
-                foreach (var incident in incidents)
-                {
-                    if (incident.ReportId == reports[i].Id)
-                        reports[i].OperatingUserId.Add(incident);
-                }*/
-/*
-                var operatingUser = reports[i].OperatingUserId.Select(op => op.OperatingUserId);
-                Console.Write(operatingUser);*/
-            }
+            var reports = await _context.Reports
+                .Include(r => r.ReportStatus)
+                .Include(r => r.ReportType)
+                .Include(r => r.ReportingUser)
+                .Include(r => r.Incidents)
+                .ThenInclude(i => i.User)
+                .ToListAsync();
 
             return reports;
         }
@@ -55,19 +40,19 @@ namespace ASP.NET.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Reports>> GetReports(int id)
         {
-            var reports = await _context.Reports.FindAsync(id);
+            var reports = await _context.Reports
+                .AsNoTracking()
+                .Include(r => r.ReportStatus)
+                .Include(r => r.ReportType)
+                .Include(r => r.ReportingUser)
+                .Include(r => r.Incidents)
+                .ThenInclude(i => i.User)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (reports == null)
             {
                 return NotFound();
             }
-
-            ReportType reportType = await _context.Report_Type.FindAsync(reports.ReportTypeId);
-            reports.ReportType = reportType;
-            ReportStatus reportStatus = await _context.Report_Status.FindAsync(reports.ReportStatusId);
-            reports.ReportStatus = reportStatus;
-            Users reportingUser = await _context.Users.FindAsync(reports.ReportingUserId);
-            reports.ReportingUser = reportingUser;
 
             return reports;
         }

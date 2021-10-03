@@ -24,13 +24,13 @@ namespace ASP.NET.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
         {
-            var users = await _context.Users.ToListAsync();
-
-            for(int i = 0; i < users.Count; i++)
-            {
-                PositionType positionType = await _context.Position_Type.FindAsync(users[i].PositionTypeId);
-                users[i].PositionType = positionType;
-            }
+            var users = await _context.Users
+                .Include(u => u.PositionType)
+                .Include(r => r.Incidents)
+                .ThenInclude(i => i.Report)
+                .Include(r => r.Missions)
+                .ThenInclude(i => i.Mission)
+                .ToListAsync();
 
             return users;
         }
@@ -39,15 +39,19 @@ namespace ASP.NET.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Users>> GetUsers(int id)
         {
-            var users = await _context.Users.FindAsync(id);
+            var users = await _context.Users
+                .Include(u => u.PositionType)
+                .Include(r => r.Incidents)
+                .ThenInclude(i => i.Report)
+                .Include(r => r.Missions)
+                .ThenInclude(i => i.Mission)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (users == null)
             {
                 return NotFound();
             }
 
-            PositionType positionType = await _context.Position_Type.FindAsync(users.PositionTypeId);
-            users.PositionType = positionType;
 
             return users;
         }
@@ -57,15 +61,18 @@ namespace ASP.NET.Controllers
         [HttpGet]
         public async Task<ActionResult<Users>> GetUsersByEmail(Users users)
         {
-            var user = _context.Users.Where(u => u.Email == users.Email).FirstOrDefault();
+            var user = await _context.Users.Where(u => u.Email == users.Email)
+                .Include(u => u.PositionType)
+                .Include(r => r.Incidents)
+                .ThenInclude(i => i.Report)
+                .Include(r => r.Missions)
+                .ThenInclude(i => i.Mission)
+                .FirstOrDefaultAsync();
 
             if (user == null)
             {
                 return NotFound();
             }
-
-            PositionType positionType = await _context.Position_Type.FindAsync(user.PositionTypeId);
-            user.PositionType = positionType;
 
             return user;
         }
