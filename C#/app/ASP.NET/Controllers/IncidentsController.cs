@@ -37,9 +37,8 @@ namespace ASP.NET.Controllers
         {
             var incidents = await _context.Incidents
                 .Where(i => i.ReportId == id)
-                .Include(i => i.Report)
-                .Include(i => i.User)
                 .ToListAsync();
+
 
             if (incidents == null)
                 return NotFound();

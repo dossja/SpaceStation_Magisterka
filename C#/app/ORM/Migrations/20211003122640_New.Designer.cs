@@ -9,7 +9,7 @@ using ORM.DataAccess;
 namespace ORM.Migrations
 {
     [DbContext(typeof(SpaceStationContext))]
-    [Migration("20211003104629_New")]
+    [Migration("20211003122640_New")]
     partial class New
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,21 @@ namespace ORM.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("IncidentsUsers");
+                });
+
+            modelBuilder.Entity("MissionCrewMissions", b =>
+                {
+                    b.Property<int>("CrewMissionCrewId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MissionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CrewMissionCrewId", "MissionId");
+
+                    b.HasIndex("MissionId");
+
+                    b.ToTable("MissionCrewMissions");
                 });
 
             modelBuilder.Entity("MissionCrewUsers", b =>
@@ -107,15 +122,10 @@ namespace ORM.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime");
 
-                    b.Property<int?>("MissionCrewId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MissionCrewId");
 
                     b.ToTable("Missions");
                 });
@@ -350,6 +360,21 @@ namespace ORM.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MissionCrewMissions", b =>
+                {
+                    b.HasOne("ORM.Models.MissionCrew", null)
+                        .WithMany()
+                        .HasForeignKey("CrewMissionCrewId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ORM.Models.Missions", null)
+                        .WithMany()
+                        .HasForeignKey("MissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("MissionCrewUsers", b =>
                 {
                     b.HasOne("ORM.Models.MissionCrew", null)
@@ -363,13 +388,6 @@ namespace ORM.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ORM.Models.Missions", b =>
-                {
-                    b.HasOne("ORM.Models.MissionCrew", null)
-                        .WithMany("Mission")
-                        .HasForeignKey("MissionCrewId");
                 });
 
             modelBuilder.Entity("ORM.Models.Reports", b =>
@@ -408,11 +426,6 @@ namespace ORM.Migrations
                         .IsRequired();
 
                     b.Navigation("PositionType");
-                });
-
-            modelBuilder.Entity("ORM.Models.MissionCrew", b =>
-                {
-                    b.Navigation("Mission");
                 });
 #pragma warning restore 612, 618
         }

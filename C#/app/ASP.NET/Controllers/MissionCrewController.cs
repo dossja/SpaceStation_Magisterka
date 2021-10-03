@@ -32,53 +32,36 @@ namespace ASP.NET.Controllers
 
         // GET api/<IncidentsController>/5
         [HttpGet("missions/{id}")]
-        public async Task<ActionResult<MissionCrew>> GetMissionCrewMission(int id)
+        public async Task<ActionResult<IEnumerable<MissionCrew>>> GetMissionCrewMission(int id)
         {
-            var missionCrews = await _context.MissionCrew.ToListAsync();
-            var missionCrew = new MissionCrew();
+            var missionCrews = await _context.MissionCrew
+                .Where(mc => mc.MissionId == id)
+                .Include(mc => mc.Mission)
+                .Include(mc => mc.User)
+                .ToListAsync();
 
-            for (int i = 0; i < missionCrews.Count; i++)
-            {
-                if (missionCrews[i].MissionId == id)
-                {
-                    missionCrew = missionCrews[i];
 
-/*                    missionCrew.User.Add(await _context.Users.FindAsync(missionCrew.UserId));*/
-                }
-            }
-
-            if (missionCrew == null)
+            if (missionCrews == null)
                 return NotFound();
-/*
-            missionCrew.Mission.Add(await _context.Missions.FindAsync(missionCrew.MissionId));*/
 
-            return missionCrew;
+            return missionCrews;
         }
 
         // GET api/<IncidentsController>/5
         [HttpGet("user/{id}")]
-        public async Task<ActionResult<MissionCrew>> GetMissionsCrewUser(int id)
+        public async Task<ActionResult<IEnumerable<MissionCrew>>> GetMissionsCrewUser(int id)
         {
-            var missionCrews = await _context.MissionCrew.ToListAsync();
-            var missionCrew = new MissionCrew();
+            var missionCrews = await _context.MissionCrew
+                .Where(mc => mc.UserId == id)
+                .Include(mc => mc.Mission)
+                .Include(mc => mc.User)
+                .ToListAsync();
 
-            for (int i = 0; i < missionCrews.Count; i++)
-            {
-                if (missionCrews[i].UserId == id)
-                {
-                    if(missionCrew.UserId == null)
-                        missionCrew = missionCrews[i];
-/*
-                    missionCrew.Mission.Add(await _context.Missions.FindAsync(missionCrew.MissionId));*/
-                }
-            }
 
-            if (missionCrew == null)
+            if (missionCrews == null)
                 return NotFound();
 
-/*            missionCrew.User.Add(await _context.Users.FindAsync(missionCrew.UserId));*/
-
-            return missionCrew;
+            return missionCrews;
         }
 
 

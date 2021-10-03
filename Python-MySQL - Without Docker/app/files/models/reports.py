@@ -15,10 +15,9 @@ class Report(db.Model):
         db.Integer, db.ForeignKey("users.id"))
     report_type_id = db.Column(db.Integer, db.ForeignKey("report_type.id"))
     report_status_id = db.Column(db.Integer, db.ForeignKey("report_status.id"))
+
     operating_user_id = db.relationship(
         "User", secondary="incidents", backref="report")
-    # operating_user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    # operating_user = db.relationship("User", back_populates="reports")
 
     def __repr__(self):
         if self.operating_user_id:

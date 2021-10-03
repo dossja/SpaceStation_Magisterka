@@ -12,9 +12,9 @@ namespace ORM.Models
         public int IncidentId { get; set; }
 
         public int UserId { get; set; }
-        public ICollection<Users> User { get; set; }
+        public Users User { get; set; }
 
         public int ReportId { get; set; }
-        public ICollection<Reports> Report { get; set; }
+        public Reports Report { get; set; }
     }
 }

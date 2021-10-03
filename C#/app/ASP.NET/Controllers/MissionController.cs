@@ -33,6 +33,25 @@ namespace ASP.NET.Controllers
             return missions;
         }
 
+        // GET: api/Users/1
+        [HttpGet("{id}/crew")]
+        public async Task<ActionResult<IEnumerable<Missions>>> GetMissions(int id)
+        {
+            var missions = await _context.Missions
+                .AsNoTracking()
+                .Where(m => m.Id == id)
+                .Include(m => m.Crew)
+                .ThenInclude(m => m.User)
+                .ToListAsync();
+
+            if (missions == null)
+            {
+                return NotFound();
+            }
+
+            return missions;
+        }
+
         // POST: api/Users
         [Route("add")]
         [HttpPost]
