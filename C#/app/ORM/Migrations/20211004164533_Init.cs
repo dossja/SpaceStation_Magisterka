@@ -4,38 +4,10 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace ORM.Migrations
 {
-    public partial class New : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Incidents",
-                columns: table => new
-                {
-                    IncidentId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    ReportId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Incidents", x => x.IncidentId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MissionCrew",
-                columns: table => new
-                {
-                    MissionCrewId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    MissionId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MissionCrew", x => x.MissionCrewId);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Missions",
                 columns: table => new
@@ -90,30 +62,6 @@ namespace ORM.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MissionCrewMissions",
-                columns: table => new
-                {
-                    CrewMissionCrewId = table.Column<int>(type: "int", nullable: false),
-                    MissionId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MissionCrewMissions", x => new { x.CrewMissionCrewId, x.MissionId });
-                    table.ForeignKey(
-                        name: "FK_MissionCrewMissions_MissionCrew_CrewMissionCrewId",
-                        column: x => x.CrewMissionCrewId,
-                        principalTable: "MissionCrew",
-                        principalColumn: "MissionCrewId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MissionCrewMissions_Missions_MissionId",
-                        column: x => x.MissionId,
-                        principalTable: "Missions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -137,47 +85,25 @@ namespace ORM.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "IncidentsUsers",
+                name: "MissionCrew",
                 columns: table => new
                 {
-                    IncidentsIncidentId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    MissionCrewId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    MissionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IncidentsUsers", x => new { x.IncidentsIncidentId, x.UserId });
+                    table.PrimaryKey("PK_MissionCrew", x => x.MissionCrewId);
                     table.ForeignKey(
-                        name: "FK_IncidentsUsers_Incidents_IncidentsIncidentId",
-                        column: x => x.IncidentsIncidentId,
-                        principalTable: "Incidents",
-                        principalColumn: "IncidentId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_IncidentsUsers_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
+                        name: "FK_MissionCrew_Missions_MissionId",
+                        column: x => x.MissionId,
+                        principalTable: "Missions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MissionCrewUsers",
-                columns: table => new
-                {
-                    MissionsMissionCrewId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MissionCrewUsers", x => new { x.MissionsMissionCrewId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_MissionCrewUsers_MissionCrew_MissionsMissionCrewId",
-                        column: x => x.MissionsMissionCrewId,
-                        principalTable: "MissionCrew",
-                        principalColumn: "MissionCrewId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MissionCrewUsers_Users_UserId",
+                        name: "FK_MissionCrew_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -223,25 +149,27 @@ namespace ORM.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "IncidentsReports",
+                name: "Incidents",
                 columns: table => new
                 {
-                    IncidentsIncidentId = table.Column<int>(type: "int", nullable: false),
+                    IncidentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     ReportId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IncidentsReports", x => new { x.IncidentsIncidentId, x.ReportId });
+                    table.PrimaryKey("PK_Incidents", x => x.IncidentId);
                     table.ForeignKey(
-                        name: "FK_IncidentsReports_Incidents_IncidentsIncidentId",
-                        column: x => x.IncidentsIncidentId,
-                        principalTable: "Incidents",
-                        principalColumn: "IncidentId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_IncidentsReports_Reports_ReportId",
+                        name: "FK_Incidents_Reports_ReportId",
                         column: x => x.ReportId,
                         principalTable: "Reports",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Incidents_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -282,23 +210,23 @@ namespace ORM.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_IncidentsReports_ReportId",
-                table: "IncidentsReports",
+                name: "IX_Incidents_ReportId",
+                table: "Incidents",
                 column: "ReportId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IncidentsUsers_UserId",
-                table: "IncidentsUsers",
+                name: "IX_Incidents_UserId",
+                table: "Incidents",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MissionCrewMissions_MissionId",
-                table: "MissionCrewMissions",
+                name: "IX_MissionCrew_MissionId",
+                table: "MissionCrew",
                 column: "MissionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MissionCrewUsers_UserId",
-                table: "MissionCrewUsers",
+                name: "IX_MissionCrew_UserId",
+                table: "MissionCrew",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -325,28 +253,16 @@ namespace ORM.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "IncidentsReports");
+                name: "Incidents");
 
             migrationBuilder.DropTable(
-                name: "IncidentsUsers");
-
-            migrationBuilder.DropTable(
-                name: "MissionCrewMissions");
-
-            migrationBuilder.DropTable(
-                name: "MissionCrewUsers");
+                name: "MissionCrew");
 
             migrationBuilder.DropTable(
                 name: "Reports");
 
             migrationBuilder.DropTable(
-                name: "Incidents");
-
-            migrationBuilder.DropTable(
                 name: "Missions");
-
-            migrationBuilder.DropTable(
-                name: "MissionCrew");
 
             migrationBuilder.DropTable(
                 name: "Report_Status");

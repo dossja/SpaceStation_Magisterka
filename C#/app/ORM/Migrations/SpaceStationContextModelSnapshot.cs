@@ -17,66 +17,6 @@ namespace ORM.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.10");
 
-            modelBuilder.Entity("IncidentsReports", b =>
-                {
-                    b.Property<int>("IncidentsIncidentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReportId")
-                        .HasColumnType("int");
-
-                    b.HasKey("IncidentsIncidentId", "ReportId");
-
-                    b.HasIndex("ReportId");
-
-                    b.ToTable("IncidentsReports");
-                });
-
-            modelBuilder.Entity("IncidentsUsers", b =>
-                {
-                    b.Property<int>("IncidentsIncidentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("IncidentsIncidentId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("IncidentsUsers");
-                });
-
-            modelBuilder.Entity("MissionCrewMissions", b =>
-                {
-                    b.Property<int>("CrewMissionCrewId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MissionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CrewMissionCrewId", "MissionId");
-
-                    b.HasIndex("MissionId");
-
-                    b.ToTable("MissionCrewMissions");
-                });
-
-            modelBuilder.Entity("MissionCrewUsers", b =>
-                {
-                    b.Property<int>("MissionsMissionCrewId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MissionsMissionCrewId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("MissionCrewUsers");
-                });
-
             modelBuilder.Entity("ORM.Models.Incidents", b =>
                 {
                     b.Property<int>("IncidentId")
@@ -90,6 +30,10 @@ namespace ORM.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("IncidentId");
+
+                    b.HasIndex("ReportId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Incidents");
                 });
@@ -107,6 +51,10 @@ namespace ORM.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("MissionCrewId");
+
+                    b.HasIndex("MissionId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("MissionCrew");
                 });
@@ -328,64 +276,42 @@ namespace ORM.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("IncidentsReports", b =>
+            modelBuilder.Entity("ORM.Models.Incidents", b =>
                 {
-                    b.HasOne("ORM.Models.Incidents", null)
-                        .WithMany()
-                        .HasForeignKey("IncidentsIncidentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ORM.Models.Reports", null)
-                        .WithMany()
+                    b.HasOne("ORM.Models.Reports", "Report")
+                        .WithMany("Incidents")
                         .HasForeignKey("ReportId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("IncidentsUsers", b =>
-                {
-                    b.HasOne("ORM.Models.Incidents", null)
-                        .WithMany()
-                        .HasForeignKey("IncidentsIncidentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ORM.Models.Users", null)
-                        .WithMany()
+                    b.HasOne("ORM.Models.Users", "User")
+                        .WithMany("Incidents")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Report");
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MissionCrewMissions", b =>
+            modelBuilder.Entity("ORM.Models.MissionCrew", b =>
                 {
-                    b.HasOne("ORM.Models.MissionCrew", null)
-                        .WithMany()
-                        .HasForeignKey("CrewMissionCrewId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ORM.Models.Missions", null)
-                        .WithMany()
+                    b.HasOne("ORM.Models.Missions", "Mission")
+                        .WithMany("Crew")
                         .HasForeignKey("MissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("MissionCrewUsers", b =>
-                {
-                    b.HasOne("ORM.Models.MissionCrew", null)
-                        .WithMany()
-                        .HasForeignKey("MissionsMissionCrewId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ORM.Models.Users", null)
+                    b.HasOne("ORM.Models.Users", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Mission");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ORM.Models.Reports", b =>
@@ -424,6 +350,21 @@ namespace ORM.Migrations
                         .IsRequired();
 
                     b.Navigation("PositionType");
+                });
+
+            modelBuilder.Entity("ORM.Models.Missions", b =>
+                {
+                    b.Navigation("Crew");
+                });
+
+            modelBuilder.Entity("ORM.Models.Reports", b =>
+                {
+                    b.Navigation("Incidents");
+                });
+
+            modelBuilder.Entity("ORM.Models.Users", b =>
+                {
+                    b.Navigation("Incidents");
                 });
 #pragma warning restore 612, 618
         }

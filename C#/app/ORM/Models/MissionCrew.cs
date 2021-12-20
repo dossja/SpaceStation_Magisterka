@@ -12,9 +12,9 @@ namespace ORM.Models
         public int MissionCrewId { get; set; }
 
         public int UserId { get; set; }
-        public ICollection<Users> User { get; set; }
+        public Users User { get; set; }
 
         public int MissionId { get; set; }
-        public ICollection<Missions> Mission { get; set; }
+        public Missions Mission { get; set; }
     }
 }

@@ -28,8 +28,8 @@ namespace ASP.NET.Controllers
                 .Include(u => u.PositionType)
                 .Include(r => r.Incidents)
                 .ThenInclude(i => i.Report)
-                .Include(r => r.Missions)
-                .ThenInclude(i => i.Mission)
+/*                .Include(r => r.Missions)
+                .ThenInclude(i => i.Mission)*/
                 .ToListAsync();
 
             return users;
@@ -43,8 +43,8 @@ namespace ASP.NET.Controllers
                 .Include(u => u.PositionType)
                 .Include(r => r.Incidents)
                 .ThenInclude(i => i.Report)
-                .Include(r => r.Missions)
-                .ThenInclude(i => i.Mission)
+/*                .Include(r => r.Missions)
+                .ThenInclude(i => i.Mission)*/
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (users == null)
@@ -65,8 +65,8 @@ namespace ASP.NET.Controllers
                 .Include(u => u.PositionType)
                 .Include(r => r.Incidents)
                 .ThenInclude(i => i.Report)
-                .Include(r => r.Missions)
-                .ThenInclude(i => i.Mission)
+/*                .Include(r => r.Missions)
+                .ThenInclude(i => i.Mission)*/
                 .FirstOrDefaultAsync();
 
             if (user == null)
