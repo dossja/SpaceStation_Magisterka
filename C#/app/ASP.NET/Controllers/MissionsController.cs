@@ -12,11 +12,11 @@ namespace ASP.NET.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class MissionController : ControllerBase
+    public class MissionsController : ControllerBase
     {
         private readonly SpaceStationContext _context;
 
-        public MissionController(SpaceStationContext context)
+        public MissionsController(SpaceStationContext context)
         {
             _context = context;
         }
@@ -28,10 +28,11 @@ namespace ASP.NET.Controllers
             var missions = await _context.Missions
                 .Include(m => m.Crew)
                 .ThenInclude(c => c.User)
-                .ToListAsync();
+                .ToListAsync();                    
 
             return missions;
         }
+
 
         // GET: api/Users/1
         [HttpGet("{id}/crew")]
@@ -55,12 +56,25 @@ namespace ASP.NET.Controllers
         // POST: api/Users
         [Route("add")]
         [HttpPost]
-        public async Task<ActionResult<Missions>> PostMissions(Missions missions)
+        public async Task<ActionResult<Missions>> PostMissions()
         {
-            _context.Missions.Add(missions);
+            var missions = await _context.Missions
+                .Include(m => m.Crew)
+                .ThenInclude(m => m.User)
+                .ToListAsync();
+
+            var mission = new Missions();
+            if (missions.Count() > 0)
+                mission.StartDate = missions[missions.Count() - 1].EndDate;
+            else
+                mission.StartDate = DateTime.Now;
+
+            mission.EndDate = mission.StartDate.AddDays(56);
+
+            _context.Missions.Add(mission);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("PostMisssions", new { id = missions.Id }, missions);
+            return CreatedAtAction("PostMissions", new { id = mission.Id }, mission);
         }
     }
 }

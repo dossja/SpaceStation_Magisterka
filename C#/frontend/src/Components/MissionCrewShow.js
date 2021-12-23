@@ -14,6 +14,7 @@ import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 
 import missionsAPI from "../Axios/missionsAPI.js";
+import positionTypeAPI from "../Axios/positionTypeAPI.js";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -51,8 +52,10 @@ function getModalStyle() {
 
 function MissionCrewShow(props) {
     const mAPI = new missionsAPI();
+    const pAPI = new positionTypeAPI();
 
     const classes = useStyles();
+    const [positionType, setPositionType] = React.useState([]);
     const [users, setUsers] = React.useState([]);
 
     const [modalStyle] = React.useState(getModalStyle);
@@ -61,15 +64,29 @@ function MissionCrewShow(props) {
 
     useEffect(() => {
         console.log(props.missionID);
-        if (aktualizuj)
+        if (aktualizuj) {
+            getPositionTypeAPI();
             getMissionCrewAPI();
+        }
     }, [aktualizuj]);
+
+    const getPositionTypeAPI = () => {
+        pAPI.get()
+            .then(response => {
+                console.log(response.data);
+                setPositionType(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        setAktualizuj(false);
+    }
 
     const getMissionCrewAPI = () => {
         mAPI.getCrewByID(props.missionID)
             .then(response => {
-                console.log(response.data);
-                setUsers(response.data);
+                console.log(response.data[0].crew);
+                setUsers(response.data[0].crew);
             })
             .catch(e => {
                 console.log(e);
@@ -99,13 +116,13 @@ function MissionCrewShow(props) {
                             {users.map((users) => (
                                 <TableRow key={users.id}>
                                     <TableCell component="th" scope="row">
-                                        {users.id}
+                                        {users.user.id}
                                     </TableCell>
-                                    <TableCell align="right">{users.name}</TableCell>
-                                    <TableCell align="right">{users.surname}</TableCell>
-                                    <TableCell align="right">{users.email}</TableCell>
-                                    <TableCell align="right">{users.position_type}</TableCell>
-                                    <TableCell align="right">{users.manager}</TableCell>
+                                    <TableCell align="right">{users.user.name}</TableCell>
+                                    <TableCell align="right">{users.user.surname}</TableCell>
+                                    <TableCell align="right">{users.user.email}</TableCell>
+                                    <TableCell align="right">{positionType[users.user.positionTypeId].name}</TableCell>
+                                    {users.user.manager == true ? <TableCell align="right">True</TableCell> : <TableCell align="right">False</TableCell>}
                                 </TableRow>
                             ))}
                         </TableBody>

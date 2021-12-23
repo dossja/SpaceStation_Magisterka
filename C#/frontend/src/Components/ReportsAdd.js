@@ -58,7 +58,7 @@ function ReportsAdd(props) {
     const getReportTypeAPI = () => {
         rtAPI.get()
             .then(response => {
-                setReportType(response.data.reportTypes);
+                setReportType(response.data);
             })
             .catch(e => {
                 console.log(e);
@@ -67,7 +67,7 @@ function ReportsAdd(props) {
     }
 
     const postReport = () => {
-        rAPI.post({ 'description': values.description, 'reporting_user_id': props.currentUserID, 'title': values.title, 'report_type_id': values.report_type })
+        rAPI.post({ 'description': values.description, 'reportingUserId': props.currentUserID, 'title': values.title, 'reportTypeId': values.report_type })
             .then(response => {
                 console.log(response.data);
                 console.log(response.status);
@@ -82,7 +82,6 @@ function ReportsAdd(props) {
         <div>
             <Container maxWidth="s" className="Add-User-Page">
                 <h2>Add Report</h2>
-                <h3>{props.currentUserID}</h3>
                 <Grid container
                     direction="column"
                     // justifyContent="center"

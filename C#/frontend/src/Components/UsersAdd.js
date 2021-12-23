@@ -57,7 +57,7 @@ function UsersAdd() {
     const getPositionTypeAPI = () => {
         ptAPI.get()
             .then(response => {
-                setPositionType(response.data.positionTypes);
+                setPositionType(response.data);
             })
             .catch(e => {
                 console.log(e);
@@ -66,8 +66,9 @@ function UsersAdd() {
     }
 
     const postUser = () => {
+        console.log(values);
         console.log(values.manager);
-        uAPI.post({ 'name': values.name, 'surname': values.surname, 'position_type_id': values.position, 'manager': values.manager })
+        uAPI.post({ 'name': values.name, 'surname': values.surname, 'positionTypeId': values.position, 'manager': values.manager })
             .then(response => {
                 console.log(response.data);
                 console.log(response.status);

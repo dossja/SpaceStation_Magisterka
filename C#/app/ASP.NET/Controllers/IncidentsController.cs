@@ -24,7 +24,7 @@ namespace ASP.NET.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Incidents>>> GetReports()
+        public async Task<ActionResult<IEnumerable<Incidents>>> GetIncidents()
         {
             var incidents = await _context.Incidents.ToListAsync();
 
@@ -32,7 +32,7 @@ namespace ASP.NET.Controllers
         }
 
         // GET api/<IncidentsController>/5
-        [HttpGet("report/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Incidents>>> GetIncidents(int id)
         {
             var incidents = await _context.Incidents

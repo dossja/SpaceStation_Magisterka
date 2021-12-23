@@ -101,16 +101,18 @@ function MissionsEdit(props) {
     const putMissionCrew = () => {
         console.log(missionCrew);
         console.log(props.missionID);
-        mcAPI.post({ "mission_id": props.missionID, "user_id": missionCrew })
-            .then(response => {
-                console.log(response.data);
-                console.log(response.status);
-                props.setAktualizuj();
-                props.handleClose();
-            })
-            .catch(e => {
-                console.log(e);
-            });
+        for (let i in missionCrew) {
+            mcAPI.post({ "missionId": props.missionID, "userId": missionCrew[i] })
+                .then(response => {
+                    console.log(response.data);
+                    console.log(response.status);
+                    props.setAktualizuj();
+                    props.handleClose();
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        }
     }
 
     return (

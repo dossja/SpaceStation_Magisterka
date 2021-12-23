@@ -4,6 +4,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace ORM.Models
 {
@@ -33,6 +34,7 @@ namespace ORM.Models
 
         [ForeignKey("Users")]
         public int ReportingUserId { get; set; }
+        [JsonIgnore]
         public Users ReportingUser { get; set; }
 
         public ICollection<Incidents> Incidents { get; set; }

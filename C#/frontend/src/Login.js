@@ -20,7 +20,9 @@ function Login(props) {
     };
 
     const getUserByEmailAPI = () => {
-        uAPI.getByEmail({ 'email': values.email, 'name': 'none', 'surname': 'none' })
+        let val = { 'email': values.email, 'name': values.email.split('.')[0], 'surname': values.email.split('.')[1].split('@')[0] };
+        console.log(val);
+        uAPI.getByEmail({ 'email': values.email, 'name': values.email.split('.')[0], 'surname': values.email.split('.')[1].split('@')[0] })
             .then(response => {
                 console.log(response);
                 console.log(response.status);

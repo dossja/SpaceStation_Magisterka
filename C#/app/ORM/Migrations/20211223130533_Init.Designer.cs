@@ -9,7 +9,7 @@ using ORM.DataAccess;
 namespace ORM.Migrations
 {
     [DbContext(typeof(SpaceStationContext))]
-    [Migration("20211004164533_Init")]
+    [Migration("20211223130533_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

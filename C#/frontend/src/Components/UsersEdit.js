@@ -79,7 +79,7 @@ function UsersAdd(props) {
     const getPositionTypeAPI = () => {
         ptAPI.get()
             .then(response => {
-                setPositionType(response.data.positionTypes);
+                setPositionType(response.data);
                 getUserByID(props.userID);
             })
             .catch(e => {
@@ -153,7 +153,7 @@ function UsersAdd(props) {
                             /></FormControl>
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-simple-select-label" required>Position</InputLabel>
-                            <Select labelId="position" label="Position" id="select" value={user.position_type_id} onChange={handleChange('position_type_id')}>
+                            <Select labelId="position" label="Position" id="select" value={user.positionTypeId} onChange={handleChange('positionTypeId')}>
                                 {positionType.map(positionType => (
                                     <MenuItem value={positionType.id} >{positionType.name}</MenuItem>
                                 ))}

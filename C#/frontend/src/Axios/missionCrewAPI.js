@@ -3,7 +3,7 @@ import API from "./API";
 export default class incidentsAPI {
     // Metody GET
     async get() {
-        const response = await API.get("/mission_crew");
+        const response = await API.get("/missionCrew");
 
         return response;
     }
@@ -11,7 +11,7 @@ export default class incidentsAPI {
 
     // Metody POST
     async post(values) {
-        const response = await API.post("/mission_crew/add", values);
+        const response = await API.post("/missionCrew/add", values);
 
         return response;
     }

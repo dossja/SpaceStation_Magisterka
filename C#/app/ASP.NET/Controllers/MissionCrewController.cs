@@ -54,7 +54,8 @@ namespace ASP.NET.Controllers
             var missionCrews = await _context.MissionCrew
                 .Where(mc => mc.UserId == id)
                 .Include(mc => mc.Mission)
-                .Include(mc => mc.User)
+/*                .Include(mc => mc.User)
+                .ThenInclude(u => u.PositionType)*/
                 .ToListAsync();
 
 

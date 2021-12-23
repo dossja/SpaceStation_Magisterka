@@ -19,10 +19,10 @@ function Users(props) {
                 {/* <h3>{props.isManager}</h3> */}
                 <Router >
                     <div>
-                        {props.isManager == "True" ?
+                        {props.isManager == true ?
                             <Button variant="contained" ><Link to="/users/add" className="Category-link">Add User</Link></Button>
                             : null}
-                        {props.isManager == "True" ?
+                        {props.isManager == true ?
                             <div class="divider" />
                             : null}
                         <Button variant="contained" ><Link to="/users/show" className="Category-link">Show Users</Link></Button>

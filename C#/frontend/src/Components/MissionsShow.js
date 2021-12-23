@@ -77,7 +77,7 @@ function MissionsShow(props) {
                             <TableCell>id</TableCell>
                             <TableCell align="right">Start Date</TableCell>
                             <TableCell align="right">End Date</TableCell>
-                            {props.isManager == "True" ? <TableCell align="center">Actions</TableCell> : null}
+                            {props.isManager == true ? <TableCell align="center">Actions</TableCell> : null}
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -86,9 +86,9 @@ function MissionsShow(props) {
                                 <TableCell component="th" scope="row">
                                     {missions.id}
                                 </TableCell>
-                                <TableCell align="right">{missions.start_date}</TableCell>
-                                <TableCell align="right">{missions.end_date}</TableCell>
-                                {props.isManager == "True" && missions.crew == "False" ? <TableCell align="right">
+                                <TableCell align="right">{missions.startDate.split("T")[0]}</TableCell>
+                                <TableCell align="right">{missions.endDate.split("T")[0]}</TableCell>
+                                {props.isManager == true && missions.crew.length == 0 ? <TableCell align="right">
                                     <Button
                                         variant="contained"
                                         color="primary"
@@ -102,7 +102,7 @@ function MissionsShow(props) {
                                         Edit
                                     </Button>
                                 </TableCell> : null}
-                                {missions.crew == "True" ? <TableCell align="right">
+                                {missions.crew.length > 0 ? <TableCell align="right">
                                     <Button
                                         variant="contained"
                                         color="secondary"

@@ -3,13 +3,13 @@ import API from "./API";
 export default class reportTypeAPI {
     // Metody GET
     async get() {
-        const response = await API.get("/report_type");
+        const response = await API.get("/reportType");
 
         return response;
     }
 
     async getByID(id) {
-        const response = await API.get("/report_type/" + id);
+        const response = await API.get("/reportType/" + id);
 
         return response;
     }
