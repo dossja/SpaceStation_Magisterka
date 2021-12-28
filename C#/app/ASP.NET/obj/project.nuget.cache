@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/adjiE2vmOqJniqKrlC855FGKx24G5ZMWb/n4hBt5pqjEGV8t0pBqZ40J0RvB+lmBggUkaWAvwhewK7ShXaygA==",
+  "dgSpecHash": "sJdZCMOxHe/L4Ya7ZXULEZpNox3CNsDfASaVS4cYzY8KCgO5Gs3ChQcLTRg03+URBCBciZNJyjatPgU+RbbutQ==",
   "success": true,
-  "projectFilePath": "D:\\Pliki pulpit\\Projekty\\Magisterka\\SpaceStation_Magisterka\\C#\\app\\ASP.NET\\ASP.NET.csproj",
+  "projectFilePath": "D:\\Pliki pulpit\\Projekty\\Magisterka\\SpaceStation_Magisterka\\C#\\app\\ASP.NET\\ASPNET.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dossja\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\Dossja\\.nuget\\packages\\google.protobuf\\3.14.0\\google.protobuf.3.14.0.nupkg.sha512",

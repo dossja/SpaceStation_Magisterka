@@ -1,0 +1,51 @@
+version: '3.8'
+services: 
+    frontend:
+        build: ./frontend
+        volumes:
+            - ./frontend:/app
+            - /app/node_modules
+        ports:
+            - 3000:3000
+        stdin_open: true
+        environment:
+            - CHOKIDAR_USEPOLLING=true
+        command: npm start
+
+    backend:
+        build: 
+            context: .
+            dockerfile: Dockerfile
+        volumes: 
+            - ./app:/app
+        ports: 
+            - 5000:80
+        build: ./app
+        restart: always
+        depends_on: 
+            - db
+        links: 
+            - db:db
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=https://+:443;http://+:80
+            - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+            - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+
+    db:
+        # image: mysql:5.7.22
+        image: mysql:8.0.19
+        restart: always
+        volumes:
+            - db-data:/var/lib/mysql
+        environment: 
+            MYSQL_DATABASE: "space_station_CSharp"
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
+            MYSQL_ROOT_PASSWORD: root
+            # MYSQL_HOST: 0.0.0.0
+        ports: 
+            - 3306:3306
+
+volumes:
+    db-data:

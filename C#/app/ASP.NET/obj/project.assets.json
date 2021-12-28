@@ -6210,9 +6210,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Pliki pulpit\\Projekty\\Magisterka\\SpaceStation_Magisterka\\C#\\app\\ASP.NET\\ASP.NET.csproj",
-      "projectName": "ASP.NET",
-      "projectPath": "D:\\Pliki pulpit\\Projekty\\Magisterka\\SpaceStation_Magisterka\\C#\\app\\ASP.NET\\ASP.NET.csproj",
+      "projectUniqueName": "D:\\Pliki pulpit\\Projekty\\Magisterka\\SpaceStation_Magisterka\\C#\\app\\ASP.NET\\ASPNET.csproj",
+      "projectName": "ASPNET",
+      "projectPath": "D:\\Pliki pulpit\\Projekty\\Magisterka\\SpaceStation_Magisterka\\C#\\app\\ASP.NET\\ASPNET.csproj",
       "packagesPath": "C:\\Users\\Dossja\\.nuget\\packages\\",
       "outputPath": "D:\\Pliki pulpit\\Projekty\\Magisterka\\SpaceStation_Magisterka\\C#\\app\\ASP.NET\\obj\\",
       "projectStyle": "PackageReference",
