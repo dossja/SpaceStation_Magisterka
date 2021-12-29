@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect, useReducer } from "react";
+import { useEffect } from "react";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -11,7 +11,6 @@ import TableBody from '@material-ui/core/TableBody';
 import Table from '@material-ui/core/Table';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import Modal from '@material-ui/core/Modal';
 
 import missionsAPI from "../Axios/missionsAPI.js";
 import positionTypeAPI from "../Axios/positionTypeAPI.js";
@@ -122,7 +121,7 @@ function MissionCrewShow(props) {
                                     <TableCell align="right">{users.user.surname}</TableCell>
                                     <TableCell align="right">{users.user.email}</TableCell>
                                     <TableCell align="right">{positionType[users.user.positionTypeId].name}</TableCell>
-                                    {users.user.manager == true ? <TableCell align="right">True</TableCell> : <TableCell align="right">False</TableCell>}
+                                    {users.user.manager === true ? <TableCell align="right">True</TableCell> : <TableCell align="right">False</TableCell>}
                                 </TableRow>
                             ))}
                         </TableBody>

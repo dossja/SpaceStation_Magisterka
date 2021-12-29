@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -70,7 +70,7 @@ function ReportsShow(props) {
     const changeReportStatus = (status_id, report_id) => {
         let newReport;
         reports.forEach(report => {
-            if (report.id == report_id)
+            if (report.id === report_id)
                 newReport = report;
         });
         newReport.report_status_id = `${status_id}`;
@@ -126,7 +126,7 @@ function ReportsShow(props) {
                                 <TableCell align="right">{reports.endDate}</TableCell>
                                 <TableCell align="right">{reports.reportingUser.name}</TableCell>
                                 <TableCell align="center">
-                                    {reports.reportStatusId == 1 && props.isManager == true ? <Button
+                                    {reports.reportStatusId === 1 && props.isManager === true ? <Button
                                         variant="contained"
                                         color="primary"
                                         className={classes.btnAssign}
@@ -138,7 +138,7 @@ function ReportsShow(props) {
                                         Assign
                                     </Button> : null}
                                     {/* && reports. == props.currentUserID */}
-                                    {reports.reportStatusId == 2 ? <Button
+                                    {reports.reportStatusId === 2 ? <Button
                                         variant="contained"
                                         color="success"
                                         onClick={() => {
@@ -148,7 +148,7 @@ function ReportsShow(props) {
                                         In progress
                                     </Button> : null}
                                     {/* && reports.operating_user_id != props.currentUserID  */}
-                                    {reports.reportStatusId == 2 ? <Button
+                                    {reports.reportStatusId === 2 ? <Button
                                         variant="contained"
                                         color="success"
                                         disabled
@@ -159,7 +159,7 @@ function ReportsShow(props) {
                                         In progress
                                     </Button> : null}
                                     {/* && reports.operating_user_id == props.currentUserID  */}
-                                    {reports.reportStatusId == 3 ? <Button
+                                    {reports.reportStatusId === 3 ? <Button
                                         variant="contained"
                                         color="success"
                                         onClick={() => {
@@ -169,7 +169,7 @@ function ReportsShow(props) {
                                         Finished
                                     </Button> : null}
                                     {/* && reports.operating_user_id != props.currentUserID  */}
-                                    {reports.reportStatusId == 3 ? <Button
+                                    {reports.reportStatusId === 3 ? <Button
                                         variant="contained"
                                         color="success"
                                         disabled
@@ -180,7 +180,7 @@ function ReportsShow(props) {
                                         Finished
                                     </Button> : null}
                                     {/* && (reports.operating_user_id == props.currentUserID || props.isManager == "True")  */}
-                                    {reports.reportStatusId != 4 && reports.reportStatusId != 5 ? <Button
+                                    {reports.reportStatusId !== 4 && reports.reportStatusId !== 5 ? <Button
                                         variant="contained"
                                         color="primary"
                                         className={classes.btnCancel}
@@ -192,8 +192,8 @@ function ReportsShow(props) {
                                     </Button> : null
                                     }
 
-                                    {reports.reportStatusId == 4 ? <p color="lightGreen">Report archived</p> : null}
-                                    {reports.reportStatusId == 5 ? <p color="red">Report cancelled</p> : null}
+                                    {reports.reportStatusId === 4 ? <p color="lightGreen">Report archived</p> : null}
+                                    {reports.reportStatusId === 5 ? <p color="red">Report cancelled</p> : null}
 
                                 </TableCell>
                             </TableRow>

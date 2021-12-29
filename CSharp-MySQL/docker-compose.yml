@@ -28,7 +28,7 @@ services:
             - db:db
         environment: 
             - ASPNETCORE_ENVIRONMENT=Development
-            # - ASPNETCORE_URLS=https://+:443;http://+:80
+            - ASPNETCORE_URLS=https://+:5000
             - DOTNET_USE_POLLING_FILE_WATCHER=1
             # - ASPNETCORE_Kestrel__Certificates__Default__Password=password
             # - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
@@ -44,8 +44,8 @@ services:
             - db-data:/var/lib/mysql
         environment: 
             MYSQL_DATABASE: "space_station_CSharp"
-            MYSQL_USER: user
-            MYSQL_PASSWORD: password
+            # MYSQL_USER: root
+            # MYSQL_PASSWORD: root
             MYSQL_ROOT_PASSWORD: root
             # MYSQL_HOST: 0.0.0.0
         ports: 
