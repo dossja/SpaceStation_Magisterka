@@ -19,7 +19,7 @@ services:
         volumes: 
             - ./app:/app
         ports: 
-            - 5000:80
+            - 5000:5000
         build: ./app
         restart: always
         depends_on: 
@@ -28,9 +28,13 @@ services:
             - db:db
         environment: 
             - ASPNETCORE_ENVIRONMENT=Development
-            - ASPNETCORE_URLS=https://+:443;http://+:80
-            - ASPNETCORE_Kestrel__Certificates__Default__Password=password
-            - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+            # - ASPNETCORE_URLS=https://+:443;http://+:80
+            - DOTNET_USE_POLLING_FILE_WATCHER=1
+            # - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+            # - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+        volumes:
+            - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+            - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
     db:
         # image: mysql:5.7.22
