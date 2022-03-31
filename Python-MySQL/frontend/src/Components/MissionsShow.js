@@ -77,7 +77,7 @@ function MissionsShow(props) {
                             <TableCell>id</TableCell>
                             <TableCell align="right">Start Date</TableCell>
                             <TableCell align="right">End Date</TableCell>
-                            {props.isManager == "True" ? <TableCell align="center">Actions</TableCell> : null}
+                            {props.isManager == true ? <TableCell align="center">Actions</TableCell> : null}
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -102,7 +102,7 @@ function MissionsShow(props) {
                                         Edit
                                     </Button>
                                 </TableCell> : null}
-                                {missions.crew == "True" ? <TableCell align="right">
+                                {missions.crew == true ? <TableCell align="right">
                                     <Button
                                         variant="contained"
                                         color="secondary"

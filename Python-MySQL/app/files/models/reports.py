@@ -1,6 +1,7 @@
 import datetime
 from files import db
-from flask import jsonify
+# from flask import jsonify
+import json
 # from files.models.users import User
 
 
@@ -21,13 +22,32 @@ class Report(db.Model):
 
     def __repr__(self):
         if self.operating_user_id:
-            operating_user = f"\"operating_user_id\": \"{self.operating_user_id[0].id}\", \"operating_user\": \"{self.operating_user_id[0].name} {self.operating_user_id[0].surname}\""
+            operating_user_id = self.operating_user_id[0].id,
+            operating_user = f"{self.operating_user_id[0].name} {self.operating_user_id[0].surname}"
         else:
-            operating_user = f"\"operating_user_id\": \"\", \"operating_user\": \"\""
+            operating_user_id = ""
+            operating_user = ""
 
         if self.end_date:
             end_date = self.end_date
         else:
             end_date = "not specified"
 
-        return f"{{\"id\": \"{self.id}\", \"description\": \"{self.description}\", \"submit_date\": \"{self.submit_date}\", \"end_date\": \"{end_date}\", \"title\": \"{self.title}\", \"reporting_user_id\": \"{self.reporting_user_id}\", \"reporting_user\": \"{self.reporting_user.name} {self.reporting_user.surname}\",\"report_status_id\": \"{self.report_status_id}\", \"report_status\": \"{self.report_status.description}\", \"report_type_id\": \"{self.report_type_id}\", \"report_type\": \"{self.report_type.description}\", {operating_user}}}"
+        json_value = {
+            "id": self.id,
+            "description": self.description,
+            "submit_date": self.submit_date,
+            "end_date": end_date,
+            "title": self.title,
+            "reporting_user_id": self.reporting_user_id,
+            "reporting_user": f"{self.reporting_user.name} {self.reporting_user.surname}",
+            "report_status_id": self.report_status_id,
+            "report_status": self.report_status.description,
+            "report_type_id": self.report_type_id,
+            "report_type": self.report_type.description,
+            "operating_user_id": operating_user_id,
+            "operating_user": operating_user
+        }
+        return json.dumps(json_value, default=str)
+
+        # return f"{{\"id\": \"{self.id}\", \"description\": \"{self.description}\", \"submit_date\": \"{self.submit_date}\", \"end_date\": \"{end_date}\", \"title\": \"{self.title}\", \"reporting_user_id\": \"{self.reporting_user_id}\", \"reporting_user\": \"{self.reporting_user.name} {self.reporting_user.surname}\",\"report_status_id\": \"{self.report_status_id}\", \"report_status\": \"{self.report_status.description}\", \"report_type_id\": \"{self.report_type_id}\", \"report_type\": \"{self.report_type.description}\", {operating_user}}}"

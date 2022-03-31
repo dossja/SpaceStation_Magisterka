@@ -1,3 +1,4 @@
+import json
 from files import db
 
 
@@ -9,5 +10,9 @@ class Incident(db.Model):
         'reports.id'), primary_key=True)
 
     def __repr__(self):
-
-        return f"{{\"operating_user_id\": \"{self.operating_user_id}\", \"report_id\": \"{self.report_id}\"}}"
+        json_value = {
+            "operating_user_id": self.operating_user_id,
+            "report_id": self.report_id
+        }
+        return json.dumps(json_value, default=str)
+        # return f"{{\"operating_user_id\": \"{self.operating_user_id}\", \"report_id\": \"{self.report_id}\"}}"

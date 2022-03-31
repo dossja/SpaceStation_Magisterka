@@ -1,4 +1,5 @@
 from files import db
+import json
 
 
 class ReportStatus(db.Model):
@@ -9,4 +10,9 @@ class ReportStatus(db.Model):
         "Report", backref="report_status")
 
     def __repr__(self):
-        return f"{{\"id\": \"{self.id}\", \"description\": \"{self.description}\"}}"
+        json_value = {
+            "id": self.id,
+            "description": self.description
+        }
+        return json.dumps(json_value, default=str)
+        # return f"{{\"id\": \"{self.id}\", \"description\": \"{self.description}\"}}"

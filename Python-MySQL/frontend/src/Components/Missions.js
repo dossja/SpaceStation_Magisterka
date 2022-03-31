@@ -13,10 +13,10 @@ function Missions(props) {
                 <h3>Missions</h3>
                 <Router >
                     <div>
-                        {props.isManager == "True" ?
+                        {props.isManager == true ?
                             <Button variant="contained" ><Link to="/missions/add" className="Category-link">Add Mission</Link></Button>
                             : null}
-                        {props.isManager == "True" ?
+                        {props.isManager == true ?
                             <div class="divider" />
                             : null}
                         <Button variant="contained" ><Link to="/missions/show" className="Category-link">Show Missions</Link></Button>

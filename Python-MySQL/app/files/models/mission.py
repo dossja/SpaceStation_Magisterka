@@ -1,4 +1,6 @@
+import imp
 from files import db
+import json
 
 
 class Mission(db.Model):
@@ -14,7 +16,15 @@ class Mission(db.Model):
         else:
             crew = False
 
-        return f"{{\"id\": \"{self.id}\", \"start_date\": \"{self.start_date}\", \"end_date\": \"{self.end_date}\", \"crew\": \"{crew}\"}}"
+        json_value = {
+            "id": self.id,
+            "start_date": self.start_date,
+            "end_date": self.end_date,
+            "crew": crew
+        }
+
+        return json.dumps(json_value, default=str)
+        # return f"{{\"id\": \"{self.id}\", \"start_date\": \"{self.start_date}\", \"end_date\": \"{self.end_date}\", \"crew\": \"{crew}\"}}"
 
     def return_crew(self):
 

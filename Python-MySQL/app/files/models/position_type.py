@@ -1,4 +1,5 @@
 from files import db
+import json
 
 
 class PositionType(db.Model):
@@ -8,4 +9,9 @@ class PositionType(db.Model):
     users = db.relationship("User", backref="position_type")
 
     def __repr__(self):
-        return f"{{\"id\": \"{self.id}\", \"name\": \"{self.name}\"}}"
+        json_value = {
+            "id": self.id,
+            "name": self.name
+        }
+        return json.dumps(json_value, default=str)
+        # return f"{{\"id\": \"{self.id}\", \"name\": \"{self.name}\"}}"

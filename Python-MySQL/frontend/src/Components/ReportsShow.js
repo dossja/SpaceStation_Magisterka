@@ -97,7 +97,7 @@ function ReportsShow(props) {
         <div>
             <Container maxWidth="s" className="Show-Report-Page">
                 <h2>Available Reports</h2>
-                <h3>{props.currentUserID}</h3>
+                {/* <h3>{props.currentUserID}</h3> */}
             </Container>
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
@@ -127,7 +127,7 @@ function ReportsShow(props) {
                                 <TableCell align="right">{reports.end_date}</TableCell>
                                 <TableCell align="right">{reports.reporting_user}</TableCell>
                                 <TableCell align="center">
-                                    {reports.report_status_id == 1 && props.isManager == "True" ? <Button
+                                    {reports.report_status_id == 1 && props.isManager == true ? <Button
                                         variant="contained"
                                         color="primary"
                                         className={classes.btnAssign}
@@ -181,7 +181,7 @@ function ReportsShow(props) {
                                         Finished
                                     </Button> : null}
 
-                                    {reports.report_status_id != 4 && reports.report_status_id != 5 && (reports.operating_user_id == props.currentUserID || props.isManager == "True") ? <Button
+                                    {reports.report_status_id != 4 && reports.report_status_id != 5 && (reports.operating_user_id == props.currentUserID || props.isManager == true) ? <Button
                                         variant="contained"
                                         color="primary"
                                         className={classes.btnCancel}

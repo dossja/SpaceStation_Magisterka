@@ -14,7 +14,7 @@ function Reports(props) {
         <div>
             <Container maxWidth="s" className="Add-User-Page">
                 <h2>Reports</h2>
-                <h3>{props.currentUserID}</h3>
+                {/* <h3>{props.currentUserID}</h3> */}
                 <Router >
                     <div>
                         <Button variant="contained" ><Link to="/reports/add" className="Category-link">Add Report</Link></Button>

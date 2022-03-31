@@ -1,5 +1,6 @@
 from files import db
 from flask_login import UserMixin
+import json
 # from files.models.reports import Report
 
 
@@ -20,5 +21,15 @@ class User(db.Model):
         "Mission", secondary="mission_crew", backref="user")
 
     def __repr__(self):
+        json_value = {
+            "id": self.id,
+            "name": self.name,
+            "surname": self.surname,
+            "email": self.email,
+            "position_type_id": self.position_type_id,
+            "position_type": self.position_type.name,
+            "manager": self.manager
+        }
+        return json.dumps(json_value, default=str)
 
-        return f"{{\"id\": \"{self.id}\", \"name\": \"{self.name}\", \"surname\": \"{self.surname}\", \"email\": \"{self.email}\", \"position_type_id\": \"{self.position_type_id}\", \"position_type\": \"{self.position_type.name}\", \"manager\": \"{self.manager}\"}}"
+        # return f"{{\"id\": \"{self.id}\", \"name\": \"{self.name}\", \"surname\": \"{self.surname}\", \"email\": \"{self.email}\", \"position_type_id\": \"{self.position_type_id}\", \"position_type\": \"{self.position_type.name}\", \"manager\": \"{self.manager}\"}}"

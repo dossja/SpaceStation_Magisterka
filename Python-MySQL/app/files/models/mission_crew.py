@@ -1,4 +1,5 @@
 from files import db
+import json
 
 
 class MissionCrew(db.Model):
@@ -9,5 +10,9 @@ class MissionCrew(db.Model):
         'missions.id'), primary_key=True)
 
     def __repr__(self):
-
-        return f"{{\"user_id\": \"{self.user_id}\", \"mission_id\": \"{self.mission_id}\"}}"
+        json_value = {
+            "user_id": self.user_id,
+            "mission_id": self.mission_id
+        }
+        return json.dumps(json_value, default=str)
+        # return f"{{\"user_id\": \"{self.user_id}\", \"mission_id\": \"{self.mission_id}\"}}"
