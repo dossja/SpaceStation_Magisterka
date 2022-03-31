@@ -64,7 +64,6 @@ def update_user(id):
 
     user.name = name
     user.surname = surname
-    user.email = f"{name}.{surname}@firm.com"
     user.position_type_id = position_type_id
     user.manager = bool(manager)
 
