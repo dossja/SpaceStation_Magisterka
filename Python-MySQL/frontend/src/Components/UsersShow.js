@@ -87,7 +87,7 @@ function UsersShow(props) {
         <div>
             <Container maxWidth="s" className="Add-User-Page">
                 <h3>Available Users</h3>
-                <h3>{props.currentUserID}</h3>
+                {/* <h3>{props.currentUserID}</h3> */}
             </Container>
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
@@ -99,7 +99,7 @@ function UsersShow(props) {
                             <TableCell align="right">Email</TableCell>
                             <TableCell align="right">Department</TableCell>
                             <TableCell align="right">Manager</TableCell>
-                            {props.isManager == "True" ? <TableCell align="center">Actions</TableCell> : null}
+                            {props.isManager == true ? <TableCell align="center">Actions</TableCell> : null}
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -112,8 +112,8 @@ function UsersShow(props) {
                                 <TableCell align="right">{users.surname}</TableCell>
                                 <TableCell align="right">{users.email}</TableCell>
                                 <TableCell align="right">{users.position_type}</TableCell>
-                                <TableCell align="right">{users.manager}</TableCell>
-                                {props.isManager == "True" ? <TableCell align="right">
+                                {users.manager == true ? <TableCell align="right">True</TableCell> : <TableCell align="right">False</TableCell>}
+                                {props.isManager == true ? <TableCell align="right">
                                     <Button
                                         variant="contained"
                                         color="primary"
