@@ -1,0 +1,4 @@
+mysql -u root -p
+root
+use space_station;
+source ./docker-entrypoint-initdb.d/initdb.sql;

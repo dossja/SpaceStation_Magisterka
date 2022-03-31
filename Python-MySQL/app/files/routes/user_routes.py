@@ -6,14 +6,6 @@ from flask_login import login_user
 # from . import api
 from .. import db, app
 
-# from ..models.users import User
-# from ..schemas.user import user_schema, users_schema
-
-
-@app.route("/")
-def index():
-    return "<h1>HI2</h1>"
-
 
 @app.route("/users/signup", methods=['POST'])
 def signup_user():

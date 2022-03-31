@@ -36,17 +36,17 @@ def add_mission_crew():
     return jsonify(f"{mission_crew}"), 200
 
 
-@app.route('/missions_crew/mission/<string:id>', methods=['GET'])
+@app.route('/mission_crew/mission/<string:id>', methods=['GET'])
 def get_mission_crew_mission(id):
-    mission_crew = MissionCrew.query.filter_by(mission_id=id)
+    mission_crew = MissionCrew.query.filter_by(mission_id=id).all()
     if mission_crew is not None:
         return jsonify(f"{mission_crew}"), 200
     return jsonify(error="mission_crew not found"), 404
 
 
-@app.route('/missions_crew/user/<string:id>', methods=['GET'])
+@app.route('/mission_crew/user/<string:id>', methods=['GET'])
 def get_mission_crew_user(id):
-    mission_crew = MissionCrew.query.filter_by(user_id=id)
+    mission_crew = MissionCrew.query.filter_by(user_id=id).all()
     if mission_crew is not None:
         return jsonify(f"{mission_crew}"), 200
     return jsonify(error="mission_crew not found"), 404
