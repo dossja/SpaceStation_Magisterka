@@ -34,7 +34,7 @@ namespace ASP.NET.Controllers
         }
 
 
-        // GET: api/Users/1
+        // GET: api/Missions/1/crew
         [HttpGet("{id}/crew")]
         public async Task<ActionResult<IEnumerable<Missions>>> GetMissions(int id)
         {
@@ -53,7 +53,7 @@ namespace ASP.NET.Controllers
             return missions;
         }
 
-        // POST: api/Users
+        // POST: api/Missions/add
         [Route("add")]
         [HttpPost]
         public async Task<ActionResult<Missions>> PostMissions()

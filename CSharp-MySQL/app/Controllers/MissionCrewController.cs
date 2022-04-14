@@ -30,8 +30,8 @@ namespace ASP.NET.Controllers
             return missionCrew;
         }
 
-        // GET api/<IncidentsController>/5
-        [HttpGet("missions/{id}")]
+        // GET api/MissionCrew/mission/5
+        [HttpGet("mission/{id}")]
         public async Task<ActionResult<IEnumerable<MissionCrew>>> GetMissionCrewMission(int id)
         {
             var missionCrews = await _context.MissionCrew
@@ -47,7 +47,7 @@ namespace ASP.NET.Controllers
             return missionCrews;
         }
 
-        // GET api/<IncidentsController>/5
+        // GET api/MissionCrew/user/5
         [HttpGet("user/{id}")]
         public async Task<ActionResult<IEnumerable<MissionCrew>>> GetMissionsCrewUser(int id)
         {
@@ -66,7 +66,7 @@ namespace ASP.NET.Controllers
         }
 
 
-        // POST: api/Users
+        // POST: api/MissionCrew
         [Route("add")]
         [HttpPost]
         public async Task<ActionResult<MissionCrew>> PostMissionCrew(MissionCrew missionCrew)

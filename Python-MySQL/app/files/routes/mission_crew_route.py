@@ -33,7 +33,7 @@ def add_mission_crew():
         db.session.add(mc)
         db.session.commit()
 
-    return jsonify(f"{mission_crew}"), 200
+    return jsonify(f"{mission_crew}"), 201
 
 
 @app.route('/mission_crew/mission/<string:id>', methods=['GET'])

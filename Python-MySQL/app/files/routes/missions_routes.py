@@ -31,4 +31,4 @@ def missions_add():
     db.session.add(m)
     db.session.commit()
 
-    return jsonify(f"{m}"), 200
+    return jsonify(f"{m}"), 201

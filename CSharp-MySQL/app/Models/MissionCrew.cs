@@ -13,6 +13,7 @@ namespace ORM.Models
         public int MissionCrewId { get; set; }
 
         public int UserId { get; set; }
+        [JsonIgnore]
         public Users User { get; set; }
 
         public int MissionId { get; set; }

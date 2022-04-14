@@ -32,7 +32,7 @@ def signup_user():
     db.session.add(u)
     db.session.commit()
 
-    return jsonify(f"{u}"), 200
+    return jsonify(f"{u}"), 201
 
 
 @app.route("/users", methods=["GET"])
@@ -71,7 +71,7 @@ def update_user(id):
     db.session.commit()
 
     if user is not None:
-        return jsonify(f"{user}"), 200
+        return jsonify(f"{user}"), 201
     return jsonify(error="user not updated"), 404
 
 
@@ -86,7 +86,7 @@ def login():
 
     if user is not None:
         # login_user(user, remember=True)
-        return jsonify(f"{user}"), 200
+        return jsonify(f"{user}"), 201
     return jsonify(error="user not found"), 404
 
 

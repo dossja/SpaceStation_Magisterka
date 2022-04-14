@@ -54,7 +54,7 @@ namespace ASP.NET.Controllers
             return users;
         }
 
-        // GET: api/Users/1
+        // GET: api/Users/login
         [Route("login")]
         [HttpPost]
         public async Task<ActionResult<Users>> GetUsersByEmail(Users users)
@@ -75,7 +75,7 @@ namespace ASP.NET.Controllers
             return user;
         }
 
-        // POST: api/Users
+        // POST: api/Users/signup
         [Route("signup")]
         [HttpPost]
         public async Task<ActionResult<Users>> PostUsers(Users users)
@@ -87,8 +87,7 @@ namespace ASP.NET.Controllers
             return CreatedAtAction("PostUsers", new { id = users.Id }, users);
         }
 
-        // PUT: api/Products/5
-/*        [Route("update")]*/
+        // PUT: api/Users/5
         [HttpPut("update/{id}")]
         public async Task<ActionResult<Users>> PutUsers(int id, Users users)
         {
@@ -118,7 +117,7 @@ namespace ASP.NET.Controllers
             return users;
         }
 
-        // DELETE: api/Products/5
+        // DELETE: api/Users/5
         [HttpDelete("delete/{id}")]
         public async Task<ActionResult<Users>> DeleteUsers(int id)
         {

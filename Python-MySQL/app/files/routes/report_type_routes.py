@@ -7,4 +7,4 @@ from files.models.report_type import ReportType
 def get_reports_type():
     report_types = ReportType.query.all()
 
-    return jsonify(f"{{\"reportTypes\" : {report_types}}}"), 200
+    return jsonify(f"{report_types}"), 200

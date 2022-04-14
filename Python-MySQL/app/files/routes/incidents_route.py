@@ -29,7 +29,7 @@ def add_incidents():
     db.session.add(i)
     db.session.commit()
 
-    return jsonify(f"{i}"), 200
+    return jsonify(f"{i}"), 201
 
 
 @app.route('/incidents/report/<string:id>', methods=['GET'])

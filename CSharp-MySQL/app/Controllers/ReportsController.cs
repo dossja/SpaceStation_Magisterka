@@ -36,7 +36,7 @@ namespace ASP.NET.Controllers
             return reports;
         }
 
-        // GET: api/Users/1
+        // GET: api/Reports/1
         [HttpGet("{id}")]
         public async Task<ActionResult<Reports>> GetReports(int id)
         {
@@ -57,7 +57,7 @@ namespace ASP.NET.Controllers
             return reports;
         }
 
-        // POST: api/Users
+        // POST: api/Reports/add
         [Route("add")]
         [HttpPost]
         public async Task<ActionResult<Reports>> PostReports(Reports reports)
@@ -69,6 +69,7 @@ namespace ASP.NET.Controllers
             return CreatedAtAction("PostReports", new { id = reports.Id }, reports);
         }
 
+        // PUT: api/Reports/update/1
         [HttpPut("update/{id}")]
         public async Task<ActionResult<Reports>> PutReports(int id, Reports reports)
         {

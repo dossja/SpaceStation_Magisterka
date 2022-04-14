@@ -47,7 +47,7 @@ def add_report():
     db.session.add(r)
     db.session.commit()
 
-    return jsonify(f"{r}"), 200
+    return jsonify(f"{r}"), 201
 
 
 @app.route('/reports/update/<string:id>', methods=['PUT'])
@@ -74,5 +74,5 @@ def update_report(id):
     db.session.commit()
 
     if r is not None:
-        return jsonify(f"{r}"), 200
+        return jsonify(f"{r}"), 201
     return jsonify(error="report not updated"), 404

@@ -41,6 +41,7 @@ services:
         image: mysql:8.0.19
         restart: always
         volumes:
+            - ./mysql:/docker-entrypoint-initdb.d
             - db-data:/var/lib/mysql
         environment: 
             MYSQL_DATABASE: "space_station_CSharp"

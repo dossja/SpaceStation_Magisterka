@@ -31,8 +31,8 @@ namespace ASP.NET.Controllers
             return incidents;
         }
 
-        // GET api/<IncidentsController>/5
-        [HttpGet("{id}")]
+        // GET api/IncidentsController/report/5
+        [HttpGet("report/{id}")]
         public async Task<ActionResult<IEnumerable<Incidents>>> GetIncidents(int id)
         {
             var incidents = await _context.Incidents
@@ -47,7 +47,7 @@ namespace ASP.NET.Controllers
         }
 
 
-        // POST: api/Users
+        // POST: api/IncidentsController/add
         [Route("add")]
         [HttpPost]
         public async Task<ActionResult<Incidents>> PostIncidents(Incidents incidents)
