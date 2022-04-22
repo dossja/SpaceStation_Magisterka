@@ -6,6 +6,169 @@
 	},
 	"item": [
 		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "All Reports",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/reports",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One Report",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/reports/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reports",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Report",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const id = pm.response.json().id;\r",
+									"\r",
+									"pm.collectionVariables.set(\"reportId\", id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Something is no yes\",\r\n    \"description\": \"Very not yes\",\r\n    \"reportingUserId\": 1,\r\n    \"reportTypeId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/reports/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reports",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Report",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{reportId}},\r\n    \"title\": \"Something is no yes\",\r\n    \"submitDate\": \"2022-04-07T18:13:35\",\r\n    \"endDate\": \"0001-01-01T00:00:00\",\r\n    \"description\": \"Very not yes!!\",\r\n    \"reportTypeId\": 1,\r\n    \"reportType\": null,\r\n    \"reportStatusId\": 1,\r\n    \"reportStatus\": null,\r\n    \"reportingUserId\": 1,\r\n    \"incidents\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/reports/update/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reports",
+								"update",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{reportId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Incidents",
 			"item": [
 				{
@@ -83,8 +246,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -96,7 +259,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"reportId\": 4,\r\n    \"operatingUserId\": 1\r\n}",
+							"raw": "{\r\n    \"reportId\": {{reportId}},\r\n    \"userId\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -488,165 +651,6 @@
 			]
 		},
 		{
-			"name": "Reports",
-			"item": [
-				{
-					"name": "All Reports",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/reports",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"reports"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "One Report",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/reports/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"reports",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Add Report",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 201\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Something is no yes\",\r\n    \"description\": \"Very not yes\",\r\n    \"reportingUserId\": 1,\r\n    \"reportTypeId\": 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/reports/add",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"reports",
-								"add"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Report",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": 5,\r\n    \"title\": \"Something is no yes\",\r\n    \"submitDate\": \"2022-04-07T18:13:35\",\r\n    \"endDate\": \"0001-01-01T00:00:00\",\r\n    \"description\": \"Very not yes!!\",\r\n    \"reportTypeId\": 1,\r\n    \"reportType\": null,\r\n    \"reportStatusId\": 1,\r\n    \"reportStatus\": null,\r\n    \"reportingUserId\": 1,\r\n    \"incidents\": null\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/reports/update/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"reports",
-								"update",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "5"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Users",
 			"item": [
 				{
@@ -736,7 +740,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Some\",\r\n    \"surname\": \"Guy\",\r\n    \"position_type_id\": 1,\r\n    \"manager\": true\r\n}",
+							"raw": "{\r\n    \"name\": \"Some\",\r\n    \"surname\": \"Guy\",\r\n    \"positionTypeId\": 1,\r\n    \"manager\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -765,7 +769,13 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
-									"});"
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"const id = pm.response.json().id;\r",
+									"\r",
+									"pm.collectionVariables.set(\"userId\", id);"
 								],
 								"type": "text/javascript"
 							}
@@ -805,7 +815,8 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
-									"});"
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -816,7 +827,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 20,\r\n    \"name\": \"Some\",\r\n    \"surname\": \"Guy\",\r\n    \"email\": \"Some.Guy2@firm.com\",\r\n    \"manager\": true,\r\n    \"positionTypeId\": 1,\r\n        \"positionType\": {\r\n        \"id\": 1,\r\n        \"name\": \"HR\"\r\n    },\r\n    \"incidents\": null\r\n}",
+							"raw": "{\r\n    \"id\": {{userId}},\r\n    \"name\": \"Some\",\r\n    \"surname\": \"Guy\",\r\n    \"email\": \"Some.Guy2@firm.com\",\r\n    \"manager\": true,\r\n    \"positionTypeId\": 1,\r\n        \"positionType\": {\r\n        \"id\": 1,\r\n        \"name\": \"HR\"\r\n    },\r\n    \"incidents\": null\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -836,7 +847,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "20"
+									"value": "{{userId}}"
 								}
 							]
 						}
@@ -874,7 +885,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "20"
+									"value": "{{userId}}"
 								}
 							]
 						}
@@ -882,6 +893,16 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"variable": [
+		{
+			"key": "reportId",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": ""
 		}
 	]
 }

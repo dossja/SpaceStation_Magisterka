@@ -48,6 +48,7 @@ class Report(db.Model):
             "operating_user_id": operating_user_id,
             "operating_user": operating_user
         }
+
         return json.dumps(json_value, default=str)
 
         # return f"{{\"id\": \"{self.id}\", \"description\": \"{self.description}\", \"submit_date\": \"{self.submit_date}\", \"end_date\": \"{end_date}\", \"title\": \"{self.title}\", \"reporting_user_id\": \"{self.reporting_user_id}\", \"reporting_user\": \"{self.reporting_user.name} {self.reporting_user.surname}\",\"report_status_id\": \"{self.report_status_id}\", \"report_status\": \"{self.report_status.description}\", \"report_type_id\": \"{self.report_type_id}\", \"report_type\": \"{self.report_type.description}\", {operating_user}}}"

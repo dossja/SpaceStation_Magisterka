@@ -2,6 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, abort, jso
 from files import app, db
 from files.models.users import User
 from flask_login import login_user
+import json
 
 # from . import api
 from .. import db, app
@@ -45,7 +46,6 @@ def get_users():
 @app.route('/users/<string:id>', methods=['GET'])
 def get_user(id):
     user = User.query.get(id)
-
     if user is not None:
         return jsonify(f"{user}"), 200
     return jsonify(error="user not found"), 404

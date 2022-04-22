@@ -22,14 +22,15 @@ class User(db.Model):
 
     def __repr__(self):
         json_value = {
-            "id": self.id,
-            "name": self.name,
-            "surname": self.surname,
-            "email": self.email,
-            "position_type_id": self.position_type_id,
-            "position_type": self.position_type.name,
-            "manager": self.manager
+            'id': self.id,
+            'name': self.name,
+            'surname': self.surname,
+            'email': self.email,
+            'position_type_id': self.position_type_id,
+            'position_type': self.position_type.name,
+            'manager': self.manager
         }
-        return json.dumps(json_value, default=str)
+        return f"{json_value}"
+        # return json.dumps(json_value, default=str)
 
-        # return f"{{\"id\": \"{self.id}\", \"name\": \"{self.name}\", \"surname\": \"{self.surname}\", \"email\": \"{self.email}\", \"position_type_id\": \"{self.position_type_id}\", \"position_type\": \"{self.position_type.name}\", \"manager\": \"{self.manager}\"}}"
+    # return f"{{\"id\": \"{self.id}\", \"name\": \"{self.name}\", \"surname\": \"{self.surname}\", \"email\": \"{self.email}\", \"position_type_id\": \"{self.position_type_id}\", \"position_type\": \"{self.position_type.name}\", \"manager\": \"{self.manager}\"}}"
