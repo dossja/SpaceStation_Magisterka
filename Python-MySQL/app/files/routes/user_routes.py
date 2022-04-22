@@ -47,7 +47,7 @@ def get_users():
 def get_user(id):
     user = User.query.get(id)
     if user is not None:
-        return jsonify(f"{user}"), 200
+        return jsonify(user.output()), 200
     return jsonify(error="user not found"), 404
 
 
@@ -86,7 +86,7 @@ def login():
 
     if user is not None:
         # login_user(user, remember=True)
-        return jsonify(f"{user}"), 201
+        return jsonify(user.output()), 201
     return jsonify(error="user not found"), 404
 
 

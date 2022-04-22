@@ -33,4 +33,15 @@ class User(db.Model):
         return f"{json_value}"
         # return json.dumps(json_value, default=str)
 
+    def output(self):
+
+        return {
+            'id': self.id,
+            'name': self.name,
+            'surname': self.surname,
+            'email': self.email,
+            'position_type_id': self.position_type_id,
+            'position_type': self.position_type.name,
+            'manager': self.manager
+        }
     # return f"{{\"id\": \"{self.id}\", \"name\": \"{self.name}\", \"surname\": \"{self.surname}\", \"email\": \"{self.email}\", \"position_type_id\": \"{self.position_type_id}\", \"position_type\": \"{self.position_type.name}\", \"manager\": \"{self.manager}\"}}"

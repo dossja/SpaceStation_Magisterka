@@ -47,7 +47,7 @@ def add_report():
     db.session.add(r)
     db.session.commit()
 
-    return jsonify(f"{r}"), 201
+    return jsonify(r.output()), 201
 
 
 @app.route('/reports/update/<string:id>', methods=['PUT'])

@@ -771,8 +771,6 @@
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
-									"\r",
-									"\r",
 									"const id = pm.response.json().id;\r",
 									"\r",
 									"pm.collectionVariables.set(\"userId\", id);"
