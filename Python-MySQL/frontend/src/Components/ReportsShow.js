@@ -51,7 +51,6 @@ function ReportsShow(props) {
         if (aktualizuj) {
             getReports();
         }
-
     }, [aktualizuj]);
 
 

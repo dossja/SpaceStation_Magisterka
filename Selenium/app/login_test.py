@@ -12,4 +12,3 @@ def test_succesful_login(driver):
     singIn_btn = driver.find_element(
         By.XPATH, """//*[@id="root"]/div/header/div/div/div/div[2]/button/span[1]""")
     singIn_btn.click()
-    sleep(10)

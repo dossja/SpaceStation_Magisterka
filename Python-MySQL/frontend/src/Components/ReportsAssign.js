@@ -81,6 +81,8 @@ function ReportsAssign(props) {
     const getUsers = () => {
         uAPI.get()
             .then(response => {
+                console.log(response.data);
+
                 let userss = [];
                 for (let i in response.data) {
                     userss.push({ 'id': response.data[i].id, 'name': response.data[i].name + ' ' + response.data[i].surname });

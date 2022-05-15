@@ -30,8 +30,8 @@ class User(db.Model):
             'position_type': self.position_type.name,
             'manager': self.manager
         }
-        return f"{json_value}"
-        # return json.dumps(json_value, default=str)
+
+        return json.dumps(json_value, default=str)
 
     def output(self):
 

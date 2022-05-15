@@ -24,7 +24,7 @@ function Login(props) {
             .then(response => {
                 console.log(response.data);
                 console.log(response.status);
-                if (response.status == 200) {
+                if (response.status == 201) {
                     props.setCurrentUserID(response.data.id);
                     props.setIsManager(response.data.manager);
                 }
