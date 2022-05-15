@@ -1,0 +1,39 @@
+# version: '3.8'
+
+# services:
+#   seleniumhub:
+#     image: selenium/hub
+#     ports:
+#       - 4444:4444
+
+#   firefoxnode:
+#     image: selenium/node-firefox
+#     ports:
+#       - 4577
+#     links:
+#       - seleniumhub:hub
+
+#   chromenode:
+#     image: selenium/node-chrome
+#     ports:
+#       - 4578
+#     links:
+#       - seleniumhub:hub
+
+version: '3.7'
+
+services:
+  selenium:
+    image: selenium/standalone-chrome
+    ports:
+      - 4444:4444
+    restart: always
+
+  selenium-app:
+    build:
+      context: .
+    volumes:
+      - ./app:/app
+    command: sh -c "python3 bot.py"
+    depends_on:
+      - selenium
