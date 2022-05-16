@@ -17,9 +17,9 @@ function Reports(props) {
                 {/* <h3>{props.currentUserID}</h3> */}
                 <Router >
                     <div>
-                        <Button variant="contained" ><Link to="/reports/add" className="Category-link">Add Report</Link></Button>
+                        <Button variant="contained" ><Link to="/reports/add" className="Category-link" id="addReports">Add Report</Link></Button>
                         <div class="divider" />
-                        <Button variant="contained" ><Link to="/reports/show" className="Category-link">Show Reports</Link></Button>
+                        <Button variant="contained" ><Link to="/reports/show" className="Category-link" id="showReports">Show Reports</Link></Button>
                         <Switch className="Nav-Route">
                             <Route exact path="/reports/add" className="Nav-Route"><ReportsAdd currentUserID={props.currentUserID} /></Route>
                             <Route exact path="/reports/show" className="Nav-Route"><ReportsShow currentUserID={props.currentUserID} isManager={props.isManager} /></Route>

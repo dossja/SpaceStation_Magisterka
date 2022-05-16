@@ -14,12 +14,12 @@ function Missions(props) {
                 <Router >
                     <div>
                         {props.isManager == true ?
-                            <Button variant="contained" ><Link to="/missions/add" className="Category-link">Add Mission</Link></Button>
+                            <Button variant="contained" ><Link to="/missions/add" className="Category-link" id="addMission">Add Mission</Link></Button>
                             : null}
                         {props.isManager == true ?
                             <div class="divider" />
                             : null}
-                        <Button variant="contained" ><Link to="/missions/show" className="Category-link">Show Missions</Link></Button>
+                        <Button variant="contained" ><Link to="/missions/show" className="Category-link" id="showMissions">Show Missions</Link></Button>
                         <Switch className="Nav-Route">
                             <Route exact path="/missions/add" className="Nav-Route"><MissionsAdd currentUserID={props.currentUserID} /></Route>
                             <Route exact path="/missions/show" className="Nav-Route"><MissionsShow currentUserID={props.currentUserID} isManager={props.isManager} /></Route>

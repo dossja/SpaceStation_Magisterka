@@ -20,12 +20,12 @@ function Users(props) {
                 <Router >
                     <div>
                         {props.isManager == true ?
-                            <Button variant="contained" ><Link to="/users/add" className="Category-link">Add User</Link></Button>
+                            <Button variant="contained" ><Link to="/users/add" className="Category-link" id="addUser">Add User</Link></Button>
                             : null}
                         {props.isManager == true ?
                             <div class="divider" />
                             : null}
-                        <Button variant="contained" ><Link to="/users/show" className="Category-link">Show Users</Link></Button>
+                        <Button variant="contained" ><Link to="/users/show" className="Category-link" id="showUsers">Show Users</Link></Button>
                         <Switch className="Nav-Route">
                             <Route exact path="/users/add" className="Nav-Route"><UsersAdd currentUserID={props.currentUserID} /></Route>
                             <Route exact path="/users/show" className="Nav-Route"><UsersShow currentUserID={props.currentUserID} isManager={props.isManager} /></Route>
