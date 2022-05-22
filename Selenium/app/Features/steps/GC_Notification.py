@@ -50,6 +50,26 @@ def step_impl(context, id):
     context.space_station.click_dropdownUser(id)
 
 
+@then(u'Clicks assign user')
+def step_impl(context):
+    context.space_station.click_assignUser()
+
+
+@then(u'Clicks add reports')
+def step_impl(context):
+    context.space_station.click_addReports()
+
+
+@then(u'Insert report: "{title}" "{description}" {type}')
+def step_impl(context, title, description, type):
+    context.space_station.insertReportData(title, description, type)
+
+
+@then(u'Clicks add report')
+def step_impl(context):
+    context.space_station.click_addReport()
+
+
 @then(u'wait: {sec}')
 def step_impl(context, sec):
     time.sleep(int(sec))

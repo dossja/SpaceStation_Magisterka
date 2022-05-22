@@ -58,7 +58,8 @@ function ReportsAdd(props) {
     const getReportTypeAPI = () => {
         rtAPI.get()
             .then(response => {
-                setReportType(response.data.reportTypes);
+                setReportType(response.data);
+                console.log(response.data)
             })
             .catch(e => {
                 console.log(e);
@@ -82,14 +83,13 @@ function ReportsAdd(props) {
         <div>
             <Container maxWidth="s" className="Add-User-Page">
                 <h2>Add Report</h2>
-                <h3>{props.currentUserID}</h3>
                 <Grid container
                     direction="column"
                     // justifyContent="center"
                     alignItems="left">
                     <FormControl className={classes.formControl}>
                         <TextField
-                            id="name"
+                            id="title"
                             label="Title"
                             value={values.title}
                             placeholder="Problems with heating"
@@ -111,7 +111,7 @@ function ReportsAdd(props) {
                         <InputLabel id="demo-simple-select-label" required>Report type</InputLabel>
                         <Select labelId="report_type" label="Report Type" id="select" onChange={handleChange('report_type')}>
                             {reportType.map(reportType => (
-                                <MenuItem value={reportType.id} >{reportType.description}</MenuItem>
+                                <MenuItem id={reportType.id} value={reportType.id} >{reportType.description}</MenuItem>
                             ))}
                         </Select>
                     </FormControl>
