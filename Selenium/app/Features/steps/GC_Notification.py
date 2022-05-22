@@ -70,6 +70,26 @@ def step_impl(context):
     context.space_station.click_addReport()
 
 
+@then(u'Clicks finish: {id}')
+def step_impl(context, id):
+    context.space_station.click_finishReports(id)
+
+
+@then(u'Clicks cancel: {id}')
+def step_impl(context, id):
+    context.space_station.click_cancelReports(id)
+
+
+@then(u'Checks btn text: {id} "{value}"')
+def step_impl(context, id, value):
+    context.space_station.checks_btnText(id, value)
+
+
+@then(u'Checks label text: {id} "{value}"')
+def step_impl(context, id, value):
+    context.space_station.checks_labelText(id, value)
+
+
 @then(u'wait: {sec}')
 def step_impl(context, sec):
     time.sleep(int(sec))

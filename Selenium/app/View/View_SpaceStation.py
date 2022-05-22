@@ -11,7 +11,7 @@ import time
 class SpaceStation:
     driver = None
     """
-    
+
     """
 
     email_field_xpath = '//input[contains(@id, "email")]'
@@ -71,11 +71,15 @@ class SpaceStation:
         self.dropdownUser_btn = WebDriverWait(self.driver, 20).until(
             EC.visibility_of_element_located((By.XPATH, self.dropdownUser_btn_xpath)))
         self.dropdownUser_btn.click()
+        WebDriverWait(self.driver, 20).until(
+            EC.invisibility_of_element_located((By.XPATH, '//*[@id="1"]')))
 
     def click_assignUser(self):
         self.assignUser_btn = WebDriverWait(self.driver, 20).until(
-            EC.element_to_be_clickable((By.XPATH, self.assignUser_btn_xpath)))
+            EC.visibility_of_element_located((By.XPATH, self.assignUser_btn_xpath)))
         self.assignUser_btn.click()
+        WebDriverWait(self.driver, 20).until(
+            EC.invisibility_of_element_located((By.XPATH, self.assignUser_btn_xpath)))
 
     def click_addReports(self):
         self.addReports_btn = WebDriverWait(self.driver, 20).until(
@@ -102,3 +106,43 @@ class SpaceStation:
         self.addReport_btn = WebDriverWait(self.driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, self.addReport_btn_xpath)))
         self.addReport_btn.click()
+
+    def click_finishReports(self, id):
+        self.finishReports_btn_xpath = '//*[@id="root"]/div/header/div/div/div[3]/div/div/div[2]/div[2]/table/tbody/tr[' + \
+            id + ']/td[7]/button[1]/span[1]'
+        self.finishReports_btn = WebDriverWait(self.driver, 20).until(
+            EC.element_to_be_clickable((By.XPATH, self.finishReports_btn_xpath)))
+        self.finishReports_btn.click()
+
+    def click_cancelReports(self, id):
+        self.cancelReports_btn_xpath = '//*[@id="root"]/div/header/div/div/div[3]/div/div/div[2]/div[2]/table/tbody/tr[' + \
+            id + ']/td[7]/button[2]/span[1]'
+        self.cancelReports_btn = WebDriverWait(self.driver, 20).until(
+            EC.element_to_be_clickable((By.XPATH, self.cancelReports_btn_xpath)))
+        self.cancelReports_btn.click()
+
+    def checks_btnText(self, id, value):
+        try:
+            self.text_btn_xpath = '//*[@id="root"]/div/header/div/div/div[3]/div/div/div[2]/div[2]/table/tbody/tr[' + \
+                id + ']/td[7]/button[1]/span[1]'
+            self.text_btn = WebDriverWait(self.driver, 20).until(
+                EC.visibility_of_element_located((By.XPATH, self.text_btn_xpath)))
+            print(value)
+            print(self.text_btn.text)
+            assert self.text_btn.text == value
+        except:
+            self.text_btn_xpath = '//*[@id="root"]/div/header/div/div/div[3]/div/div/div[2]/div[2]/table/tbody/tr[' + \
+                id + ']/td[7]/button[1]/span[1]'
+            self.text_btn = WebDriverWait(self.driver, 20).until(
+                EC.visibility_of_element_located((By.XPATH, self.text_btn_xpath)))
+            print(value)
+            print(self.text_btn.text)
+            assert self.text_btn.text == value
+
+    def checks_labelText(self, id, value):
+        self.text_label_xpath = ' //*[@id="root"]/div/header/div/div/div[3]/div/div/div[2]/div[2]/table/tbody/tr[' + \
+            id + ']/td[7]/p'
+        self.text_label = WebDriverWait(self.driver, 20).until(
+            EC.visibility_of_element_located((By.XPATH, self.text_label_xpath)))
+
+        assert self.text_label.text == value
