@@ -18,7 +18,7 @@ import missionsAPI from "../Axios/missionsAPI.js";
 const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(1),
-        minWidth: 120,
+        minWidth: 140,
     },
     selectEmpty: {
         marginTop: theme.spacing(2),
@@ -105,7 +105,7 @@ function MissionCrewShow(props) {
                                     <TableCell align="right">{users.surname}</TableCell>
                                     <TableCell align="right">{users.email}</TableCell>
                                     <TableCell align="right">{users.position_type}</TableCell>
-                                    <TableCell align="right">{users.manager}</TableCell>
+                                    {users.manager == true ? <TableCell align="right">True</TableCell> : <TableCell align="right">False</TableCell>}
                                 </TableRow>
                             ))}
                         </TableBody>

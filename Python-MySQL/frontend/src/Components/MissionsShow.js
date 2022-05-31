@@ -88,7 +88,7 @@ function MissionsShow(props) {
                                 </TableCell>
                                 <TableCell align="right">{missions.start_date}</TableCell>
                                 <TableCell align="right">{missions.end_date}</TableCell>
-                                {props.isManager == "True" && missions.crew == "False" ? <TableCell align="right">
+                                {props.isManager == true && missions.crew == false ? <TableCell align="right">
                                     <Button
                                         variant="contained"
                                         color="primary"

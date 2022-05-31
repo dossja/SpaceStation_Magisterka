@@ -24,7 +24,8 @@ import missionCrewAPI from "../Axios/missionCrewAPI.js";
 const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(1),
-        minWidth: 120,
+        minWidth: 140,
+        scrollable: 'true'
     },
     selectEmpty: {
         marginTop: theme.spacing(2),
@@ -32,11 +33,13 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
         width: 400,
+        height: 500,
         backgroundColor: theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
-        "text-align": "center"
+        "text-align": "center",
+        overflow: 'auto'
     },
 }));
 
