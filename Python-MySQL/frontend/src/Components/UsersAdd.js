@@ -108,7 +108,7 @@ function UsersAdd() {
                         <InputLabel id="demo-simple-select-label" required>Position</InputLabel>
                         <Select labelId="position" label="Position" id="select" onChange={handleChange('position')}>
                             {positionType.map(positionType => (
-                                <MenuItem value={positionType.id} >{positionType.name}</MenuItem>
+                                <MenuItem id={positionType.id} value={positionType.id} >{positionType.name}</MenuItem>
                             ))}
                         </Select>
                     </FormControl>
