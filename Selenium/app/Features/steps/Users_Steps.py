@@ -30,3 +30,28 @@ def step_impl(context, name, surname, position, manager):
 @then(u'Clicks add user')
 def step_impl(context):
     context.users.click_addUser()
+
+
+@then(u'Clicks show users')
+def step_impl(context):
+    context.users.click_showUsers()
+
+
+@then(u'Clicks delete: {id}')
+def step_impl(context, id):
+    context.users.click_deleteUser(id)
+
+
+@then(u'Clicks edit: {id}')
+def step_impl(context, id):
+    context.users.click_editUser(id)
+
+
+@then(u'Change user: "{name}" "{surname}" "{email}" {position} {manager}')
+def step_impl(context, name, surname, email, position, manager):
+    context.users.changeUserData(name, surname, email, position, manager)
+
+
+@then(u'Clicks modify user')
+def step_impl(context):
+    context.users.click_modifyUser()
