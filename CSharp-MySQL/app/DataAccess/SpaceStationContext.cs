@@ -47,10 +47,22 @@ namespace ORM.DataAccess
                     new ReportType { Id = 3, Description = "medical" }
             );
 
-/*            modelBuilder.Entity<Reports>().ToTable(nameof(Incidents))
-                .HasMany(c => c.Incidents)
-                .WithMany(i => i.User);
-            modelBuilder.Entity<MissionCrew>().HasKey(mis => new { mis.UserId, mis.MissionId});*/
+            modelBuilder.Entity<Incidents>()
+                .HasKey(i => new { i.UserId, i.ReportId });
+
+            modelBuilder.Entity<Incidents>()
+                .HasOne(i => i.User)
+                .WithMany(u => u.Incidents)
+                .HasForeignKey(i => i.UserId);
+            modelBuilder.Entity<Incidents>()
+                .HasOne(i => i.Report)
+                .WithMany(r => r.Incidents)
+                .HasForeignKey(i => i.ReportId);
+
+            /*            modelBuilder.Entity<Reports>().ToTable(nameof(Incidents))
+                            .HasMany(c => c.Incidents)
+                            .WithMany(i => i.User);
+                        modelBuilder.Entity<MissionCrew>().HasKey(mis => new { mis.UserId, mis.MissionId});*/
         }
     }
 }

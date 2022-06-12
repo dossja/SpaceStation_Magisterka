@@ -9,13 +9,14 @@ namespace ORM.Models
 {
     public class Incidents
     {
-        [Key]
-        public int IncidentId { get; set; }
+/*        [Key]
+        public int IncidentId { get; set; }*/
 
         public int UserId { get; set; }
         [JsonIgnore]
         public Users User { get; set; }
 
+        [Index(IsUnique = true)]
         public int ReportId { get; set; }
         [JsonIgnore]
         public Reports Report { get; set; }

@@ -4,7 +4,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace app.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class MyFirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -121,7 +121,7 @@ namespace app.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.ComputedColumn),
                     EndDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     Description = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
-                    ReportTypeId = table.Column<int>(type: "int", nullable: false),
+                    ReportTypeId = table.Column<int>(type: "int", nullable: true),
                     ReportStatusId = table.Column<int>(type: "int", nullable: false),
                     ReportingUserId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -139,7 +139,7 @@ namespace app.Migrations
                         column: x => x.ReportTypeId,
                         principalTable: "Report_Type",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Reports_Users_ReportingUserId",
                         column: x => x.ReportingUserId,
@@ -152,14 +152,12 @@ namespace app.Migrations
                 name: "Incidents",
                 columns: table => new
                 {
-                    IncidentId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     ReportId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Incidents", x => x.IncidentId);
+                    table.PrimaryKey("PK_Incidents", x => new { x.UserId, x.ReportId });
                     table.ForeignKey(
                         name: "FK_Incidents_Reports_ReportId",
                         column: x => x.ReportId,
@@ -213,11 +211,6 @@ namespace app.Migrations
                 name: "IX_Incidents_ReportId",
                 table: "Incidents",
                 column: "ReportId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Incidents_UserId",
-                table: "Incidents",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MissionCrew_MissionId",

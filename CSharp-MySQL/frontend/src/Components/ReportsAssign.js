@@ -141,7 +141,7 @@ function ReportsAssign(props) {
                             <InputLabel id="demo-simple-select-label" required>User</InputLabel>
                             <Select labelId="position" label="Position" id="select" onChange={handleChange('operating_user_id')}>
                                 {users.map(users => (
-                                    <MenuItem value={users.id} >{users.name}</MenuItem>
+                                    <MenuItem id={users.id} value={users.id} >{users.name}</MenuItem>
                                 ))}
                             </Select>
                         </FormControl>

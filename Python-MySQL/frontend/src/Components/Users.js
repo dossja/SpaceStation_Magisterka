@@ -15,8 +15,6 @@ function Users(props) {
         <div>
             <Container maxWidth="s" className="Add-User-Page">
                 <h2>Users</h2>
-                {/* <h3>{props.currentUserID}</h3> */}
-                {/* <h3>{props.isManager}</h3> */}
                 <Router >
                     <div>
                         {props.isManager == true ?

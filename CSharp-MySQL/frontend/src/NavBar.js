@@ -15,11 +15,11 @@ function NavBar(props) {
     return (
         <Router className="Nav-Bar">
             <div className="Nav-div">
-                <Button variant="contained" color="secondary" className="Nav-Button"><Link to="/reports" className="Nav-link">Reports</Link></Button>
+                <Button variant="contained" color="secondary" className="Nav-Button"><Link to="/reports" className="Nav-link" id="reportsLink">Reports</Link></Button>
                 <div class="divider" />
-                <Button variant="contained" color="secondary" className="Nav-Button"><Link to="/missions" className="Nav-link">Missions</Link></Button>
+                <Button variant="contained" color="secondary" className="Nav-Button"><Link to="/missions" className="Nav-link" id="missionsLink">Missions</Link></Button>
                 <div class="divider" />
-                <Button variant="contained" color="secondary" className="Nav-Button"><Link to="/users" className="Nav-link">Users</Link></Button>
+                <Button variant="contained" color="secondary" className="Nav-Button"><Link to="/users" className="Nav-link" id="usersLink">Users</Link></Button>
                 <Switch className="Nav-Route">
                     <Route exact path="/" className="Nav-Route" component={HomePage} />
                     <Route exact path="/reports" className="Nav-Route"><Reports currentUserID={props.currentUserID} isManager={props.isManager} /></Route>

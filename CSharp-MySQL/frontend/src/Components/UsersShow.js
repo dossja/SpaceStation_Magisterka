@@ -87,7 +87,6 @@ function UsersShow(props) {
         <div>
             <Container maxWidth="s" className="Add-User-Page">
                 <h3>Available Users</h3>
-                <h3>{props.currentUserID}</h3>
             </Container>
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">

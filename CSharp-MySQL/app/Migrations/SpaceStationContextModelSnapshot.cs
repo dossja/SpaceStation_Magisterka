@@ -19,21 +19,15 @@ namespace app.Migrations
 
             modelBuilder.Entity("ORM.Models.Incidents", b =>
                 {
-                    b.Property<int>("IncidentId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<int>("ReportId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("IncidentId");
+                    b.HasKey("UserId", "ReportId");
 
                     b.HasIndex("ReportId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Incidents");
                 });
@@ -217,7 +211,7 @@ namespace app.Migrations
                     b.Property<int>("ReportStatusId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReportTypeId")
+                    b.Property<int?>("ReportTypeId")
                         .HasColumnType("int");
 
                     b.Property<int>("ReportingUserId")
@@ -324,9 +318,7 @@ namespace app.Migrations
 
                     b.HasOne("ORM.Models.ReportType", "ReportType")
                         .WithMany()
-                        .HasForeignKey("ReportTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ReportTypeId");
 
                     b.HasOne("ORM.Models.Users", "ReportingUser")
                         .WithMany()

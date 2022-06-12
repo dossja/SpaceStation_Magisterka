@@ -25,7 +25,7 @@ namespace ORM.Models
         public string Description { get; set; }
 
         [ForeignKey("ReportType")]
-        public int ReportTypeId { get; set; }
+        public int? ReportTypeId { get; set; }
         public ReportType ReportType { get; set; }
 
         [ForeignKey("ReportStatus")]
@@ -36,6 +36,11 @@ namespace ORM.Models
         public int ReportingUserId { get; set; }
         [JsonIgnore]
         public Users ReportingUser { get; set; }
+/*
+        [ForeignKey("Users")]
+        public int OperatingUserId { get; set; }
+        [JsonIgnore]
+        public virtual Users OperatingUser { get; set; }*/
 
         public ICollection<Incidents> Incidents { get; set; }
     }
