@@ -139,7 +139,7 @@ function ReportsAssign(props) {
                         alignItems="left">
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-simple-select-label" required>User</InputLabel>
-                            <Select labelId="position" label="Position" id="select" onChange={handleChange('operating_user_id')}>
+                            <Select labelId="position" label="Position" id="selectUser" onChange={handleChange('operating_user_id')}>
                                 {users.map(users => (
                                     <MenuItem id={users.id} value={users.id} >{users.name}</MenuItem>
                                 ))}

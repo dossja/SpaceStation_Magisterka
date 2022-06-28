@@ -59,6 +59,16 @@ function ReportsShow(props) {
         rAPI.get()
             .then(response => {
                 console.log(response.data);
+                let tmp_rep = response.data;
+                tmp_rep.forEach(rep => {
+                    if (rep.incidents.length > 0)
+                        rep.operatingUserId = rep.incidents[0].userId;
+
+                    else
+                        rep.operatingUserId = null;
+                    console.log(rep);
+                })
+
                 setReports(response.data);
             })
             .catch(e => {
@@ -138,7 +148,7 @@ function ReportsShow(props) {
                                         Assign
                                     </Button> : null}
                                     {/* && reports. == props.currentUserID */}
-                                    {reports.reportStatusId === 2 && reports.incidents[0].userId == props.currentUserID ? <Button
+                                    {reports.reportStatusId === 2 && reports.operatingUserId == props.currentUserID ? <Button
                                         variant="contained"
                                         color="success"
                                         onClick={() => {
@@ -148,7 +158,7 @@ function ReportsShow(props) {
                                         In progress
                                     </Button> : null}
                                     {/* && reports.operating_user_id != props.currentUserID  */}
-                                    {reports.reportStatusId === 2 && reports.incidents[0].userId != props.currentUserID ? <Button
+                                    {reports.reportStatusId === 2 && reports.operatingUserId != props.currentUserID ? <Button
                                         variant="contained"
                                         color="success"
                                         disabled
@@ -159,7 +169,7 @@ function ReportsShow(props) {
                                         In progress
                                     </Button> : null}
                                     {/* && reports.operating_user_id == props.currentUserID  */}
-                                    {reports.reportStatusId === 3 && reports.incidents[0].userId == props.currentUserID ? <Button
+                                    {reports.reportStatusId === 3 && reports.operatingUserId == props.currentUserID ? <Button
                                         variant="contained"
                                         color="success"
                                         onClick={() => {
@@ -169,7 +179,7 @@ function ReportsShow(props) {
                                         Finished
                                     </Button> : null}
                                     {/* && reports.operating_user_id != props.currentUserID  */}
-                                    {reports.reportStatusId === 3 && reports.incidents[0].userId != props.currentUserID ? <Button
+                                    {reports.reportStatusId === 3 && reports.operatingUserId != props.currentUserID ? <Button
                                         variant="contained"
                                         color="success"
                                         disabled
@@ -180,7 +190,7 @@ function ReportsShow(props) {
                                         Finished
                                     </Button> : null}
                                     {/* && (reports.operating_user_id == props.currentUserID || props.isManager == "True")  */}
-                                    {reports.reportStatusId !== 4 && reports.reportStatusId !== 5 && (reports.incidents[0].userId == props.currentUserID || props.isManager == true) ? <Button
+                                    {reports.reportStatusId !== 4 && reports.reportStatusId !== 5 && (reports.operatingUserId == props.currentUserID || props.isManager == true) ? <Button
                                         variant="contained"
                                         color="primary"
                                         className={classes.btnCancel}
