@@ -28,3 +28,9 @@ def step_impl(context):
 @then(u'wait: {sec}')
 def step_impl(context, sec):
     time.sleep(int(sec))
+
+
+@then(u'write results: "{feature}" "{scenario}"')
+def step_impl(context, feature, scenario):
+    context.space_station.save_results(
+        feature, scenario, context.config.userdata["filename"])

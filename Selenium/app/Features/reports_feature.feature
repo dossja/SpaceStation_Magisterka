@@ -10,6 +10,7 @@ Scenario: Add report
     Then Clicks add reports
     Then Insert report: "New report" "Report description" 1
     Then Clicks add report
+    Then write results: "Reports" "Add Report"
 
 Scenario: Assign report
     Given Reports. Open url: http://localhost:3000
@@ -24,6 +25,7 @@ Scenario: Assign report
     Then Clicks assign user
     Then wait: 5
     Then Checks btn text: last() "IN PROGRESS"
+    Then write results: "Reports" "Assign Report"
 
 # Scenario: Change report status to in progress
 #     Given Reports. Open url: http://localhost:3000
