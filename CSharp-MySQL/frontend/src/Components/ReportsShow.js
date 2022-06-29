@@ -83,7 +83,7 @@ function ReportsShow(props) {
             if (report.id === report_id)
                 newReport = report;
         });
-        newReport.report_status_id = `${status_id}`;
+        newReport.reportStatusId = status_id;
         console.log(newReport);
         rAPI.putByID(report_id, newReport)
             .then(response => {
