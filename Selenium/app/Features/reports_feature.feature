@@ -3,6 +3,7 @@ Feature: SpaceStation Reports
 
 Scenario: Add report
     Given Reports. Open url: http://localhost:3000
+    Then reset timer
     Then Insert email: Lois.Lane@firm.com
     Then Insert password: password
     Then Clicks signin
@@ -14,6 +15,7 @@ Scenario: Add report
 
 Scenario: Assign report
     Given Reports. Open url: http://localhost:3000
+    Then reset timer
     Then Insert email: Lois.Lane@firm.com
     Then Insert password: password
     Then Clicks signin
@@ -29,6 +31,7 @@ Scenario: Assign report
 
 Scenario: Change report status to in progress
     Given Reports. Open url: http://localhost:3000
+    Then reset timer
     Then Insert email: Clark.Kent@firm.com
     Then Insert password: password
     Then Clicks signin
@@ -40,6 +43,7 @@ Scenario: Change report status to in progress
 
 Scenario: Change report status to in finished
     Given Reports. Open url: http://localhost:3000
+    Then reset timer
     Then Insert email: Clark.Kent@firm.com
     Then Insert password: password
     Then Clicks signin
@@ -51,6 +55,7 @@ Scenario: Change report status to in finished
 
 Scenario: Add and cancel report
     Given Reports. Open url: http://localhost:3000
+    Then reset timer
     Then Insert email: Lois.Lane@firm.com
     Then Insert password: password
     Then Clicks signin

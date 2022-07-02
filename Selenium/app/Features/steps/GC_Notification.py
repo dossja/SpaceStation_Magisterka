@@ -34,3 +34,8 @@ def step_impl(context, sec):
 def step_impl(context, feature, scenario):
     context.space_station.save_results(
         feature, scenario, context.config.userdata["filename"])
+
+
+@then(u'reset timer')
+def step_impl(context):
+    context.space_station.reset_timer()

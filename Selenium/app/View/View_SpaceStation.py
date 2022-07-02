@@ -37,6 +37,9 @@ class SpaceStation:
             EC.visibility_of_element_located((By.XPATH, self.signIn_btn_xpath)))
         self.signIn_btn.click()
 
+    def reset_timer(self):
+        self.start_time = time.time()
+
     def save_results(self, feature, scenario, filename):
         import openpyxl
         import os
