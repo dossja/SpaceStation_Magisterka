@@ -2,8 +2,8 @@
 Feature: SpaceStation Missions
 
 Scenario: Show missions crew
-    Then reset timer
     Given Missions. Open url: http://localhost:3000
+    Then reset timer
     Then Insert email: Lois.Lane@firm.com
     Then Insert password: password
     Then Clicks signin
@@ -13,8 +13,8 @@ Scenario: Show missions crew
     Then write results: "Missions" "Show missions crew"
 
 Scenario: Add missions
-    Then reset timer
     Given Missions. Open url: http://localhost:3000
+    Then reset timer
     Then Insert email: Lois.Lane@firm.com
     Then Insert password: password
     Then Clicks signin
