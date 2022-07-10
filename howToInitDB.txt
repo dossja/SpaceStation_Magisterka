@@ -1,4 +1,5 @@
 mysql -u root -p
 root
 use space_station;
+use space_station_CSharp;
 source ./docker-entrypoint-initdb.d/initdb.sql;
