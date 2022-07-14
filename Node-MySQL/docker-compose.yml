@@ -33,7 +33,7 @@ services:
             - ./mysql:/docker-entrypoint-initdb.d
             - db-data:/var/lib/mysql
         environment: 
-            MYSQL_DATABASE: "space_station"
+            MYSQL_DATABASE: "space_station_Node"
             MYSQL_USER: user
             MYSQL_PASSWORD: password
             MYSQL_ROOT_PASSWORD: root
