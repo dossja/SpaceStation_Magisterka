@@ -9,9 +9,6 @@ namespace ORM.Models
 {
     public class MissionCrew
     {
-        [Key]
-        public int MissionCrewId { get; set; }
-
         public int UserId { get; set; }
         [JsonIgnore]
         public Users User { get; set; }
