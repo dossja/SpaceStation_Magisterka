@@ -36,11 +36,6 @@ namespace ORM.Models
         public int ReportingUserId { get; set; }
         [JsonIgnore]
         public Users ReportingUser { get; set; }
-/*
-        [ForeignKey("Users")]
-        public int OperatingUserId { get; set; }
-        [JsonIgnore]
-        public virtual Users OperatingUser { get; set; }*/
 
         public ICollection<Incidents> Incidents { get; set; }
     }

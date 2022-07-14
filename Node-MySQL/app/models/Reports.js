@@ -81,6 +81,7 @@ module.exports = (sequelize, DataTypes) => {
     Reports.belongsTo(models.ReportType, { foreignKey: 'reportTypeId', as: 'ReportType' });
     Reports.belongsTo(models.ReportStatus, { foreignKey: 'reportStatusId', as: 'ReportStatus' });
     Reports.belongsTo(models.Users, { foreignKey: 'reportingUserId', as: 'ReportingUser' });
+    Reports.belongsToMany(models.Users, { through: 'Incidents', foreignKey: 'reportId', as: 'OperatingUser' });
   };
   return Reports;
 };

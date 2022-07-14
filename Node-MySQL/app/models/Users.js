@@ -62,7 +62,8 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
   Users.associate = function (models) {
-    Users.belongsTo(models.PositionType, { foreignKey: 'positionTypeId', as: 'PositionType' })
+    Users.belongsTo(models.PositionType, { foreignKey: 'positionTypeId', as: 'PositionType' });
+    Users.belongsToMany(models.Reports, { through: 'Incidents', foreignKey: 'userId', as: 'UserIncidents' });
   };
   return Users;
 };
