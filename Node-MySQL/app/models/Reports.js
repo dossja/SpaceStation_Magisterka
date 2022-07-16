@@ -26,6 +26,13 @@ module.exports = (sequelize, DataTypes) => {
         notNull: { msg: "Title required!" }
       }
     },
+    description: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      validate: {
+        notNull: { msg: "Description required!" }
+      }
+    },
     submitDate: {
       type: DataTypes.DATE,
       allowNull: false,
