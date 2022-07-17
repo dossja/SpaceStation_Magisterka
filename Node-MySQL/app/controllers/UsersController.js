@@ -4,6 +4,8 @@ module.exports = {
     getUsers: (req, res) => {
         Users.findAll().then(users => {
             return res.status(200).json(users);
+        }).catch(err => {
+            return res.status(400).json({ err })
         });
     },
 

@@ -4,6 +4,8 @@ module.exports = {
     getIncidents: (req, res) => {
         Incidents.findAll().then(incidents => {
             return res.status(200).json(incidents);
+        }).catch(err => {
+            return res.status(400).json({ err })
         });
     },
 

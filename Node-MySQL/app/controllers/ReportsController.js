@@ -4,6 +4,8 @@ module.exports = {
     getReports: (req, res) => {
         Reports.findAll().then(reports => {
             return res.status(200).json(reports);
+        }).catch(err => {
+            return res.status(400).json({ err })
         });
     },
 

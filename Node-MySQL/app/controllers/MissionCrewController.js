@@ -4,6 +4,8 @@ module.exports = {
     getMissionCrew: (req, res) => {
         MissionCrew.findAll().then(missionCrew => {
             return res.status(200).json(missionCrew);
+        }).catch(err => {
+            return res.status(400).json({ err })
         });
     },
 
