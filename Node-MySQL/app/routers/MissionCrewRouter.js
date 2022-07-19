@@ -13,6 +13,6 @@ router.get('/MissionCrew', getMissionCrew);
 router.get('/MissionCrew/mission/:id', getMissionCrewMission);
 router.get('/MissionCrew/user/:id', getMissionCrewUser);
 
-router.post('/MissionCrew/signup', postMissionCrew);
+router.post('/MissionCrew/add', postMissionCrew);
 
 module.exports = router;

@@ -24,7 +24,7 @@ module.exports = {
     getUserByEmail: (req, res) => {
         Users.findAll({
             where: {
-                email: req.params.email
+                email: req.body.email
             }
         }).then(user => {
             return res.status(200).json(user);
@@ -34,8 +34,9 @@ module.exports = {
     },
 
     postUsers: (req, res) => {
+        req.body.email = req.body.name + "." + req.body.surname + "@firm.com";
         Users.create(req.body).then(user => {
-            return res.status(201).json({ "message": "User created successfully", user });
+            return res.status(201).json(user);
         }).catch(err => {
             return res.status(400).json({ err })
         });
@@ -47,9 +48,11 @@ module.exports = {
                 id: req.params.id
             }
         }).then(user => {
-            user.update(req.body).then(updateUser => {
-                return res.status(202).json({ "message": "User updated successfully", updateUser });
-            })
+            Users.update(req.body, { where: { id: req.params.id } }).then(updateUser => {
+                return res.status(202).json(updateUser);
+            }).catch(err => {
+                return res.status(400).json({ err })
+            });
         }).catch(err => {
             return res.status(400).json({ err })
         });

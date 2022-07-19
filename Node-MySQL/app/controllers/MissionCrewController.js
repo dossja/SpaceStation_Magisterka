@@ -35,7 +35,7 @@ module.exports = {
 
     postMissionCrew: (req, res) => {
         MissionCrew.create(req.body).then(missionCrew => {
-            return res.status(201).json({ "message": "MissionCrew created successfully", missionCrew });
+            return res.status(201).json(missionCrew);
         }).catch(err => {
             return res.status(400).json({ err })
         });

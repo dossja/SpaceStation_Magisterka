@@ -23,7 +23,7 @@ module.exports = {
 
     postIncidents: (req, res) => {
         Incidents.create(req.body).then(incident => {
-            return res.status(201).json({ "message": "Incident created successfully", incident });
+            return res.status(201).json(incident);
         }).catch(err => {
             return res.status(400).json({ err })
         });

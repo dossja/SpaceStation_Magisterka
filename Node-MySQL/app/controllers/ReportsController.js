@@ -22,22 +22,17 @@ module.exports = {
     },
 
     postReports: (req, res) => {
+        req.body.reportStatusId = 1;
         Reports.create(req.body).then(report => {
-            return res.status(201).json({ "message": "Report created successfully", report });
+            return res.status(201).json(report);
         }).catch(err => {
             return res.status(400).json({ err })
         });
     },
 
     updateReports: (req, res) => {
-        Reports.findAll({
-            where: {
-                id: req.params.id
-            }
-        }).then(report => {
-            report.update(req.body).then(updateReport => {
-                return res.status(202).json({ "message": "Report updated successfully", updateReport });
-            })
+        Reports.update(req.body, { where: { id: req.params.id } }).then(updatedReport => {
+            return res.status(202).json(updatedReport);
         }).catch(err => {
             return res.status(400).json({ err })
         });

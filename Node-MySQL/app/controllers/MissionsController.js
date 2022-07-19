@@ -33,7 +33,7 @@ module.exports = {
             endDate.setDate(endDate.getDate() + 56);
 
             Missions.create({ startDate, endDate }).then(mission => {
-                return res.status(201).json({ "message": "Missions created successfully", mission });
+                return res.status(201).json(mission);
             }).catch(err => {
                 return res.status(400).json({ err })
             });

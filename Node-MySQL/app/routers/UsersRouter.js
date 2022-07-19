@@ -13,8 +13,8 @@ const router = express.Router();
 
 router.get('/Users', getUsers);
 router.get('/Users/:id', getUser);
-router.get('/Users/login', getUserByEmail);
 
+router.post('/Users/login', getUserByEmail);
 router.post('/Users/signup', postUsers);
 
 router.put('/Users/update/:id', updateUsers);
