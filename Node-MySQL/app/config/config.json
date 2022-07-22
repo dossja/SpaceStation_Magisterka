@@ -2,15 +2,15 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "space_station_node",
-    "host": "127.0.0.1",
+    "database": "space_station_Node",
+    "host": "db",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "root",
-    "database": "space_station_node",
-    "host": "127.0.0.1",
+    "database": "space_station_Node",
+    "host": "db",
     "dialect": "mysql"
   }
 }

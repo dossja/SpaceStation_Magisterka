@@ -6,18 +6,10 @@ from flask_login import LoginManager
 app = Flask(__name__)
 CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@172.17.0.1/space_station'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@127.0.0.1/space_station'
+
 db = SQLAlchemy(app)
 db.create_all()
-# login_manager = LoginManager(app)
 
-# @login_manager.user_loader
-# def load_user(id):
-#     return User.query.get(int(id))
-
-# login_manager = LoginManager(app)
-# login_manager.login_view = 'login'
-# login_manager.login_message_category = 'info'
 from files.routes import user_routes, report_routes, report_type_routes, position_type_routes, missions_routes, incidents_route, mission_crew_route, report_status_routes
 from files.models.report_type import ReportType
 from files.models.position_type import PositionType

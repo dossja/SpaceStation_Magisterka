@@ -1,0 +1,14 @@
+.Btn-Assign{
+    margin: 5px 1px;
+    background-color: green;
+}
+
+.Btn-Cancel{
+    margin: 5px 1px;
+    background-color: red;
+}
+
+.Btn-Blue{
+    margin: 5px 1px;
+    background-color: rgb(152, 152, 255);
+}
