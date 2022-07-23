@@ -1,8 +1,16 @@
 const Reports = require("../models").Reports;
+const ReportType = require("../models").ReportType;
+const ReportStatus = require("../models").ReportStatus;
+const Users = require("../models").Users;
+const Incidents = require("../models").Incidents;
 
 module.exports = {
     getReports: (req, res) => {
-        Reports.findAll().then(reports => {
+        Reports.findAll({ include: [{ model: ReportType }, { model: ReportStatus }, { model: Users }, { model: Incidents }] }).then(reports => {
+            reports.forEach(rep => {
+                rep.dataValues.ReportingUser = rep.dataValues.User;
+                delete rep.dataValues.User;
+            });
             return res.status(200).json(reports);
         }).catch(err => {
             return res.status(400).json({ err })

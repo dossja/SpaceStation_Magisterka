@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(50),
             allowNull: false,
             validate: {
-                notNull: { msg: "Descreption required!" }
+                notNull: { msg: "Description required!" }
             }
         }
     }, {

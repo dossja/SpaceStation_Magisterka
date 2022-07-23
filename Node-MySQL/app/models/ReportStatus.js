@@ -32,5 +32,8 @@ module.exports = (sequelize, DataTypes) => {
         tableName: 'ReportStatus',
         timestamps: false
     });
+    // ReportStatus.associate = function (models) {
+    //     ReportStatus.hasMany(models.Reports);
+    // };
     return ReportStatus;
 };

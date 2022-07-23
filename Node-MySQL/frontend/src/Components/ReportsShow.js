@@ -61,8 +61,8 @@ function ReportsShow(props) {
                 console.log(response.data);
                 let tmp_rep = response.data;
                 tmp_rep.forEach(rep => {
-                    if (rep.incidents.length > 0)
-                        rep.operatingUserId = rep.incidents[0].userId;
+                    if (rep.Incidents.length > 0)
+                        rep.operatingUserId = rep.Incidents[0].userId;
 
                     else
                         rep.operatingUserId = null;
@@ -131,9 +131,9 @@ function ReportsShow(props) {
                                 </TableCell>
                                 <TableCell align="right">{reports.title}</TableCell>
                                 <TableCell align="right">{reports.description}</TableCell>
-                                <TableCell align="right">{reports.reportType.description}</TableCell>
-                                <TableCell align="right">{reports.submitDate.split(" ")[0]}</TableCell>
-                                <TableCell align="right">{reports.endDate}</TableCell>
+                                <TableCell align="right">{reports.ReportType.description}</TableCell>
+                                <TableCell align="right">{reports.submitDate.split("T")[0]}</TableCell>
+                                <TableCell align="right">{reports.endDate.split("T")[0]}</TableCell>
                                 <TableCell align="right">{reports.reportingUserId}</TableCell>
                                 <TableCell align="center">
                                     {reports.reportStatusId === 1 && props.isManager === true ? <Button

@@ -85,10 +85,10 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
   Reports.associate = function (models) {
-    Reports.belongsTo(models.ReportType, { foreignKey: 'reportTypeId', as: 'ReportType' });
-    Reports.belongsTo(models.ReportStatus, { foreignKey: 'reportStatusId', as: 'ReportStatus' });
-    Reports.belongsTo(models.Users, { foreignKey: 'reportingUserId', as: 'ReportingUser' });
-    Reports.belongsToMany(models.Users, { through: 'Incidents', foreignKey: 'reportId', as: 'OperatingUser' });
+    Reports.belongsTo(models.ReportType, { foreignKey: 'reportTypeId' });
+    Reports.belongsTo(models.ReportStatus, { foreignKey: 'reportStatusId' });
+    Reports.belongsTo(models.Users, { foreignKey: 'reportingUserId' });
+    Reports.hasMany(models.Incidents, { foreignKey: 'reportId' });
   };
   return Reports;
 };

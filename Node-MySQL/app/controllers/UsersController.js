@@ -27,6 +27,7 @@ module.exports = {
                 email: req.body.email
             }
         }).then(user => {
+            console.log(user);
             return res.status(200).json(user);
         }).catch(err => {
             return res.status(400).json({ err })
