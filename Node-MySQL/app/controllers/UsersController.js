@@ -1,8 +1,9 @@
 const Users = require("../models").Users;
+const PositionType = require("../models").PositionType;
 
 module.exports = {
     getUsers: (req, res) => {
-        Users.findAll().then(users => {
+        Users.findAll({ include: [{ model: PositionType }] }).then(users => {
             return res.status(200).json(users);
         }).catch(err => {
             return res.status(400).json({ err })

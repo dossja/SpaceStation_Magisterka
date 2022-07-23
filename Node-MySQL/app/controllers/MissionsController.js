@@ -1,8 +1,10 @@
 const Missions = require("../models").Missions;
+const MissionCrew = require("../models").MissionCrew;
+const Users = require("../models").Users;
 
 module.exports = {
     getMissions: (req, res) => {
-        Missions.findAll().then(missions => {
+        Missions.findAll({ include: [{ model: MissionCrew }] }).then(missions => {
             return res.status(200).json(missions);
         }).catch(err => {
             return res.status(400).json({ err })
@@ -13,7 +15,7 @@ module.exports = {
         Missions.findAll({
             where: {
                 id: req.params.id
-            }
+            }, include: [{ model: MissionCrew, include: { model: Users } }]
         }).then(mission => {
             return res.status(200).json(mission);
         }).catch(err => {

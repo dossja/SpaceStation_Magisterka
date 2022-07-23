@@ -66,6 +66,9 @@ function ReportsShow(props) {
 
                     else
                         rep.operatingUserId = null;
+
+                    if (rep.endDate != null)
+                        rep.endDate = rep.endDate.split("T")[0];
                     console.log(rep);
                 })
 
@@ -133,7 +136,7 @@ function ReportsShow(props) {
                                 <TableCell align="right">{reports.description}</TableCell>
                                 <TableCell align="right">{reports.ReportType.description}</TableCell>
                                 <TableCell align="right">{reports.submitDate.split("T")[0]}</TableCell>
-                                <TableCell align="right">{reports.endDate.split("T")[0]}</TableCell>
+                                <TableCell align="right">{reports.endDate}</TableCell>
                                 <TableCell align="right">{reports.reportingUserId}</TableCell>
                                 <TableCell align="center">
                                     {reports.reportStatusId === 1 && props.isManager === true ? <Button

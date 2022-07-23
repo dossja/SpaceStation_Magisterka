@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
   Missions.associate = function (models) {
-    Missions.belongsToMany(models.Users, { through: 'MissionCrew', foreignKey: 'missionId', as: 'Mission' });
+    Missions.hasMany(models.MissionCrew, { foreignKey: 'missionId' });
   };
   return Missions;
 };

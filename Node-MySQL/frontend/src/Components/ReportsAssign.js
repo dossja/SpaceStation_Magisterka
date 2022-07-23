@@ -106,7 +106,7 @@ function ReportsAssign(props) {
     const putReport = () => {
         console.log(props.reportID);
         console.log(values.operating_user_id);
-        iAPI.post({ 'ReportId': props.reportID, 'UserId': values.operating_user_id })
+        iAPI.post({ 'reportId': props.reportID, 'userId': values.operating_user_id })
             .then(response => {
                 console.log(response.data);
                 console.log(response.status);

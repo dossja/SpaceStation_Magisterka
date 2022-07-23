@@ -87,8 +87,13 @@ function MissionCrewShow(props) {
     const getMissionCrewAPI = () => {
         mAPI.getCrewByID(props.missionID)
             .then(response => {
-                console.log(response.data[0].crew);
-                setUsers(response.data[0].crew);
+                // let uss = response.data[0].MissionCrews;
+                // console.log(uss);
+                // uss.forEach(element => {
+                //     console.log(element.User.positionTypeId);
+                //     console.log(positionType);
+                // });
+                setUsers(response.data[0].MissionCrews);
             })
             .catch(e => {
                 console.log(e);
@@ -118,13 +123,13 @@ function MissionCrewShow(props) {
                             {users.map((users) => (
                                 <TableRow key={users.id}>
                                     <TableCell component="th" scope="row">
-                                        {users.user.id}
+                                        {users.User.id}
                                     </TableCell>
-                                    <TableCell align="right">{users.user.name}</TableCell>
-                                    <TableCell align="right">{users.user.surname}</TableCell>
-                                    <TableCell align="right">{users.user.email}</TableCell>
-                                    <TableCell align="right">{positionType[users.user.positionTypeId].name}</TableCell>
-                                    {users.user.manager === true ? <TableCell align="right">True</TableCell> : <TableCell align="right">False</TableCell>}
+                                    <TableCell align="right">{users.User.name}</TableCell>
+                                    <TableCell align="right">{users.User.surname}</TableCell>
+                                    <TableCell align="right">{users.User.email}</TableCell>
+                                    <TableCell align="right">{positionType[users.User.positionTypeId - 1].name}</TableCell>
+                                    {users.User.manager === true ? <TableCell align="right">True</TableCell> : <TableCell align="right">False</TableCell>}
                                 </TableRow>
                             ))}
                         </TableBody>

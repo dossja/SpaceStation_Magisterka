@@ -21,7 +21,7 @@ module.exports = {
         Reports.findAll({
             where: {
                 id: req.params.id
-            }
+            }, include: [{ model: ReportType }, { model: ReportStatus }, { model: Users }, { model: Incidents }]
         }).then(report => {
             return res.status(200).json(report);
         }).catch(err => {

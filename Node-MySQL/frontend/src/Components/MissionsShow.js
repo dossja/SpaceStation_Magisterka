@@ -88,7 +88,7 @@ function MissionsShow(props) {
                                 </TableCell>
                                 <TableCell align="right">{missions.startDate.split("T")[0]}</TableCell>
                                 <TableCell align="right">{missions.endDate.split("T")[0]}</TableCell>
-                                {props.isManager == true && missions.crew.length == 0 ? <TableCell align="right">
+                                {props.isManager == true && missions.MissionCrews.length == 0 ? <TableCell align="right">
                                     <Button
                                         variant="contained"
                                         color="primary"
@@ -102,7 +102,7 @@ function MissionsShow(props) {
                                         Edit
                                     </Button>
                                 </TableCell> : null}
-                                {missions.crew.length > 0 ? <TableCell align="right">
+                                {missions.MissionCrews.length > 0 ? <TableCell align="right">
                                     <Button
                                         variant="contained"
                                         color="secondary"

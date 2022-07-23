@@ -110,7 +110,7 @@ function UsersShow(props) {
                                 <TableCell align="right">{users.name}</TableCell>
                                 <TableCell align="right">{users.surname}</TableCell>
                                 <TableCell align="right">{users.email}</TableCell>
-                                <TableCell align="right">{users.positionType.name}</TableCell>
+                                <TableCell align="right">{users.PositionType.name}</TableCell>
                                 {users.manager == true ? <TableCell align="right">True</TableCell> : <TableCell align="right">False</TableCell>}
 
                                 {props.isManager == true ? <TableCell align="right">
