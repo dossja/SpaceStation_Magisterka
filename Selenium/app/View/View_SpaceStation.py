@@ -48,29 +48,32 @@ class SpaceStation:
 
         date = time.strftime("%Y-%m-%d", time.gmtime())
 
-        path = f"{filename}_{feature}_{date}.xlsx"
+        path = f"{filename}_{date}.xlsx"
 
         book = openpyxl.Workbook()
         if os.path.isfile(path):
             book = openpyxl.load_workbook(path)
 
-        # book = xlwt.Workbook(encoding="utf-8")
-        sheet_time = time.strftime("%H.%M.%S", time.gmtime())
-        sheet = book.create_sheet(f"{scenario}_{sheet_time}")
+        isSheet = False
+
+        for sh in book:
+            if sh.title == feature:
+                sheet = book[feature]
+                isSheet = True
+
+        if isSheet == False:
+            book.create_sheet(feature)
 
         if book.get_sheet_names()[0] == "Sheet":
-            sheet_to_del = book.get_sheet_by_name('Sheet')
-            book.remove_sheet(sheet_to_del)
+            sheet_to_del = book['Sheet']
+            book.remove(sheet_to_del)
+
+        sheet = book[feature]
 
         diff = end_time - self.start_time
+        sheet.append([scenario])
         sheet.append(["StartTime", "EndTime", "Difference"])
         sheet.append([self.start_time, end_time, diff])
+        sheet.append([""])
 
-        # sheet1.write(0, 0, "StartTime")
-        # sheet1.write(1, 0, self.start_time)
-        # sheet1.write(0, 1, "EndTime")
-        # sheet1.write(1, 1, end_time)
-        # sheet1.write(0, 2, "Difference")
-        # sheet1.write(1, 2, diff)
-
-        book.save(f"{filename}_{feature}_{date}.xlsx")
+        book.save(f"{filename}_{date}.xlsx")

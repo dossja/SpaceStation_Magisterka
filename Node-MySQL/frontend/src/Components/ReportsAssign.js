@@ -110,9 +110,9 @@ function ReportsAssign(props) {
             .then(response => {
                 console.log(response.data);
                 console.log(response.status);
-                report.reportStatusId = "2";
-                console.log(report);
-                rAPI.putByID(props.reportID, report)
+                report[0].reportStatusId = "2";
+                console.log(report[0]);
+                rAPI.putByID(props.reportID, report[0])
                     .then(response => {
                         console.log(response.data);
                         console.log(response.status);

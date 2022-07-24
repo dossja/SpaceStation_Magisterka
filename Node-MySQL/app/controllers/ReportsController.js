@@ -6,7 +6,11 @@ const Incidents = require("../models").Incidents;
 
 module.exports = {
     getReports: (req, res) => {
-        Reports.findAll({ include: [{ model: ReportType }, { model: ReportStatus }, { model: Users }, { model: Incidents }] }).then(reports => {
+        Reports.findAll({
+            include: [{ model: ReportType }, { model: ReportStatus }, { model: Users }, { model: Incidents }], order: [
+                ['id', 'ASC']
+            ],
+        }).then(reports => {
             reports.forEach(rep => {
                 rep.dataValues.ReportingUser = rep.dataValues.User;
                 delete rep.dataValues.User;
