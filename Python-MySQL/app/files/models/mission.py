@@ -26,6 +26,18 @@ class Mission(db.Model):
         return json.dumps(json_value, default=str)
         # return f"{{\"id\": \"{self.id}\", \"start_date\": \"{self.start_date}\", \"end_date\": \"{self.end_date}\", \"crew\": \"{crew}\"}}"
 
+    def output(self):
+        if self.crew:
+            crew = True
+        else:
+            crew = False
+        return {
+            "id": self.id,
+            "start_date": self.start_date,
+            "end_date": self.end_date,
+            "crew": crew
+        }
+
     def return_crew(self):
 
         return f"{self.crew}"

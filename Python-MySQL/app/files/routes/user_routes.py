@@ -1,17 +1,13 @@
-from flask import render_template, url_for, flash, redirect, request, abort, jsonify
+from flask import request, jsonify
 from files import app, db
 from files.models.users import User
-from flask_login import login_user
-import json
 
-# from . import api
 from .. import db, app
 
 
 @app.route("/users/signup", methods=['POST'])
 def signup_user():
     datas = request.get_json()
-    print(datas)
     name = datas.get('name', '')
     if name == '':
         return jsonify(error="name is empty"), 400
@@ -33,7 +29,7 @@ def signup_user():
     db.session.add(u)
     db.session.commit()
 
-    return jsonify(f"{u}"), 201
+    return jsonify(u.output()), 201
 
 
 @app.route("/users", methods=["GET"])
@@ -85,14 +81,13 @@ def login():
     user = User.query.filter_by(email=email).first()
 
     if user is not None:
-        # login_user(user, remember=True)
         return jsonify(user.output()), 201
     return jsonify(error="user not found"), 404
 
 
 @app.route('/users/delete/<string:id>', methods=['DELETE'])
 def delete_user(id):
-    user = User.query.filter_by(id=id).delete()
+    User.query.filter_by(id=id).delete()
     db.session.commit()
 
     return jsonify(f"User deleted"), 200

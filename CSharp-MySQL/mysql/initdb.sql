@@ -1,4 +1,4 @@
-USE space_station_CSharp
+USE space_station_CSharp;
 INSERT INTO Users (
         `id`,
         `name`,

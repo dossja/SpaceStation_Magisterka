@@ -1,4 +1,4 @@
-USE space_station
+USE space_station_Python;
 INSERT INTO users (
         `id`,
         `name`,

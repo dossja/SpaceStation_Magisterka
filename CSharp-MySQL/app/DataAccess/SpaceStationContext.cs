@@ -58,11 +58,9 @@ namespace ORM.DataAccess
                 .HasOne(i => i.Report)
                 .WithMany(r => r.Incidents)
                 .HasForeignKey(i => i.ReportId);
-
-            /*            modelBuilder.Entity<Reports>().ToTable(nameof(Incidents))
-                            .HasMany(c => c.Incidents)
-                            .WithMany(i => i.User);
-                        modelBuilder.Entity<MissionCrew>().HasKey(mis => new { mis.UserId, mis.MissionId});*/
+            
+            modelBuilder.Entity<MissionCrew>()
+                .HasKey(i => new { i.UserId, i.MissionId });
         }
     }
 }

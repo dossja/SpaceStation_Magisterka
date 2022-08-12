@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ORM.DataAccess;
 using ORM.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,8 +26,6 @@ namespace ASP.NET.Controllers
                 .Include(u => u.PositionType)
                 .Include(r => r.Incidents)
                 .ThenInclude(i => i.Report)
-                /*                .Include(r => r.Missions)
-                                .ThenInclude(i => i.Mission)*/
                 .ToListAsync();
 
             return users;

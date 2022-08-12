@@ -87,12 +87,6 @@ function MissionCrewShow(props) {
     const getMissionCrewAPI = () => {
         mAPI.getCrewByID(props.missionID)
             .then(response => {
-                // let uss = response.data[0].MissionCrews;
-                // console.log(uss);
-                // uss.forEach(element => {
-                //     console.log(element.User.positionTypeId);
-                //     console.log(positionType);
-                // });
                 setUsers(response.data[0].MissionCrews);
             })
             .catch(e => {
