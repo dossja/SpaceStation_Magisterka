@@ -17,6 +17,7 @@ namespace ORM.Models
         [MaxLength(50)]
         public string Surname { get; set; }
         [MaxLength(100)]
+        [Index(IsUnique = true)]
         public string Email { get; set; }
         [Required]
         public bool Manager { get; set; }

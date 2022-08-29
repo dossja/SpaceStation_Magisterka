@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         reportId: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            unique: true,
             references: {
                 model: 'Reports',
                 key: 'id'

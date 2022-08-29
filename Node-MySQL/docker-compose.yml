@@ -21,7 +21,6 @@ services:
         ports: 
             - 5000:5000
         build: ./app
-        restart: always
         stdin_open: true
         tty: true
         depends_on: 

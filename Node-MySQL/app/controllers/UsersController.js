@@ -29,7 +29,7 @@ module.exports = {
             }
         }).then(user => {
             console.log(user);
-            return res.status(200).json(user);
+            return res.status(200).json(user[0]);
         }).catch(err => {
             return res.status(400).json({ err })
         });

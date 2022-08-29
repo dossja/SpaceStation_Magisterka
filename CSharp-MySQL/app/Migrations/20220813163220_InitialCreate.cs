@@ -4,7 +4,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace app.Migrations
 {
-    public partial class MyFirstMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -88,14 +88,12 @@ namespace app.Migrations
                 name: "MissionCrew",
                 columns: table => new
                 {
-                    MissionCrewId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     MissionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MissionCrew", x => x.MissionCrewId);
+                    table.PrimaryKey("PK_MissionCrew", x => new { x.UserId, x.MissionId });
                     table.ForeignKey(
                         name: "FK_MissionCrew_Missions_MissionId",
                         column: x => x.MissionId,
@@ -216,11 +214,6 @@ namespace app.Migrations
                 name: "IX_MissionCrew_MissionId",
                 table: "MissionCrew",
                 column: "MissionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MissionCrew_UserId",
-                table: "MissionCrew",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reports_ReportingUserId",

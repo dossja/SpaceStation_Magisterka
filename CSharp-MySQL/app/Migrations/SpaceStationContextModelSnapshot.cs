@@ -34,21 +34,15 @@ namespace app.Migrations
 
             modelBuilder.Entity("ORM.Models.MissionCrew", b =>
                 {
-                    b.Property<int>("MissionCrewId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<int>("MissionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MissionCrewId");
+                    b.HasKey("UserId", "MissionId");
 
                     b.HasIndex("MissionId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("MissionCrew");
                 });
